@@ -33,11 +33,15 @@ yêu cầu admin merge lên develop.Khi một (hoặc nhiều) tính năng hoàn
 =============
 
 ### Example 
-Khi muốn code chức năng Welcome, tạo một branch mang tên welcome <br>
-Pull cho branch đó từ vị trí mới nhất của master (hoặc develop tùy tình huống), và bắt đầu code, commit lên branch này
-<br> Sau khi code xong, yêu cầu admin merge vào develop để test
+- Khi muốn code chức năng Welcome, tạo một branch mang tên welcome <br>`$ git checkout -b welcome master`<br>or `$ git checkout -b welcome master`
 
-
+- Code trên nhánh này của bạn tạo ra.<br>Chú ý kiểm tra nhánh hiện tại bằng lệnh `$ git branch` để không nhầm nhánh. <br>
+Sau đó tiến hành code như một repo bình thường, sau khi hoàn thành một function hay gì to to thì nhớ up lên repo để không mất code.<br>
+`$ git add .`<br>
+`$ git commit -m "mycomment"`<br>
+`$ git push origin welcome`<br>
+Lúc này, trên branch 'welcome' đã có code của bạn mở rộng thêm tính năng welcome so với nhánh master. Khi đảm bảo code chạy ổn, gửi một 'pull request' đến nhánh 'develop' để kiểm thử với chương trình. Nếu ok, admin sẽ up lên 'master'
+- Nếu phát triển tính năng mới, lại làm như trên<br>Chú ý, làm xong đừng táy máy xóa branch cũ đi là được :)))
 
 
 
