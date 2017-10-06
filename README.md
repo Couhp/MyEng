@@ -31,6 +31,15 @@ yêu cầu admin merge lên develop.Khi một (hoặc nhiều) tính năng hoàn
 
 <br>
 =============
+### Example 
+Khi muốn code chức năng Welcome, tạo một branch mang tên welcome <br>
+Pull cho branch đó từ vị trí mới nhất của master (hoặc develop tùy tình huống), và bắt đầu code, commit lên branch này
+<br> Sau khi code xong, yêu cầu admin merge vào develop để test
+
+
+
+
+
 
 # Good luck 
 
