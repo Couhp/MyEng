@@ -33,7 +33,7 @@ yêu cầu admin merge lên develop.Khi một (hoặc nhiều) tính năng hoàn
 =============
 
 ### Example 
-- Khi muốn code chức năng Welcome, tạo một branch mang tên welcome <br>`$ git checkout -b welcome master`<br>or `$ git checkout -b welcome master`
+- Khi muốn code chức năng Welcome, tạo một branch mang tên welcome <br>`$ git checkout -b welcome master`<br>or `$ git checkout -b welcome develop`
 
 - Code trên nhánh này của bạn tạo ra.<br>Chú ý kiểm tra nhánh hiện tại bằng lệnh `$ git branch` để không nhầm nhánh. <br>
 Sau đó tiến hành code như một repo bình thường, sau khi hoàn thành một function hay gì to to thì nhớ up lên repo để không mất code.<br>
