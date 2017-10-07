@@ -1,0 +1,149 @@
+#logo{
+	font-size: 25px;
+	color: white;
+	padding-top: 22px;
+	color: #cc9900;
+	font-family: Comic Sans MS;
+}
+
+.bgc{
+	background-color: #e7e7e7;	
+}
+.affix{
+	top : 0;
+	width: 100%;
+}
+
+
+.button{
+	width: 110px;
+}
+
+.try-free{
+	font-size: 40px;
+	font-family: Impact;
+	position: absolute;
+	top: 260px;
+	text-align: left;
+}
+
+.absolute {
+	position: absolute;
+	top: 120px;
+}
+/*main css*/
+
+.navbar-default{
+
+}
+
+.button-header{
+	border-radius: 50px;
+	height: 40px;
+	min-width: 100px;
+    font-weight: bold;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+#theme{
+	position: absolute; 
+	top: 110px; 
+	width:100px;
+	font-weight: bold;
+}
+
+.main-panel{
+	background-color: white;
+	margin: 30px 40px 40px 40px;
+	border-radius: 15px;
+}
+
+.right-panel{
+	background-color: white;
+	margin-top: 30px;
+	margin-bottom: 40px;
+	border-radius: 15px;
+	text-align: center;
+}
+.theme-div{
+	display: inline-block;
+	min-width: 85px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    width: 30%;
+    margin-top: 20px;
+}
+
+.theme-circle1{
+	background-color: #1caff6;
+	border-radius: 98px;
+    display: inline-block;
+    height: 80px;
+    margin-top: 12px;
+    width: 80px;
+}
+
+.theme-circle2{
+	background-color: #dd381d;
+	border-radius: 98px;
+    display: inline-block;
+    height: 80px;
+    margin-top: 12px;
+    width: 80px;
+}
+
+.theme-circle3{
+	background-color: #7eb530;
+	border-radius: 98px;
+    display: inline-block;
+    height: 80px;
+    margin-top: 12px;
+    width: 80px;
+}
+
+.theme-img{
+	margin: 12px;
+	height: 55px;
+	width: 55px;
+}
+
+.theme-text{
+	font-weight: bold;
+	color: black;
+}
+
+.theme-box{
+	margin-top: 20px;
+	text-align: center;
+
+}
+
+.progress{
+	height: 17px;
+}
+
+.test{
+	text-align: center;
+}
+
+.button-test{
+	width: 300px;
+	height: 40px;
+	border-radius: 98px;
+	font-size: 18px;
+	font-weight: bold;
+	background-color: orange;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.level{
+	height: 200px;
+	font-size: 20px;
+	padding-bottom: 30px;
+	padding-top:20px;
+}
