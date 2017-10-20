@@ -1,3 +1,51 @@
+## Project MyEng
+=============
+
+### Cách hoạt động
+Project chia thành 3 branch<br>
+Branch là một nhánh lưu quá trình phát triển code
+
+- master : branch cho admin. Các feature chỉ được đưa vào master sau khi đã hoạt động hoàn chỉnh
+- develop : branch phát triển tạm thời, chứa bản phát triển ổn định. Merge bởi admin. 
+- feature : branch cho member, các member push các bản phát triển lên đây. Khi code hoàn thành, 
+yêu cầu admin merge lên develop.Khi một (hoặc nhiều) tính năng hoàn thành, co thể tạo một branch feature mới (pull từ develop phiên bản của các tính năng trước đó đã hoàn thiện)
+
+### Các lệnh cần chú ý :
+
+`$ git pull <url>`<br>
+ Cập nhật một thư mục 
+
+ `$ git pull origin <this_branch>`<br>
+ Cập nhật branch hiện tại theo this_branch<br>
+
+`$ git add .`<br>Thêm code vào kho
+
+`$ git commit -m "your_comment"`
+<br>Commit code lên lịch sử chỉnh sửa
+
+`$ git push origin <branch>`
+<br>Push code lên kho origin 
+
+`$ git checkout <branch>`
+<br>Chuyển branch hiện tại (Thường thì mọi người làm việc trên branch feature)
+
+<br>
+=============
+### Example 
+Khi muốn code chức năng Welcome, tạo một branch mang tên welcome <br>
+Pull cho branch đó từ vị trí mới nhất của master (hoặc develop tùy tình huống), và bắt đầu code, commit lên branch này
+<br> Sau khi code xong, yêu cầu admin merge vào develop để test
+
+
+
+
+
+
+# Good luck 
+
+=======
+<br>
 Cây thư mục như thế này:
 Các bạn là front-end cho code html vào thư mục app/views/html và css vào thư mục app/views/css
 Các phần hình ảnh và âm thanh cho vào thư mục app/views/images và app/views/sounds
+

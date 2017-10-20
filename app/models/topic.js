@@ -9,10 +9,6 @@ var topicSchema = new Schema({
     {
         type    : Array,
         default : []
-    },
-    course:{
-      type: Schema.Types.ObjectId,
-      Ref : 'Course'
     }
 })
 

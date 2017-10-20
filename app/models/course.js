@@ -4,13 +4,13 @@ const { Schema } = mongoose;
 var courseSchema = new Schema({
   name: String,
   description : String,
-  topic :{
+  topics :{
     type : Array,
     default: []
-  },
+  }
   
 })
 
 var CourseSchema = mongoose.model('Course', courseSchema);
 
-module.exports = CoursesSchema;
+module.exports = CourseSchema;

@@ -3,9 +3,9 @@ const { Schema } = mongoose;
 const fillSchema= new Schema({
     quesion     : {type :String, required : true},
     answer      : {type :String, required : true},
-    course :{
+    topic :{
 		type: Schema.Types.ObjectId,
-		ref: 'Course'
+		ref: 'topic'
 	}
 });
 
