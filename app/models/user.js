@@ -48,8 +48,9 @@ avatar : {
 },
 friendlist:{
 	type : Array
-}
-
+},
+current_level : Number,
+current_topic_Id : String
 });
 
 module.exports = mongoose.model('User', UserSchema);
