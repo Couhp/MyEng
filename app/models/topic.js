@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 var topicSchema = new Schema({
     name        : String,
     description : String,
+    hard : number,
     quesions     :
     {
         type    : Array,
