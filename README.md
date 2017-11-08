@@ -9,7 +9,7 @@ Branch là một nhánh lưu quá trình phát triển code
 - develop : branch phát triển tạm thời, chứa bản phát triển ổn định. Merge bởi admin. 
 - feature : branch cho member, các member push các bản phát triển lên đây. Khi code hoàn thành, 
 yêu cầu admin merge lên develop.Khi một (hoặc nhiều) tính năng hoàn thành, co thể tạo một branch feature mới (pull từ develop phiên bản của các tính năng trước đó đã hoàn thiện)
-
+ 
 ### Các lệnh cần chú ý :
 
 `$ git pull <url>`<br>
@@ -47,4 +47,10 @@ Lúc này, trên branch 'welcome' đã có code của bạn mở rộng thêm t�
 
 
 # Good luck 
+
+=======
+<br>
+Cây thư mục như thế này:
+Các bạn là front-end cho code html vào thư mục app/views/html và css vào thư mục app/views/css
+Các phần hình ảnh và âm thanh cho vào thư mục app/views/images và app/views/sounds
 
