@@ -13,6 +13,8 @@ const apiRouter = require(global.__base + 'app/routes/api/index.js');
 // Body parser
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json({ limit: '100mb' }));
+app.use(express.static(global.__base + '/app/views/public'));
+app.use(express.static(global.__base + '/upload/images'));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -21,6 +23,9 @@ app.use(session({
 }));
 const log = require(global.__base + 'app/controllers/middleware').log;
 app.use('/', log);
+app.get('/signup', (req, res) => {
+    res.sendFile(global.__base + '/app/views/public/html/user.html');
+});
 app.use('/api', apiRouter);
 const port = process.env.PORT || 8080;
 app.listen(port, () => {

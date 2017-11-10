@@ -47,9 +47,6 @@ const UserSchema = Schema({
         type: String,
         required: true
     },
-    friendlist: {
-        type: Array
-    },
     current_level: Number,
     current_topic_Id: String,
     current_course_Id: String
