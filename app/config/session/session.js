@@ -20,3 +20,4 @@ const session = expressSession({
         maxAge: 1000 * ttl
     }
 });
+module.exports = session;

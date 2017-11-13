@@ -1,16 +1,13 @@
-const mongoose = require(`${r}/config/database/mongoose`)
-
+const mongoose = require(global.__base + '/app/config/database/mongoose')
 const { Schema } = mongoose;
 
 var topicSchema = new Schema({
-    name        : String,
-    description : String,
-    hard : number,
-    quesions     :
-    {
-        type    : Array,
-        default : []
+    name: String,
+    description: String,
+    course: {
+        type: Schema.Types.ObjectId,
+        Ref: 'Course'
     }
 })
 
-module.exports  = mongoose.model('Topic', topicSchema);
+module.exports = mongoose.model('Topic', topicSchema);

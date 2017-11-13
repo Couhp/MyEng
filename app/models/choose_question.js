@@ -1,4 +1,4 @@
-const mongoose = require(`${r}/config/database/mongoose`)
+const mongoose = require(global.__base + '/app/config/database/mongoose')
 const { Schema } = mongoose;
 const chooseSchema = new Schema({
     quesion     : {type : String, required : true},
