@@ -33,3 +33,21 @@ Url : `/MyEng/Welcome`
 **Code** : `200 OK`
 
 **Content** : Return File 'SignIn'
+
+----------------------
+## Trial Session
+
+**Describle** : When click button "Free Trial" in Interface 
+
+**URL** : `/MyEng/Trial`
+
+**Method** : `POST`
+
+### **Success Response**
+
+**Code** : `200 OK`
+
+**Content** : 
+```
+** I 'll update later
+```

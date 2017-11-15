@@ -9,12 +9,28 @@ var http = require('http');
 var router = express.Router();
 
 var viewPath = process.cwd() + "/app/views/public/html/"
-var mainPath = viewPath + "main.html"
+var welcomePath = viewPath + "welcome.html"
+var signInPath = viewPath + "pages-signin.html"
 
 router.get("/", (req, res) => {
     console.log('Cookies: ', req.cookies)    
-    res.sendFile(mainPath)
+    res.sendFile(welcomePath)
 });
+
+router.get("/Welcome", (req, res) => {
+    console.log('Cookies: ', req.cookies)    
+    res.sendFile(welcomePath)
+});
+
+router.get("/SignIn", (req, res) => {
+    console.log('Cookies: ', req.cookies)    
+    res.sendFile(signInPath)
+});
+
+router.post("/Trial", (req, res) => {
+    res.end("This is trial data")
+})
+
 
 
 
