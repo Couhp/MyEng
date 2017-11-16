@@ -72,51 +72,42 @@
 						</div>
 
 						<div class="form-group">
+							<label>Ảnh đại diện</label>
+							<input name="avatar" type="file" class="form-control mb-md"/>
+						</div>
+
+						<div class="form-group">
 							<label>Giới tính</label>
 							<div>
-								<select class="form-control mb-md">
+								<select name ="gender" class="form-control mb-md">
 									<option value="0">Nam</option>
 									<option value="1">Nữ</option>
 									<option value="-1">Không xác định</option>
 								</select>
 							</div> 
-
-							<div class="form-group mb-none">
-								<div class="row">
-									<div class="col-sm-6 mb-lg">
-										<label>Mật khẩu</label>
-										<input id ="password" name="pwd" type="password" class="form-control mb-md" required />
-									</div>
-									<div class="col-sm-6 mb-lg">
-										<label>Xác nhận mật khẩu</label>
-										<input id="confirm_password" name="pwd_confirm" type="password" class="form-control mb-md" required/>
-									</div>
-								</div>
-							</div>
-
+                        </div>
+						<div class="form-group mb-none">
 							<div class="row">
-								<!-- <div class="col-sm-8">
-									<div class="checkbox-custom checkbox-default">
-										<input id="AgreeTerms" name="agreeterms" type="checkbox"/>
-										<label for="AgreeTerms">I agree with <a href="#">terms of use</a></label>
-									</div>
-								</div> -->
-								<div class="text-center">
-									<button type="submit" class="btn btn-primary">Đăng kí</button>
-									<!-- <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign Up</button> -->
+								<div class="col-sm-6 mb-lg">
+									<label>Mật khẩu</label>
+									<input id ="password" name="pwd" type="password" class="form-control mb-md" required />
+								</div>
+								<div class="col-sm-6 mb-lg">
+										<label>Xác nhận mật khẩu</label>
+										<input id="confirm_password" name="pwd_confirm" type="password" class="form-control mb-md" required/>		
 								</div>
 							</div>
-
-							<span class="mt-lg mb-lg line-thru text-center text-uppercase">
-								<span>Hoặc</span>
-							</span>
-
-							<!-- <div class="mb-xs text-center">
-								<a class="btn btn-facebook mb-md ml-xs mr-xs">Connect with <i class="fa fa-facebook"></i></a>
-								<a class="btn btn-twitter mb-md ml-xs mr-xs">Connect with <i class="fa fa-twitter"></i></a>
-							</div>
-						-->
-						<p class="text-center">Bạn đã có một tài khoản <a href="pages-signin.html">Đăng nhập!</a>
+                        </div>
+                        <div class="row">								
+                        	<div class="text-center">
+                        		<button type="submit" class="btn btn-primary">Đăng kí</button>	
+                        	</div>
+                        </div>
+                        <span class="mt-lg mb-lg line-thru text-center text-uppercase">
+                        	<span>Hoặc</span>
+                        </span>
+						
+						<p class="text-center">Bạn đã có một tài khoản <a href="/MyEng/SignIn">Đăng nhập!</a>
 
 						</form>
 					</div>
