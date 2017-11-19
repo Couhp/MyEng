@@ -1,4 +1,4 @@
-const Friends = requires(global.__base + '/app/models/friendship.js');
+const Friends = require(global.__base + '/app/models/friendship.js');
 
 let sendStatus = (req, res) => {
     let info = {

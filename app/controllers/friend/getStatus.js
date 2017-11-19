@@ -1,4 +1,4 @@
-const Friends = requires(global.__base + '/app/models/friendship.js');
+const Friends = require(global.__base + '/app/models/friendship.js');
 let getStatus = (req, res) => {
     let userid = req.body.userid;
     Friends.find({ user1: userid }).exec((err, friend) => {

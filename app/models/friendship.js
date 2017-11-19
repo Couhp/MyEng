@@ -11,7 +11,7 @@ const FriendshipSchema = Schema({
         require: true
     },
     status: {
-        type: int,
+        type: Number,
         require: true
     }
     //Status:
