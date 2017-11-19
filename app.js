@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const redisClient = require(global.__base + 'app/config/database/redis-client');
-const apiRouter = require(global.__base + 'app/routes/api/index.js');
+const router = require(global.__base + 'app/routes/index.js');
+const isUser = require(global.__base+'app/controllers/middleware/isUser.js');
 // Body parser
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json({ limit: '100mb' }));
@@ -23,10 +24,9 @@ app.use(session({
 }));
 const log = require(global.__base + 'app/controllers/middleware').log;
 app.use('/', log);
-app.get('/signup', (req, res) => {
-    res.sendFile(global.__base + '/app/views/public/html/user.html');
-});
-app.use('/api', apiRouter);
+app.use('/', router);
+
+
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log('Server is listening at port ' + port);
