@@ -4,12 +4,14 @@ API for SignUp Page.
 
 Url : `/MyEng/SignUp`
 
+Default host : `http://localhost:8080` 
+
 --------
 ## Direct to Welcome
 
 **Describle** : When click button "Trang Chu" in Interface 
 
-**URL** : `localhost:3000/MyEng/Welcome`
+**URL** : `/MyEng/Welcome`
 
 **Method** : `GET`
 
@@ -24,7 +26,7 @@ Url : `/MyEng/SignUp`
 
 **Describle** : When click button "Dang nhap" in Interface 
 
-**URL** : `localhost:3000/MyEng/SignIn`
+**URL** : `MyEng/SignIn`
 
 **Method** : `GET`
 
@@ -39,7 +41,7 @@ Url : `/MyEng/SignUp`
 
 **Describle** : When click button "Dang ki" in Interface 
 
-**URL** : `localhost:8080/MyEng/SignUp`
+**URL** : `MyEng/SignUp`
 
 **Method** : `POST`
 
@@ -81,5 +83,24 @@ Url : `/MyEng/SignUp`
     }
 }
 ```
+### **Failure Response**
+
+**Code** : `400`
+
+**Content** : 
+```
+    { errCode: 400, msg: 'User already exists' }
+```
+-----
+
+**Code** : `413`
+
+**Content** : 
+```
+    {errCode: 413, msg: "Unsupported media type" }
+```
+
+
+
 
 **Note** : After get response, callback function send a GET request to "MainPage" (see main.md)
