@@ -41,7 +41,7 @@ Default host : `http://localhost:8080`
 
 **Describle** : When click button "Dang ki" in Interface 
 
-**URL** : `MyEng/SignUp`
+**URL** : `localhost:8080/api/user/signup`
 
 **Method** : `POST`
 
