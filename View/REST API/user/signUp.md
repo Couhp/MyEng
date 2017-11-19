@@ -1,4 +1,4 @@
-# SignIn Page API
+# SignUp Page API
 
 API for SignUp Page.
 
@@ -48,7 +48,15 @@ Default host : `http://localhost:8080`
 **Data constraints** : 
 ```
 {
-    ** Use the required form **
+    username: string,
+    email: string,
+    password: string,
+    displayName: string,
+    birthday: string,   **pattern YYYY-MM-DD**
+    livingIn: string,
+    gender: string,     ** value : ["Nam", "Nu"] **
+    job: string,
+    file : input File
 }
 ```
 
@@ -99,8 +107,6 @@ Default host : `http://localhost:8080`
 ```
     {errCode: 413, msg: "Unsupported media type" }
 ```
-
-
-
+-------
 
 **Note** : After get response, callback function send a GET request to "MainPage" (see main.md)
