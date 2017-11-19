@@ -48,7 +48,8 @@
 						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Đăng nhập</h2>
 					</div>
 					<div class="panel-body">
-						<form action="index.html" method="post">
+						<script> function myFunction() {}</script>
+						<form id="submitForm" >
 							<div class="form-group mb-lg">
 								<label>Tên đăng nhập</label>
 								<div class="input-group input-group-icon">
@@ -67,7 +68,7 @@
 									
 								</div>
 								<div class="input-group input-group-icon">
-									<input name="pwd" type="password" class="form-control input-lg" />
+									<input name="password" type="password" class="form-control input-lg" />
 									<span class="input-group-addon">
 										<span class="icon icon-lg">
 											<i class="fa fa-lock"></i>
@@ -81,8 +82,8 @@
 									
 								</div>
 								<div class="col-sm-4 text-right">
-									<button type="submit" class="btn btn-primary hidden-xs">Đăng nhập</button>
-									<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Đăng nhập</button>
+									<button  class="btn btn-primary" id="submit">Đăng nhập</button>
+		
 								</div>
 							</div>
 
@@ -90,7 +91,7 @@
 								<span>Hoặc</span>
 							</span>
 
-							<p class="text-center">Bạn chưa có tài khoản <a href="pages-signup.html">Đăng kí!</a>
+							<p class="text-center">Bạn chưa có tài khoản <a id="signUp">Đăng kí!</a>
 
 							
 
@@ -114,6 +115,7 @@
 		
 		<!-- Theme Base, Components and Settings -->
 		<script src="../assets/javascripts/theme.js"></script>
+		<script src="../assets/javascripts/jquery.form.js"></script>
 		
 		<!-- Theme Custom -->
 		<script src="../assets/javascripts/theme.custom.js"></script>

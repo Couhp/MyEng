@@ -55,3 +55,10 @@ Url : `/MyEng/SignIn`
 **Code** : `200 OK`
 
 **Content** : 
+```
+{
+    "userId" : String
+}
+```
+
+**Note** : After get response, callback function send a GET request to "MainPage" (see main.md)

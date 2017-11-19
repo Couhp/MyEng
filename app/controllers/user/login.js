@@ -27,18 +27,18 @@ let login = (req, res) => {
                     else {
                         req.session.userId = user._id;
                         let resData = { user: user };
-                        return res.status(200).json({ errCode: 200, msg: 'Success', data: resData });
+                        return res.json({ errCode: 200, msg: 'Success', data: resData });
                     }
                 }
             });
         }
         if (user) {
             if (!bcrypt.compareSync(password, user.password)) {
-                return res.status(400).json({ errCode: 400, msg: 'Password mismatch' });
+                return res.json({ errCode: 400, msg: 'Password mismatch' });
             } else {
                 req.session.userId = user._id;
                 let resData = { user: user };
-                return res.status(200).json({ errCode: 200, msg: 'Success', data: resData });
+                return res.json({ errCode: 200, msg: 'Success', data: resData });
             }
         }
 

@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
+const isUser = require(global.__base+'app/controllers/middleware/isUser.js');
 
 app.use(express.static(global.__base + '/app/views/public'));
 app.use(express.static(global.__base + '/upload/images'));
