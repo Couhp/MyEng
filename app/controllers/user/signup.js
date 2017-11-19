@@ -21,7 +21,7 @@ let sigup = (req, res) => {
         return res.status(400).json({ errCode: -1, msg: 'Invalid date format' });
     }
     //Check type avatar
-    if (req.file.mimetype.indexOf("image") === -1) {
+    if (req.file.mimetype.indexOf("image") === -1 && req.file != null) {
         return res.status(413).json({ errCode: 413, msg: "Unsupported media type" });
     }
     let info = {
