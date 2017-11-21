@@ -5,10 +5,14 @@ const topic = require('./topic.js');
 const course = require('./course.js');
 const user = require('./user.js');
 const friend = require('./friend.js')
+const choose = require('./choose_question.js');
+const fill = require('./fill_question.js');
+
 router.use(session);
+router.use('/fill', fill);
 router.use('/course', course);
 router.use('/topic', topic);
 router.use('/user', user);
 router.use('/friend', friend);
-
+router.use('/choose', choose);
 module.exports = router;
