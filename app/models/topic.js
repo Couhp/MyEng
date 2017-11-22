@@ -7,6 +7,10 @@ var topicSchema = new Schema({
     course: {
         type: Schema.Types.ObjectId,
         Ref: 'Course'
+    },
+    exp_topic: {
+        type: Number,
+        default: 100
     }
 })
 

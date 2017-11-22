@@ -21,5 +21,7 @@ router.post('/signup', upload.single("file"), userController.signup);
 router.post('/login', userController.login);
 router.get('/logout', isUser, deserializeUser, userController.logout);
 router.put('/update', isUser, deserializeUser, upload.single("file"), userController.update);
+//router.put('/exp', isUser, deserializeUser, userController.updateEXP);
+router.put('/exp', userController.updateEXP);
 
 module.exports = router;
