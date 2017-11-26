@@ -20,7 +20,7 @@ $('#submit').on('click', function() {
 		type: "POST",
 		method : "POST",
 		url: url,
-		data: JSON.stringify(data),
+		data: data,
 		success: function(data){
 			console.log(data)
 			alert(data)

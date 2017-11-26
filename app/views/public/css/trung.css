@@ -1,76 +1,76 @@
-#logo{
-	font-size: 25px;
-	color: white;
-	padding-top: 22px;
-	color: #cc9900;
-	font-family: Comic Sans MS;
+#logo {
+    font-size: 25px;
+    color: white;
+    padding-top: 22px;
+    color: #cc9900;
+    font-family: Comic Sans MS;
 }
 
-.bgc{
-	background-color: #e7e7e7;	
-}
-.affix{
-	top : 0;
-	width: 100%;
+.bgc {
+    background-color: #e7e7e7;
 }
 
-
-.button{
-	width: 110px;
+.affix {
+    top: 0;
+    width: 100%;
 }
 
-.try-free{
-	font-size: 40px;
-	font-family: Impact;
-	position: absolute;
-	top: 260px;
-	text-align: left;
+.button {
+    width: 110px;
+}
+
+.try-free {
+    font-size: 40px;
+    font-family: Impact;
+    position: absolute;
+    top: 260px;
+    text-align: left;
 }
 
 .absolute {
-	position: absolute;
-	top: 120px;
+    position: absolute;
+    top: 120px;
 }
+
+
 /*main css*/
 
-.navbar-default{
-
-}
-
-.button-header{
-	border-radius: 50px;
-	height: 40px;
-	min-width: 100px;
+.button-header {
+    border-radius: 50px;
+    height: 40px;
+    min-width: 100px;
     font-weight: bold;
 }
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
+
+#theme {
+    position: absolute;
+    top: 110px;
+    width: 100px;
+    font-weight: bold;
 }
 
-#theme{
-	position: absolute; 
-	top: 110px; 
-	width:100px;
-	font-weight: bold;
+.main-panel {
+    background-color: white;
+    margin: 30px 40px 40px 10px;
+    border-radius: 15px;
 }
 
-.main-panel{
-	background-color: white;
-	margin: 30px 40px 40px 40px;
-	border-radius: 15px;
+.right-panel {
+    background-color: white;
+    margin: 30px 0px 40px 0px;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
 }
 
-.right-panel{
-	background-color: white;
-	margin-top: 30px;
-	margin-bottom: 40px;
-	border-radius: 15px;
-	text-align: center;
+.theme-box {
+    margin-top: 20px;
+    text-align: center;
 }
-.theme-div{
-	display: inline-block;
-	min-width: 85px;
+
+.theme-div {
+    display: inline-block;
+    min-width: 85px;
     position: relative;
     text-align: center;
     vertical-align: top;
@@ -78,72 +78,99 @@
     margin-top: 20px;
 }
 
-.theme-circle1{
-	background-color: #1caff6;
-	border-radius: 98px;
+.theme-circle1 {
+    background-color: #1caff6;
+    border-radius: 98px;
     display: inline-block;
     height: 80px;
     margin-top: 12px;
     width: 80px;
 }
 
-.theme-circle2{
-	background-color: #dd381d;
-	border-radius: 98px;
+.theme-circle2 {
+    background-color: #dd381d;
+    border-radius: 98px;
     display: inline-block;
     height: 80px;
     margin-top: 12px;
     width: 80px;
 }
 
-.theme-circle3{
-	background-color: #7eb530;
-	border-radius: 98px;
+.theme-circle3 {
+    background-color: #7eb530;
+    border-radius: 98px;
     display: inline-block;
     height: 80px;
     margin-top: 12px;
     width: 80px;
 }
 
-.theme-img{
-	margin: 12px;
-	height: 55px;
-	width: 55px;
+.theme-img {
+    margin: 12px;
+    height: 55px;
+    width: 55px;
 }
 
-.theme-text{
-	font-weight: bold;
-	color: black;
+.theme-text {
+    font-weight: bold;
+    color: black;
 }
 
-.theme-box{
-	margin-top: 20px;
-	text-align: center;
-
+.theme-name {
+    text-align: center;
+    display: block;
+    position: relative;
+    font-weight: bold;
+    color: black;
 }
 
-.progress{
-	height: 17px;
+.progress {
+    display: inherit;
+    width: 80px;
+    height: 17px;
 }
 
-.test{
-	text-align: center;
+.test {
+    text-align: center;
 }
 
-.button-test{
-	width: 300px;
-	height: 40px;
-	border-radius: 98px;
-	font-size: 18px;
-	font-weight: bold;
-	background-color: orange;
-	margin-top: 20px;
-	margin-bottom: 20px;
+.button-test {
+    width: 300px;
+    height: 40px;
+    border-radius: 98px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: orange;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.level{
-	height: 200px;
-	font-size: 20px;
-	padding-bottom: 30px;
-	padding-top:20px;
+.level {
+    height: 200px;
+    font-size: 20px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+}
+
+button.theme {
+    border-width: 0px;
+    padding: 0px;
+    white-space: nowrap;
+    overflow: visible;
+    background-color: #7eb530;
+    border-radius: 98px;
+    display: inline-block;
+    height: 80px;
+    margin-top: 12px;
+    width: 80px;
+}
+
+button em {
+    vertical-align: middle;
+    display: inline-block;
+    border-radius: 98px;
+    margin: 12px;
+    height: 55px;
+    width: 55px;
+    background-image: url(../images/1.jpg);
 }
