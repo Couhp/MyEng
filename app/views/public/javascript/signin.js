@@ -22,8 +22,9 @@ $(document).ready(()=> {
             url: url,
             data: data,
             success: function(data){
-                console.log(data.data.user)
-                window.location = "http://localhost:8080/MyEng/Main";
+                document.cookie = "userId=" + data.data.user._id + ";"
+                console.log(document.cookie)
+                // window.location = "http://localhost:8080/MyEng/Main";
             }
           });
         
