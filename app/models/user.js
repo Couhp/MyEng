@@ -37,7 +37,8 @@ const UserSchema = Schema({
         required: true
     },
     streak: {
-        type: Number
+        type: Number,
+        default: 0
     },
     isBlock: {
         type: Number,
@@ -47,7 +48,18 @@ const UserSchema = Schema({
         type: String,
         required: true
     },
-    current_level: Number,
+    current_level: {
+        type: Number,
+        default: 1
+    },
+    exp: {
+        type: Number,
+        default: 0
+    },
+    topic: {
+        type: Array,
+        default: []
+    },
     current_topic_Id: String,
     current_course_Id: String
 });
