@@ -12,6 +12,7 @@ $("document").ready(function() {
     // ==============   GLOBAL VAR ==================
 
     let topicId = []
+    let questions = []
 
     //
 
@@ -22,13 +23,20 @@ $("document").ready(function() {
         let id = data._id
         topicId.push(clone(id))
 
-        result = '   <div class="theme-div">  ' +
-            '                           <button id="' + id + '"class="theme">  ' +
-            '                               <em></em>  ' +
-            '                           </button>  ' +
-            '                           <span class="theme-name">' + name + '</span>  ' +
-            '                           <div class="progress"></div>  ' +
-            '                      </div>  ';
+        result = '   <div id= ' + id + ' class="theme-div">  ' +
+            '                            <a href="">  ' +
+            '                                <div class="theme-circle1">  ' +
+            '                                    <img src="../images/beauty.jpg" class="img-circle theme-img" alt="user img">   ' +
+            '                                    <span class="theme-text">' + name + '</span>  ' +
+            '                                    <div class="progress">  ' +
+            '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
+            '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">  ' +
+            '                                            50%  ' +
+            '                                        </div>  ' +
+            '                                    </div>  ' +
+            '                                </div>  ' +
+            '                            </a>  ' +
+            '                       </div>  ';
 
         return result;
 
@@ -72,12 +80,17 @@ $("document").ready(function() {
 
 
     // Click to direct to Learn-Interface
-    $("div.theme-box").on('click', 'button', function() {
+    $("div.theme-box").on('click', 'div.theme-div', function() {
+        $("#main-interface").hide();
+        $("#view-question").show();
         var id = $(this).attr('id')
         getQuestion(id, function(data) {
-            console.log(data)
+            console.log(data);
+            questions = data;
         })
     });
+
+
 
 
 
@@ -102,7 +115,6 @@ $("document").ready(function() {
                     }
 
                     genTopic(topic_data)
-
 
                 }
             });
