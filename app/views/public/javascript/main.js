@@ -11,8 +11,8 @@ $("document").ready(function() {
 
     // ==============   GLOBAL VAR ==================
 
-    let topicId = []
-    let questions = []
+    let topicId = [];
+    let questionsQueue = [];
 
     //
 
@@ -78,6 +78,13 @@ $("document").ready(function() {
         });
     }
 
+    function showQuestion(question) {
+        $("#question").text(question["quesion"]);
+        if (question["option"] == null) {
+
+
+        }
+    }
 
     // Click to direct to Learn-Interface
     $("div.theme-box").on('click', 'div.theme-div', function() {
@@ -85,13 +92,14 @@ $("document").ready(function() {
         $("#view-question").show();
         var id = $(this).attr('id')
         getQuestion(id, function(data) {
-            console.log(data);
-            questions = data;
+            // console.log(data);
+            data.forEach(function(item) {
+                questionsQueue.push(item)
+            });
         })
+        console.log(questionsQueue);
+
     });
-
-
-
 
 
     $.ajax({
