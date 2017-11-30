@@ -12,7 +12,6 @@ $("document").ready(function() {
     // ==============   GLOBAL VAR ==================
 
     let topicId = [];
-    let questionsQueue = [];
 
     //
 
@@ -24,7 +23,7 @@ $("document").ready(function() {
         topicId.push(clone(id))
 
         result = '   <div id= ' + id + ' class="theme-div">  ' +
-            '                            <a href="">  ' +
+            // '                            <a href="">  ' +
             '                                <div class="theme-circle1">  ' +
             '                                    <img src="../images/beauty.jpg" class="img-circle theme-img" alt="user img">   ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
@@ -35,7 +34,7 @@ $("document").ready(function() {
             '                                        </div>  ' +
             '                                    </div>  ' +
             '                                </div>  ' +
-            '                            </a>  ' +
+            // '                            </a>  ' +
             '                       </div>  ';
 
         return result;
@@ -80,9 +79,33 @@ $("document").ready(function() {
 
     function showQuestion(question) {
         $("#question").text(question["quesion"]);
-        if (question["option"] == null) {
+        if (question["option"] != null) {
+            var list = question["option"];
+            answers = '   <form id="form-answer">  ' +
+                '   <div class="radio">  ' +
+                '                                   <label><input type="radio" name="answer" value=0>' + list[0] + '</label>  ' +
+                '                               </div>  ' +
+                '                               <div class="radio">  ' +
+                '                                   <label><input type="radio" name="answer" value=1>' + list[1] + '</label>  ' +
+                '                               </div>  ' +
+                '                               <div class="radio">  ' +
+                '                                   <label><input type="radio" name="answer" value=2>' + list[2] + '</label>  ' +
+                '                               </div>  ' +
+                '                               <div class="radio">  ' +
+                '                                   <label><input type="radio" name="answer" value=3>' + list[3] + '</label>  ' +
+                '                              </div>  ' +
+                '  </form>  ';
+            $("#list-answer").append(answers);
+            if (!$('input[type="radio"]').is(':checked')) {
+                $("#check-btn").prop('disabled', true);
+            }
 
-
+        } else {
+            area = '   <div class="form-group">  ' +
+                '     <h3><label for="comment">Dịch câu trên :</label></h3>  ' +
+                '     <textarea class="form-control" rows="6" id="area-answer"></textarea>  ' +
+                '  </div>  ';
+            $("#list-answer").append(area);
         }
     }
 
@@ -90,17 +113,32 @@ $("document").ready(function() {
     $("div.theme-box").on('click', 'div.theme-div', function() {
         $("#main-interface").hide();
         $("#view-question").show();
-        var id = $(this).attr('id')
+        var id = $(this).attr('id');
+        var questionsQueue = [];
         getQuestion(id, function(data) {
-            // console.log(data);
-            data.forEach(function(item) {
-                questionsQueue.push(item)
-            });
+            showQuestion(data[0]);
+            questionsQueue = data;
+
         })
         console.log(questionsQueue);
-
     });
 
+
+    $('#list-answer').on('click', 'input[name ="answer"]', function() {
+        console.log($('input[type="radio"]:checked').val());
+        $("#check-btn").prop('disabled', false);
+    });
+
+    $('#check-btn').on('click', function() {
+        $('#check-btn').hide();
+        $('#next-btn').show();
+    })
+
+    $('#next-btn').on('click', function() {
+        $('#check-btn').show();
+        $('#next-btn').hide();
+        $("#check-btn").prop('disabled', true);
+    })
 
     $.ajax({
         type: "GET",
