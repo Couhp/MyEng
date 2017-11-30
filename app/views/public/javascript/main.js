@@ -11,7 +11,10 @@ $("document").ready(function() {
 
     // ==============   GLOBAL VAR ==================
 
-    let topicId = [];
+    let _topicId = [];
+    let _queue = [];
+    let _position = 0
+    let _point = 0
 
     //
 
@@ -20,7 +23,7 @@ $("document").ready(function() {
         //console.log(data)
         let name = data.name
         let id = data._id
-        topicId.push(clone(id))
+        _topicId.push(clone(id))
 
         result = '   <div id= ' + id + ' class="theme-div">  ' +
             // '                            <a href="">  ' +
@@ -62,14 +65,22 @@ $("document").ready(function() {
             url: "http://localhost:8080/api/choose/question",
             data: { topicid: id },
             success: function(data) {
+
                 mylist = mylist.concat(data.data)
+                for (var i = 0; i < mylist.length; i++) {
+                    mylist[i].type = 1
+                }
                 $.ajax({
                     type: "POST",
                     method: "POST",
                     url: "http://localhost:8080/api/fill/question",
                     data: { topicid: id },
                     success: function(data) {
-                        mylist = mylist.concat(data.data)
+                        sublist = data.data
+                        for (var i = 0; i < sublist.length; i++) {
+                            sublist[i].type = 2
+                        }
+                        mylist = mylist.concat(sublist)
                         callback(mylist)
                     }
                 })
@@ -77,9 +88,12 @@ $("document").ready(function() {
         });
     }
 
-    function showQuestion(question) {
+    function showQuestion(index) {
+        question = _queue[index]
+        _position = index
+        console.log("question", question)
         $("#question").text(question["quesion"]);
-        if (question["option"] != null) {
+        if (question["type"] == 1) {
             var list = question["option"];
             answers = '   <form id="form-answer">  ' +
                 '   <div class="radio">  ' +
@@ -95,6 +109,7 @@ $("document").ready(function() {
                 '                                   <label><input type="radio" name="answer" value=3>' + list[3] + '</label>  ' +
                 '                              </div>  ' +
                 '  </form>  ';
+            $("#list-answer").empty();
             $("#list-answer").append(answers);
             if (!$('input[type="radio"]').is(':checked')) {
                 $("#check-btn").prop('disabled', true);
@@ -105,6 +120,7 @@ $("document").ready(function() {
                 '     <h3><label for="comment">Dịch câu trên :</label></h3>  ' +
                 '     <textarea class="form-control" rows="6" id="area-answer"></textarea>  ' +
                 '  </div>  ';
+            $("#list-answer").empty();
             $("#list-answer").append(area);
         }
     }
@@ -116,23 +132,63 @@ $("document").ready(function() {
         var id = $(this).attr('id');
         var questionsQueue = [];
         getQuestion(id, function(data) {
-            showQuestion(data[0]);
-            questionsQueue = data;
-
+            _queue = data
+            showQuestion(0)
         })
-        console.log(questionsQueue);
+
     });
 
+    $("#check-btn").on('click', () => {
+
+        if (_queue[_position].type == 1) {
+            answer = $('input[type="radio"]:checked').val();
+            true_ans = _queue[_position].answer
+            if (answer == true_ans) {
+                // Answer right
+                _point += 1
+                _position += 1
+                showQuestion(_position)
+            } else {
+                // Answer wrong
+                _position += 1
+                showQuestion(_position)
+            }
+        } else {
+            // Fill quesrion 
+            answer = $('#area-answer').val();
+            console.log(answer)
+            true_ans = _queue[_position].answer
+            ok = false
+            for (x in true_ans) {
+                if (x.trim() == answer.trim()) {
+                    ok = true;
+                    break;
+                }
+            }
+            if (answer in true_ans) {
+                _point += 1
+                _position += 1
+                if (_position)
+                    console.log("right")
+                showQuestion(_position)
+            } else {
+                // Answer wrong
+                _position += 1
+                showQuestion(_position)
+            }
+        }
+
+    })
 
     $('#list-answer').on('click', 'input[name ="answer"]', function() {
-        console.log($('input[type="radio"]:checked').val());
+        // console.log($('input[type="radio"]:checked').val());
         $("#check-btn").prop('disabled', false);
     });
 
-    $('#check-btn').on('click', function() {
-        $('#check-btn').hide();
-        $('#next-btn').show();
-    })
+    // $('#check-btn').on('click', function() {
+    //     // $('#check-btn').hide();
+    //     $('#next-btn').show();
+    // })
 
     $('#next-btn').on('click', function() {
         $('#check-btn').show();
