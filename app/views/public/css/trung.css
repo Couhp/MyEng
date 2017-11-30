@@ -61,13 +61,13 @@
 	border-radius: 15px;
 }
 
-.right-panel{
+/* .right-panel{
 	background-color: white;
 	margin-top: 30px;
 	margin-bottom: 40px;
 	border-radius: 15px;
 	text-align: center;
-}
+} */
 .theme-div{
 	display: inline-block;
 	min-width: 85px;
