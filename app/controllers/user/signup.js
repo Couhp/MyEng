@@ -3,6 +3,7 @@ const utils = require(global.__base + 'app/utils/index');
 const moment = require('moment');
 const bcrypt = require('bcrypt-nodejs');
 let sigup = (req, res) => {
+    console.log(req.body);
     // Check key not exists
     let keys = ['username', 'email', 'password', 'displayName', 'birthday', 'livingIn'];
     let notExists = utils.checkKeysNotExists(req.body, keys);
