@@ -11,7 +11,7 @@ const FriendshipSchema = Schema({
         require: true
     },
     status: {
-        type: int,
+        type: Number,
         require: true
     }
     //Status:
@@ -19,3 +19,4 @@ const FriendshipSchema = Schema({
     // 2 : friend
     // 3 : block 
 });
+module.exports = mongoose.model('Friend', FriendshipSchema);

@@ -1,13 +1,15 @@
-$(document).ready(() => {
+$(document).ready(()=> {
+    
 
-
+    //getFormData($("#submitForm"))
     $('#submit').on('click', function() {
-
-        let url = "http://localhost:8080/api/user/login"
+    
+        let url =  "http://localhost:8080/api/user/signup";
+        let data = getFormData($("#submitForm"))
         
         $.ajax({
             type: "POST",
-            method: "POST",
+            method : "POST",
             url: url,
             data: $("#submitForm").serializeArray(),
             success: function(data){
@@ -15,6 +17,6 @@ $(document).ready(() => {
                 window.location = "http://localhost:8080/MyEng/Main";
             }
         });
-
+    
     })
-})
+    })

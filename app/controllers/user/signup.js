@@ -21,7 +21,7 @@ let sigup = (req, res) => {
         return res.status(400).json({ errCode: -1, msg: 'Invalid date format' });
     }
     //Check type avatar
-    if (req.file.mimetype.indexOf("image") === -1) {
+    if (req.file != null && req.file != undefined && req.file.mimetype.indexOf("image") === -1) {
         return res.status(413).json({ errCode: 413, msg: "Unsupported media type" });
     }
     let info = {
@@ -33,10 +33,10 @@ let sigup = (req, res) => {
         livingIn: req.body.livingIn,
         gender: req.body.gender === 'Nam' ? 0 : 1,
         isBlock: 0,
-        avatar: req.file.path === null ? "/upload/images/default-avt" : req.file.path,
+        avatar: req.file === null || req.file === undefined ? "/upload/images/default-avt" : req.file.path,
         job: req.body.job,
         streak: 0,
-        current_level: 0,
+        current_level: 1,
         current_topic_Id: "",
         current_course_Id: ""
     };
@@ -45,10 +45,10 @@ let sigup = (req, res) => {
         if (!user) {
             let newUser = new User(info);
             newUser.save(err => {
-                if (err) res.status.json({ errCode: 500, msg: 'Internal error' });
+                if (err) res.status(500).json({ errCode: 500, msg: 'Internal error' });
                 else {
                     User.findOne({ username: newUser.username }).exec((err, user) => {
-                        if (err) res.status.json({ errCode: 500, msg: 'Internal error' });
+                        if (err) res.status(500).json({ errCode: 500, msg: 'Internal error' });
                         else {
                             let resData = { user: user };
                             req.session.userId = user._id
