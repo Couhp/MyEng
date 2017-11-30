@@ -5,8 +5,8 @@ let createDB = (req, res) => {
     let id = new mongoose.Types.ObjectId("5a1224a17605d32d985a8156")
 
     let info = {
-        name: "Job",
-        description: "Learn some words in Job topic",
+        name: "Taste and Dish",
+        description: "Learn some words in Tash and Dish topic",
         course: id
     };
     create(info)

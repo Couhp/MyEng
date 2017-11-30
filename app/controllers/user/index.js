@@ -6,6 +6,7 @@ const logout = require(global.__base + 'app/controllers/user/logout');
 const update = require(global.__base + 'app/controllers/user/update.js');
 const getInfo = require(global.__base + 'app/controllers/user/getInfo.js');
 const UpdateExp = require(global.__base + 'app/controllers/user/updateEXP.js');
+const avatar = require(global.__base + 'app/controllers/user/avatar.js');
 
 const userController = {
     getInfo: getInfo,
@@ -13,7 +14,8 @@ const userController = {
     signup: signup,
     logout: logout,
     update: update,
-    updateEXP: UpdateExp
+    updateEXP: UpdateExp,
+    avatar: avatar
 };
 
 module.exports = userController;

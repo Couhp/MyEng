@@ -17,11 +17,11 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 router.post('/getinfo', userController.getInfo);
-router.post('/signup', upload.single("file"), userController.signup);
+router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.get('/logout', isUser, deserializeUser, userController.logout);
 router.put('/update', isUser, deserializeUser, upload.single("file"), userController.update);
 router.put('/exp', isUser, deserializeUser, userController.updateEXP);
+router.post('/avt', isUser, deserializeUser, upload.single("file"), userController.avatar);
 //router.put('/exp', userController.updateEXP);
-
 module.exports = router;

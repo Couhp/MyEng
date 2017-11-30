@@ -1,7 +1,7 @@
 const User = require(global.__base + '/app/models/user.js');
 const mongoose = require("mongoose");
 let updateExp = (req, res) => {
-    let userid = new mongoose.Types.ObjectId(req.body.userid);
+    let userid = new mongoose.Types.ObjectId(req.session.userId);
     let topicid = new mongoose.Types.ObjectId(req.body.topicid);
     let exp_plus = req.body.exp;
     User.findOne({ _id: userid }).exec((err, user) => {

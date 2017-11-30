@@ -21,9 +21,9 @@ let sigup = (req, res) => {
         return res.status(400).json({ errCode: -1, msg: 'Invalid date format' });
     }
     //Check type avatar
-    if (req.file != null && req.file != undefined && req.file.mimetype.indexOf("image") === -1) {
-        return res.status(413).json({ errCode: 413, msg: "Unsupported media type" });
-    }
+    // if (req.file != null && req.file != undefined && req.file.mimetype.indexOf("image") === -1) {
+    //     return res.status(413).json({ errCode: 413, msg: "Unsupported media type" });
+    // }
     let info = {
         username: req.body.username,
         email: req.body.email,
@@ -33,7 +33,7 @@ let sigup = (req, res) => {
         livingIn: req.body.livingIn,
         gender: req.body.gender === 'Nam' ? 0 : 1,
         isBlock: 0,
-        avatar: req.file === null || req.file === undefined ? "/upload/images/default-avt" : req.file.path,
+        avatar: "/upload/images/default-avt",
         job: req.body.job,
         streak: 0,
         current_level: 1,
