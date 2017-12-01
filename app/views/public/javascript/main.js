@@ -18,6 +18,9 @@ $("document").ready(function() {
 
     //
 
+    function random() {
+        return Math.floor((Math.random() * 3) + 1);
+    }
 
     function genQuestionHTML(data) {
         //console.log(data)
@@ -27,8 +30,8 @@ $("document").ready(function() {
 
         result = '   <div id= ' + id + ' class="theme-div">  ' +
             // '                            <a href="">  ' +
-            '                                <div class="theme-circle1">  ' +
-            '                                    <img src="../images/beauty.jpg" class="img-circle theme-img" alt="user img">   ' +
+            '                                <div class="theme-circle' + random() + '">  ' +
+            '                                    <img src="../images/' + random() + '.jpg" class="img-circle theme-img" alt="user img">   ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
             '                                    <div class="progress">  ' +
             '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
@@ -88,6 +91,7 @@ $("document").ready(function() {
         });
     }
 
+    //function show question when choose theme
     function showQuestion(index) {
         question = _queue[index]
         _position = index
@@ -122,6 +126,7 @@ $("document").ready(function() {
                 '  </div>  ';
             $("#list-answer").empty();
             $("#list-answer").append(area);
+            // $("#check-btn").prop('disabled', true);
         }
     }
 
@@ -132,69 +137,106 @@ $("document").ready(function() {
         var id = $(this).attr('id');
         var questionsQueue = [];
         getQuestion(id, function(data) {
+            console.log(data)
             _queue = data
             showQuestion(0)
         })
 
     });
 
+    //check anwser with button check-btn
     $("#check-btn").on('click', () => {
+        if (_position < 10) {
+            if (_queue[_position].type == 1) {
+                answer = $('input[type="radio"]:checked').val();
+                true_ans = _queue[_position].answer
+                if (answer == true_ans) {
+                    // Answer right
+                    _point += 1
+                    _position += 1
+                    $("div.group-button").css("background-color", "#bff199");
 
-        if (_queue[_position].type == 1) {
-            answer = $('input[type="radio"]:checked').val();
-            true_ans = _queue[_position].answer
-            if (answer == true_ans) {
-                // Answer right
-                _point += 1
-                _position += 1
-                showQuestion(_position)
-            } else {
-                // Answer wrong
-                _position += 1
-                showQuestion(_position)
-            }
-        } else {
-            // Fill quesrion 
-            answer = $('#area-answer').val();
-            console.log(answer)
-            true_ans = _queue[_position].answer
-            ok = false
-            for (x in true_ans) {
-                if (x.trim() == answer.trim()) {
-                    ok = true;
-                    break;
+                } else {
+                    // Answer wrong
+                    _position += 1
+                    $("div.group-button").css("background-color", "#ffd3d1");
                 }
-            }
-            if (answer in true_ans) {
-                _point += 1
-                _position += 1
-                if (_position)
-                    console.log("right")
-                showQuestion(_position)
+                $("input").prop('disabled', true);
             } else {
+                // Fill quesrion 
+                answer = $('#area-answer').val();
+                true_ans = _queue[_position].answer
+                console.log(answer)
+                var ok = false
+                for (x in true_ans) {
+                    if (x.trim() == answer.trim()) {
+                        $("div.group-button").css("background-color", "#bff199");
+                        ok = true;
+                        _point += 1;
+                        break;
+                    }
+                }
                 // Answer wrong
+                if (!ok) {
+                    $("div.group-button").css("background-color", "#ffd3d1");
+                }
                 _position += 1
-                showQuestion(_position)
+                $("textarea").prop('disabled', true);
             }
+            $("#check-btn").hide();
+            $("#next-btn").show();
+            $("#ignore-btn").prop('disabled', true);
         }
-
     })
 
+
+    //disable check-btn when show view-question
     $('#list-answer').on('click', 'input[name ="answer"]', function() {
-        // console.log($('input[type="radio"]:checked').val());
         $("#check-btn").prop('disabled', false);
     });
 
-    // $('#check-btn').on('click', function() {
-    //     // $('#check-btn').hide();
-    //     $('#next-btn').show();
-    // })
+    $('#done-btn').on('click', function() {
+        $("#show-result").hide();
+        $("#main-interface").show();
+    });
 
     $('#next-btn').on('click', function() {
+        $("div.group-button").css("background-color", "#f0f0f0");
+        $("#next-btn").hide();
         $('#check-btn').show();
-        $('#next-btn').hide();
-        $("#check-btn").prop('disabled', true);
-    })
+        $("input").prop('disabled', false);
+        $("textarea").prop('disabled', false);
+        $("#ignore-btn").prop('disabled', false);
+        if (_position < 10) {
+            showQuestion(_position);
+        } else {
+            $("#view-question").hide();
+            $("#show-result").show();
+            $("#point").text(_point + " / 10");
+            _point = 0;
+        }
+    });
+
+    $("#ignore-btn").on('click', function() {
+        _position += 1;
+        if (_position < 10) {
+            showQuestion(_position);
+        } else {
+            $("#view-question").hide();
+            $("#show-result").show();
+            $("#point").text(_point + " / 10");
+            _point = 0;
+        }
+    });
+
+    $("#list-answer").on('change', 'textarea', function() {
+        if ($.trim($('textarea').val()).length < 1) {
+            $("#check-btn").prop('disabled', true);
+        } else {
+            $("#check-btn").prop('disabled', false);
+        }
+    });
+
 
     $.ajax({
         type: "GET",
@@ -212,8 +254,8 @@ $("document").ready(function() {
                 success: function(data) {
 
                     let topic_data = []
-                    for (var i = 0; i < 1; ++i) {
-                        topic_data.push(clone(data.data[0]))
+                    for (var i = 0; i < data.data.length; ++i) {
+                        topic_data.push(clone(data.data[i]))
                     }
 
                     genTopic(topic_data)
