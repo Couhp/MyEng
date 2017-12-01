@@ -45,14 +45,14 @@ let sigup = (req, res) => {
         if (!user) {
             let newUser = new User(info);
             newUser.save(err => {
-                if (err) res.status(500).json({ errCode: 500, msg: 'Internal error' });
+                if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
                 else {
                     User.findOne({ username: newUser.username }).exec((err, user) => {
-                        if (err) res.status(500).json({ errCode: 500, msg: 'Internal error' });
+                        if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
                         else {
                             let resData = { user: user };
                             req.session.userId = user._id
-                            res.status(200).json({ errCode: 200, msg: "Success", data: resData });
+                            return res.status(200).json({ errCode: 200, msg: "Success", data: resData });
                         }
                     });
                 }

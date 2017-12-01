@@ -23,5 +23,5 @@ router.get('/logout', isUser, deserializeUser, userController.logout);
 router.put('/update', isUser, deserializeUser, upload.single("file"), userController.update);
 router.put('/exp', isUser, deserializeUser, userController.updateEXP);
 router.post('/avt', isUser, deserializeUser, upload.single("file"), userController.avatar);
-//router.put('/exp', userController.updateEXP);
+router.post('/feedback', isUser, deserializeUser, userController.createFeedback);
 module.exports = router;
