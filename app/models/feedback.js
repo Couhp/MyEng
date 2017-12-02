@@ -2,6 +2,7 @@ const mongoose = require(global.__base + '/app/config/database/mongoose')
 const { Schema } = mongoose;
 
 var feedbackSchema = new Schema({
+    subject: String,
     content: String,
     isRep: {
         type: Number,
