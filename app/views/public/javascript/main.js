@@ -152,7 +152,7 @@ $("document").ready(function() {
                 url: "http://localhost:8080/api/topic/all",
                 data: { "courseid": courseId },
                 success: function(data) {
-
+                    console.log(data)
                     let topic_data = []
                     for (var i = 0; i < 1; ++i) {
                         topic_data.push(clone(data.data[0]))
