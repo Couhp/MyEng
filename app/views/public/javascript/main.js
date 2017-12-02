@@ -17,7 +17,18 @@ $("document").ready(function() {
     let _position = 0
     let _point = 0
 
-    //
+    
+    // ================= ROUTING ============================
+
+    $("#feedback").on('click', function() {
+        window.location = "http://localhost:8080/MyEng/FeedBack";
+    }) 
+
+    $("#main").on('click', function() {
+        window.location = "http://localhost:8080/MyEng/Main";
+    })
+
+    //=========================================================
 
     function random() {
         return Math.floor((Math.random() * 3) + 1);
@@ -29,7 +40,7 @@ $("document").ready(function() {
         let id = data._id
         _topicId.push(clone(id))
 
-        result = '   <div id= ' + id + ' class="theme-div" data-toggle="modal" data-target="#myModal">  ' +
+        result = '   <div id= ' + id + ' class="theme-div" data-toggle="modal" >  ' +
             // '                            <a href="">  ' +
             '                                <div class="theme-circle' + random() + '">  ' +
             '                                    <img src="../images/' + random() + '.jpg" class="img-circle theme-img" alt="user img">   ' +
@@ -136,13 +147,24 @@ $("document").ready(function() {
         $("#main-interface").hide();
         $("#view-question").show();
         var id = $(this).attr('id');
+        $('#myModal').modal('show');
+        $('#timeTrue').on('click', function() {
+            timer();
+            learn(id);
+        });
+        $('#timeFalse').on('click', function() {
+            learn(id);
+        });
+    });
+
+    var learn = function(id) {
         turnOnQuestion()
         getQuestion(id, function(data) {
             console.log(data)
             _queue = data
             showQuestion(0)
         })
-    });
+    }
 
     var submitPoint = function(topicid, exp) {
         $.ajax({
@@ -153,6 +175,10 @@ $("document").ready(function() {
             success: function(data) {}
         });
     }
+
+    var timer = function(id) {setTimeout(function(id){
+        endLearn(id, _point)
+     }, 15000)};
 
     //check anwser with button check-btn
     var turnOnQuestion = function() {
@@ -222,15 +248,18 @@ $("document").ready(function() {
         if (_position < 10) {
             showQuestion(_position);
         } else {
-            $("#view-question").hide();
-            $("#show-result").show();
-            $("#point").text(_point + " / 10");
-            submitPoint()
-            _point = 0;
-            _queue = null;
+            endLearn();
         }
     });
 
+    var endLearn = function(id, point) {
+        $("#view-question").hide();
+        $("#show-result").show();
+        $("#point").text(_point + " / 10");
+        submitPoint(id, point)
+        _point = 0;
+        _queue = null;
+    }
     $("#ignore-btn").on('click', function() {
         _position += 1;
         if (_position < 10) {
@@ -305,10 +334,6 @@ $("document").ready(function() {
             }
         });
     }
-
-    var timer = function() {setTimeout(function(){ 
-        alert(_point)
-     }, 15000)};
     
     var main = function() {
         callInfo()

@@ -16,13 +16,14 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+router.get('/myinfo', userController.info);
 router.post('/getinfo', userController.getInfo);
 router.get('/myinfo', isUser, deserializeUser, userController.info);
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.get('/logout', isUser, deserializeUser, userController.logout);
-router.put('/update', isUser, deserializeUser, upload.single("file"), userController.update);
-router.put('/exp', isUser, deserializeUser, userController.updateEXP);
+router.post('/update', isUser, deserializeUser, userController.update);
+router.post('/exp', isUser, deserializeUser, userController.updateEXP);
 router.post('/avt', isUser, deserializeUser, upload.single("file"), userController.avatar);
 router.post('/feedback', isUser, deserializeUser, userController.createFeedback);
 module.exports = router;

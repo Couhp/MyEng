@@ -8,9 +8,12 @@ var express = require('express');
 var http = require('http');
 var router = express.Router();
 
-const signInRouter = require(global.__base + 'app/routes/admin/signin.js');
+const signinFile = process.cwd() + "/app/views/public/html/admin-signin.html";
 
-router.use("/SignIn", signInRouter)
+
+router.get("/", (req, res)=> {
+    res.sendFile(signinFile)
+})
 
 
 module.exports = router;

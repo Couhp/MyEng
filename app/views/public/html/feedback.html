@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/gopy.css">
     <script src="../assets/vendor/jquery/jquery.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="../javascript/gopy.js"></script>
+    <script src="../javascript/feedback.js"></script>
 </head>
 
 <body class="bgc">
@@ -21,14 +21,14 @@
     <nav id="myScrollspy" class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a id="logo" class="navbar-brand" href="#">WebSiteName</a>
+                <a id="logo" class="navbar-brand">WebSiteName</a>
             </div>
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#"><button class="button-header btn-info">Trang chủ</button></a>
+                    <a ><button class="button-header btn-info" id="main">Trang chủ</button></a>
                 </li>
                 <li>
-                    <a href="ThaoLuan"><button class="button-header btn-info">Thảo luận</button></a>
+                    <a><button class="button-header btn-info" id="feedback">Thảo luận</button></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -49,40 +49,30 @@
             <h1 class="topic-heading">Dòng thảo luận</h1>
 
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#home">Bình luận</a></li>
-                <li><a href="#menu1">Mới</a></li>
-                <li><a href="#menu2">Đã theo dõi</a></li>
+                <li class="active"><a href="#home">Mới</a></li>
+                <li><a href="#menu1">Mine</a></li>
 
             </ul>
 
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
-                    <h3>Bình luận</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <h3>News</h3>
+                    <div id="news-content"></div>
                 </div>
                 <div id="menu1" class="tab-pane fade">
-                    <h3>Mới</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h3>Mine</h3>
+                    <div>
+                    <textarea id="fb-subject"></textarea>
+                    <textarea id="fb-content"></textarea>
+                    <button id="sendFeedback">Send</button></div>
+                    <div id="my-content"></div>
                 </div>
-                <div id="menu2" class="tab-pane fade">
-                    <h3>Đã theo dõi</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>111
-                </div>
+                
 
             </div>
 
         </div>
-        <div class="col-md-3 right-panel">
-            <div class="box-gray">
-                <h2 style="margin-bottom: 15px;">
-                    <button class="btn btn-blue btn-edit-subscriptions">
-					  Sửa đổi
-					  </button> Đang theo dõi:
-                </h2>
-
-            </div>
-        </div>
+        
     </div>
 
 

@@ -8,9 +8,13 @@ var express = require('express');
 var http = require('http');
 var router = express.Router();
 
-const signInRouter = require(global.__base + 'app/routes/admin/signin.js');
+const mainFile = process.cwd() + "/app/views/public/html/feedback.html";
 
-router.use("/SignIn", signInRouter)
+
+router.get("/", (req, res)=> {
+    console.log(" Cookie : ", req.session)
+    res.sendFile(mainFile)
+})
 
 
 module.exports = router;
