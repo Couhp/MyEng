@@ -1,5 +1,6 @@
 $("document").ready(function() {
 
+
     function clone(obj) {
         if (null == obj || "object" != typeof obj) return obj;
         var copy = obj.constructor();
@@ -135,60 +136,70 @@ $("document").ready(function() {
         $("#main-interface").hide();
         $("#view-question").show();
         var id = $(this).attr('id');
-        var questionsQueue = [];
-        timer()
+        turnOnQuestion()
         getQuestion(id, function(data) {
             console.log(data)
             _queue = data
             showQuestion(0)
         })
-
     });
 
-    //check anwser with button check-btn
-    $("#check-btn").on('click', () => {
-        if (_position < 10) {
-            if (_queue[_position].type == 1) {
-                answer = $('input[type="radio"]:checked').val();
-                true_ans = _queue[_position].answer
-                if (answer == true_ans) {
-                    // Answer right
-                    _point += 1
-                    _position += 1
-                    $("div.group-button").css("background-color", "#bff199");
+    var submitPoint = function(topicid, exp) {
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/user/exp",
+            data: { "topicid": topicid, "exp": exp },
+            success: function(data) {}
+        });
+    }
 
-                } else {
-                    // Answer wrong
-                    _position += 1
-                    $("div.group-button").css("background-color", "#ffd3d1");
-                }
-                $("input").prop('disabled', true);
-            } else {
-                // Fill quesrion 
-                answer = $('#area-answer').val();
-                true_ans = _queue[_position].answer
-                console.log(answer)
-                var ok = false
-                for (x in true_ans) {
-                    if (x.trim() == answer.trim()) {
+    //check anwser with button check-btn
+    var turnOnQuestion = function() {
+        $("#check-btn").on('click', () => {
+            if (_position < 10) {
+                if (_queue[_position].type == 1) {
+                    answer = $('input[type="radio"]:checked').val();
+                    true_ans = _queue[_position].answer
+                    if (answer == true_ans) {
+                        // Answer right
+                        _point += 1
+                        _position += 1
                         $("div.group-button").css("background-color", "#bff199");
-                        ok = true;
-                        _point += 1;
-                        break;
+
+                    } else {
+                        // Answer wrong
+                        _position += 1
+                        $("div.group-button").css("background-color", "#ffd3d1");
                     }
+                    $("input").prop('disabled', true);
+                } else {
+                    // Fill quesrion 
+                    answer = $('#area-answer').val();
+                    true_ans = _queue[_position].answer
+                    console.log(answer)
+                    var ok = false
+                    for (x in true_ans) {
+                        if (x.trim() == answer.trim()) {
+                            $("div.group-button").css("background-color", "#bff199");
+                            ok = true;
+                            _point += 1;
+                            break;
+                        }
+                    }
+                    // Answer wrong
+                    if (!ok) {
+                        $("div.group-button").css("background-color", "#ffd3d1");
+                    }
+                    _position += 1
+                    $("textarea").prop('disabled', true);
                 }
-                // Answer wrong
-                if (!ok) {
-                    $("div.group-button").css("background-color", "#ffd3d1");
-                }
-                _position += 1
-                $("textarea").prop('disabled', true);
+                $("#check-btn").hide();
+                $("#next-btn").show();
+                $("#ignore-btn").prop('disabled', true);
             }
-            $("#check-btn").hide();
-            $("#next-btn").show();
-            $("#ignore-btn").prop('disabled', true);
-        }
-    })
+        })
+    }
 
 
     //disable check-btn when show view-question
@@ -214,7 +225,9 @@ $("document").ready(function() {
             $("#view-question").hide();
             $("#show-result").show();
             $("#point").text(_point + " / 10");
+            submitPoint()
             _point = 0;
+            _queue = null;
         }
     });
 
@@ -239,35 +252,73 @@ $("document").ready(function() {
     });
 
 
-    $.ajax({
-        type: "GET",
-        method: "GET",
-        url: "http://localhost:8080/api/course/all",
-        data: "",
-        success: function(data) {
+    function setInfo(data) {
 
-            let courseId = data.data[0]["_id"]
-            $.ajax({
-                type: "POST",
-                method: "POST",
-                url: "http://localhost:8080/api/topic/all",
-                data: { "courseid": courseId },
-                success: function(data) {
-                    console.log(data)
-                    let topic_data = []
-                    for (var i = 0; i < data.data.length; ++i) {
-                        topic_data.push(clone(data.data[i]))
-                    }
-
-                    genTopic(topic_data)
-
-                }
-            });
+        function normalize(str) {
+            let arr = str.split('/');
+            arr.splice(0, 1);
+            return '/' + arr.join('/');
         }
-    });
+
+        $("#avatar").attr("src", normalize(data.avatar));
+        $("#displayname").text(data.displayName);
+    }
+
+
+    var callData = function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/course/all",
+            data: "",
+            success: function(data) {
+
+                let courseId = data.data[0]["_id"]
+                $.ajax({
+                    type: "POST",
+                    method: "POST",
+                    url: "http://localhost:8080/api/topic/all",
+                    data: { "courseid": courseId },
+                    success: function(data) {
+
+                        let topic_data = []
+                        for (var i = 0; i < data.data.length; ++i) {
+                            topic_data.push(clone(data.data[i]))
+                        }
+
+                        genTopic(topic_data)
+
+                    }
+                });
+            }
+        });
+    }
+
+    var callInfo = function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/user/myinfo",
+            data: "",
+            success: function(data) {
+                setInfo(data.data)
+            }
+        });
+    }
 
     var timer = function() {setTimeout(function(){ 
         alert(_point)
      }, 15000)};
+    
+    var main = function() {
+        callInfo()
+        callData()
+    }
+
+    //==================== RUN EXCUTION ========================
+
+    main()
+
+    
     
 })

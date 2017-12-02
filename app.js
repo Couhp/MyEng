@@ -15,8 +15,9 @@ const deserializeUser = require(global.__base + 'app/controllers/middleware/dese
 // Body parser
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json({ limit: '100mb' }));
+app.use(express.static(global.__base + '/upload'));
 app.use(express.static(global.__base + '/app/views/public'));
-app.use(express.static(global.__base + '/upload/images'));
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
