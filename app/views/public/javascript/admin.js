@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    function trung() {
+
+    }
     var table = $('#example').DataTable({
         "ajax": {
             "url": "http://localhost:8080/api/admin/all-user",

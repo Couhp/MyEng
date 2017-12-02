@@ -5,6 +5,9 @@ const router = express.Router();
 const userController = require(global.__base + 'app/controllers/user/index');
 const deserializeUser = require(global.__base + 'app/controllers/middleware/deserializeUser.js');
 const isUser = require(global.__base + 'app/controllers/middleware/isUser.js');
+const deserialize = require(global.__base + 'app/controllers/middleware/deserialize.js');
+const isAuthenticated = require(global.__base + 'app/controllers/middleware/isAuthenticated.js');
+
 var fs = require('fs');
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -16,13 +19,16 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+router.get('/my-feedback', isUser, deserializeUser, userController.myFeedback)
+router.get('/myinfo', userController.info);
 router.post('/getinfo', userController.getInfo);
 router.get('/myinfo', isUser, deserializeUser, userController.info);
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.get('/logout', isUser, deserializeUser, userController.logout);
-router.put('/update', isUser, deserializeUser, upload.single("file"), userController.update);
-router.put('/exp', isUser, deserializeUser, userController.updateEXP);
+router.post('/update', isUser, deserializeUser, userController.update);
+router.post('/exp', isUser, deserializeUser, userController.updateEXP);
 router.post('/avt', isUser, deserializeUser, upload.single("file"), userController.avatar);
 router.post('/feedback', isUser, deserializeUser, userController.createFeedback);
+router.get("/feed/:id", isAuthenticated, deserialize, userController.getFeedback);
 module.exports = router;
