@@ -40,7 +40,7 @@ $(document).ready(function(){
     var showFb = function(data) {
         data.forEach(element => {
             var html = getFbHTML(element)
-            $("#allFeedback").append(html)
+            $("#news-content").append(html)
         });
     }
 
@@ -48,11 +48,11 @@ $(document).ready(function(){
         var subject = data.subject
         var content = data.content
         var reply = data.reply
-        var html = "<h>" +
+        var html = "<div class='alert alert-success'>" +
                 "<h5 > " + subject +"</h5>" +
                 "<h6>" + content +"</h6>" +
                 "<h6>Reply</h6>" + reply + "<br>" 
-                "</h>"
+                "</div>"
         return html
     }
 
