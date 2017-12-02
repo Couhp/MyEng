@@ -8,7 +8,8 @@ const isAdmin = require(global.__base + 'app/controllers/middleware/isAdmin.js')
 
 router.post("/login", adminController.login);
 router.get("/logout", isAdmin, deserializeAdmin, adminController.logout);
-router.get("/all-user", isAdmin, deserializeAdmin, adminController.getAllUser);
+// router.get("/all-user", isAdmin, deserializeAdmin, adminController.getAllUser);
+router.get("/all-user", adminController.getAllUser);
 router.post("/block", isAdmin, deserializeAdmin, adminController.blockUser);
 router.post("/reply-feedback", isAdmin, deserializeAdmin, adminController.repFeedback);
 
