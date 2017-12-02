@@ -284,11 +284,17 @@ $("document").ready(function() {
     function setInfo(data) {
 
         function normalize(str) {
-            let arr = str.split('/');
-            arr.splice(0, 1);
-            return '/' + arr.join('/');
-        }
+            if (str.indexOf("/") === 1) {
+                let arr = str.split('/');
+                arr.splice(0, 1);
+                return '/' + arr.join('/');
+            } else {
+                let arr = str.split('\\');
+                arr.splice(0, 1);
+                return '/' + arr.join('/');
+            }
 
+        }
         $("#avatar").attr("src", normalize(data.avatar));
         $("#displayname").text(data.displayName);
     }
