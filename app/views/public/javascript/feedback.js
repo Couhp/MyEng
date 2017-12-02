@@ -25,7 +25,35 @@ $(document).ready(function(){
             }})
     })
 
+    var getAllFb = function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/admin/get-feedback-is-reply",
+            data: {},
+            success: function(data) {
+                showFb(data.data)
+            }})
+    }
 
+    var showFb = function(data) {
+        data.forEach(element => {
+            var html = getFbHTML(element)
+            $("#allFeedback").append(html)
+        });
+    }
+
+    var getFbHTML = function (data) {
+        var subject = data.subject
+        var content = data.content
+        var reply = data.reply
+        var html = "<h>" +
+                "<h5 > " + subject +"</h5>" +
+                "<h6>" + content +"</h6>" +
+                "<h6>Reply</h6>" + reply + "<br>" 
+                "</h>"
+        return html
+    }
 
 
     $(".nav-tabs a").click(function(){
@@ -38,5 +66,10 @@ $(document).ready(function(){
         $(".prev span").text(y);
     });
 
+
+    var main = function() {
+        getAllFb()
+    }
     
+    main()
 });

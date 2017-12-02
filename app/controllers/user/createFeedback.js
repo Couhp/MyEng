@@ -3,6 +3,7 @@ const Feedback = require(global.__base + '/app/models/feedback.js');
 const mongoose = require('mongoose');
 let createFeedback = (req, res) => {
     let info = {
+        subject: req.body.subject,
         content: req.body.content,
         isRep: 0,
         reply: "",

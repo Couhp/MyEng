@@ -13,6 +13,7 @@ const adminController = {
     blockUser: blockUser,
     repFeedback: repFeedback,
     getFeedbackIsRep: getFeedbackIsRep,
-    getAllFeedback : getAllFeedback
+    getAllFeedback: getAllFeedback
+
 }
 module.exports = adminController;
