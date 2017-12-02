@@ -47,11 +47,18 @@
     </nav>
 
     <div id="main" class="container-fluid">
+        <div id="show-result" class="container" hidden>
+            <h2 class="text-success">Kết quả bài làm của bạn:</h2>
+            <h2 id="point" class="text-center text-danger"></h2>
+            <button id="done-btn" class="button-header pull-right btn-danger">
+                Tiếp tục
+            </button>
+        </div>
         <div id="main-interface" class="row">
             <div class="col-md-1"></div>
             <!-- main panel -->
             <div class="col-md-7 main-panel">
-                <h2 class="text-center"><i> Cum chu de ve gioi tinh</i></h2>
+                <h2 class="text-center"><i> Các chủ đề </i></h2>
                 <!-- dong chu de 1 -->
                 <div class="theme-box" id="question-box">
                     <!-- chu de 1 -->
@@ -79,46 +86,59 @@
             </div>
         </div>
 
-        <div id="view-question" hidden>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <div id="question-panel" class="panel panel-default">
-                        <div class="panel-heading">
-                            <h2 id="question"></h2>
-                        </div>
-                        <div id="list-answer" class="panel-body">
+    </div>
+    <div id="view-question" hidden>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div id="question-panel" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 id="question"></h2>
+                    </div>
+                    <div id="list-answer" class="panel-body">
 
-                        </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="row">
-                <button id="ignore-btn" class="button-header btn-warning">
-                    Bỏ qua
-                </button>
-                <h3 id="correct-response" class="text-success" hidden>
-                    Chính xác !!!
-                </h3>
-                <h3 id="wrong-response" class="text-danger" hidden>
-                    Câu trả lời sai !!!
-                </h3>
-                <button id="check-btn" class="button-header pull-right btn-success">
-                    Kiểm tra
-                </button>
-                <button id="next-btn" class="button-header pull-right btn-danger" hidden>
-                    Tiếp tục
-                </button>
             </div>
 
         </div>
+        <div class="group-button">
+            <button id="ignore-btn" class="button-header btn-warning">
+                Bỏ qua
+            </button>
+            <!-- <h3 id="correct-response" class="text-success alert-result" hidden>
+                Chính xác !!!
+            </h3>
+            <h3 id="wrong-response" class="text-danger alert-result" hidden>
+                Câu trả lời sai !!!
+            </h3> -->
+            <button id="check-btn" class="button-header pull-right btn-success">
+                Kiểm tra
+            </button>
+            <button id="next-btn" class="button-header pull-right btn-danger" hidden>
+                Tiếp tục
+            </button>
+        </div>
 
+    </div>    
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text center">Chọn cách phương thức học</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info pull-left" data-dismiss="modal">Làm bài tính giờ</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Làm bài không tính giờ</button>            
+          </div>
+        </div>
+    
+      </div>
     </div>
-
-
-    <!-- <script src="../assets/javascripts/jquery.form.js"></script> -->
-
 
 
     <!-- MAIN JAVASCRIPT -->

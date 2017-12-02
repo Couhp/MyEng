@@ -49,6 +49,12 @@
     font-weight: bold;
 }
 
+#show-result {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+}
+
 .main-panel {
     background-color: white;
     margin: 30px 40px 40px 10px;
@@ -88,7 +94,7 @@
 }
 
 .theme-circle2 {
-    background-color: #dd381d;
+    background-color: #ddd01d;
     border-radius: 98px;
     display: inline-block;
     height: 80px;
@@ -152,7 +158,8 @@
     padding-top: 20px;
 }
 
-button.theme {
+
+/* button.theme {
     border-width: 0px;
     padding: 0px;
     white-space: nowrap;
@@ -173,11 +180,7 @@ button em {
     height: 55px;
     width: 55px;
     background-image: url(../images/1.jpg);
-}
-
-#view-question {
-    margin: 30px;
-}
+} */
 
 div input {
     height: 20px;
@@ -188,7 +191,7 @@ div label {
 }
 
 #question-panel .panel-body {
-    margin: 10px;
+    margin: 10px 10px 0px 10px !important;
     height: 300px;
 }
 
@@ -196,6 +199,16 @@ textarea {
     font-size: 20px !important;
 }
 
-#check-btn #next-btn {
+
+/* #check-btn #next-btn {
     display: inline;
+} */
+
+.alert-result {
+    display: inline;
+}
+
+.group-button {
+    background-color: #f0f0f0;
+    padding: 40px 100px 50px 100px;
 }

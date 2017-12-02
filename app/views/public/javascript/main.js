@@ -11,21 +11,27 @@ $("document").ready(function() {
 
     // ==============   GLOBAL VAR ==================
 
-    let topicId = [];
+    let _topicId = [];
+    let _queue = [];
+    let _position = 0
+    let _point = 0
 
     //
 
+    function random() {
+        return Math.floor((Math.random() * 3) + 1);
+    }
 
     function genQuestionHTML(data) {
         //console.log(data)
         let name = data.name
         let id = data._id
-        topicId.push(clone(id))
+        _topicId.push(clone(id))
 
-        result = '   <div id= ' + id + ' class="theme-div">  ' +
+        result = '   <div id= ' + id + ' class="theme-div" data-toggle="modal" data-target="#myModal">  ' +
             // '                            <a href="">  ' +
-            '                                <div class="theme-circle1">  ' +
-            '                                    <img src="../images/beauty.jpg" class="img-circle theme-img" alt="user img">   ' +
+            '                                <div class="theme-circle' + random() + '">  ' +
+            '                                    <img src="../images/' + random() + '.jpg" class="img-circle theme-img" alt="user img">   ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
             '                                    <div class="progress">  ' +
             '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
@@ -62,14 +68,22 @@ $("document").ready(function() {
             url: "http://localhost:8080/api/choose/question",
             data: { topicid: id },
             success: function(data) {
+
                 mylist = mylist.concat(data.data)
+                for (var i = 0; i < mylist.length; i++) {
+                    mylist[i].type = 1
+                }
                 $.ajax({
                     type: "POST",
                     method: "POST",
                     url: "http://localhost:8080/api/fill/question",
                     data: { topicid: id },
                     success: function(data) {
-                        mylist = mylist.concat(data.data)
+                        sublist = data.data
+                        for (var i = 0; i < sublist.length; i++) {
+                            sublist[i].type = 2
+                        }
+                        mylist = mylist.concat(sublist)
                         callback(mylist)
                     }
                 })
@@ -77,9 +91,13 @@ $("document").ready(function() {
         });
     }
 
-    function showQuestion(question) {
+    //function show question when choose theme
+    function showQuestion(index) {
+        question = _queue[index]
+        _position = index
+        console.log("question", question)
         $("#question").text(question["quesion"]);
-        if (question["option"] != null) {
+        if (question["type"] == 1) {
             var list = question["option"];
             answers = '   <form id="form-answer">  ' +
                 '   <div class="radio">  ' +
@@ -95,6 +113,7 @@ $("document").ready(function() {
                 '                                   <label><input type="radio" name="answer" value=3>' + list[3] + '</label>  ' +
                 '                              </div>  ' +
                 '  </form>  ';
+            $("#list-answer").empty();
             $("#list-answer").append(answers);
             if (!$('input[type="radio"]').is(':checked')) {
                 $("#check-btn").prop('disabled', true);
@@ -105,7 +124,9 @@ $("document").ready(function() {
                 '     <h3><label for="comment"></label></h3>  ' +
                 '     <textarea class="form-control" rows="6" id="area-answer"></textarea>  ' +
                 '  </div>  ';
+            $("#list-answer").empty();
             $("#list-answer").append(area);
+            // $("#check-btn").prop('disabled', true);
         }
     }
 
@@ -115,28 +136,108 @@ $("document").ready(function() {
         $("#view-question").show();
         var id = $(this).attr('id');
         var questionsQueue = [];
+        timer()
         getQuestion(id, function(data) {
-            
+            console.log(data)
+            _queue = data
+            showQuestion(0)
         })
-        console.log(questionsQueue);
+
     });
 
+    //check anwser with button check-btn
+    $("#check-btn").on('click', () => {
+        if (_position < 10) {
+            if (_queue[_position].type == 1) {
+                answer = $('input[type="radio"]:checked').val();
+                true_ans = _queue[_position].answer
+                if (answer == true_ans) {
+                    // Answer right
+                    _point += 1
+                    _position += 1
+                    $("div.group-button").css("background-color", "#bff199");
 
+                } else {
+                    // Answer wrong
+                    _position += 1
+                    $("div.group-button").css("background-color", "#ffd3d1");
+                }
+                $("input").prop('disabled', true);
+            } else {
+                // Fill quesrion 
+                answer = $('#area-answer').val();
+                true_ans = _queue[_position].answer
+                console.log(answer)
+                var ok = false
+                for (x in true_ans) {
+                    if (x.trim() == answer.trim()) {
+                        $("div.group-button").css("background-color", "#bff199");
+                        ok = true;
+                        _point += 1;
+                        break;
+                    }
+                }
+                // Answer wrong
+                if (!ok) {
+                    $("div.group-button").css("background-color", "#ffd3d1");
+                }
+                _position += 1
+                $("textarea").prop('disabled', true);
+            }
+            $("#check-btn").hide();
+            $("#next-btn").show();
+            $("#ignore-btn").prop('disabled', true);
+        }
+    })
+
+
+    //disable check-btn when show view-question
     $('#list-answer').on('click', 'input[name ="answer"]', function() {
-        console.log($('input[type="radio"]:checked').val());
         $("#check-btn").prop('disabled', false);
     });
 
-    $('#check-btn').on('click', function() {
-        $('#check-btn').hide();
-        $('#next-btn').show();
-    })
+    $('#done-btn').on('click', function() {
+        $("#show-result").hide();
+        $("#main-interface").show();
+    });
 
     $('#next-btn').on('click', function() {
+        $("div.group-button").css("background-color", "#f0f0f0");
+        $("#next-btn").hide();
         $('#check-btn').show();
-        $('#next-btn').hide();
-        $("#check-btn").prop('disabled', true);
-    })
+        $("input").prop('disabled', false);
+        $("textarea").prop('disabled', false);
+        $("#ignore-btn").prop('disabled', false);
+        if (_position < 10) {
+            showQuestion(_position);
+        } else {
+            $("#view-question").hide();
+            $("#show-result").show();
+            $("#point").text(_point + " / 10");
+            _point = 0;
+        }
+    });
+
+    $("#ignore-btn").on('click', function() {
+        _position += 1;
+        if (_position < 10) {
+            showQuestion(_position);
+        } else {
+            $("#view-question").hide();
+            $("#show-result").show();
+            $("#point").text(_point + " / 10");
+            _point = 0;
+        }
+    });
+
+    $("#list-answer").on('change', 'textarea', function() {
+        if ($.trim($('textarea').val()).length < 1) {
+            $("#check-btn").prop('disabled', true);
+        } else {
+            $("#check-btn").prop('disabled', false);
+        }
+    });
+
 
     $.ajax({
         type: "GET",
@@ -154,8 +255,8 @@ $("document").ready(function() {
                 success: function(data) {
                     console.log(data)
                     let topic_data = []
-                    for (var i = 0; i < 1; ++i) {
-                        topic_data.push(clone(data.data[0]))
+                    for (var i = 0; i < data.data.length; ++i) {
+                        topic_data.push(clone(data.data[i]))
                     }
 
                     genTopic(topic_data)
@@ -165,4 +266,8 @@ $("document").ready(function() {
         }
     });
 
+    var timer = function() {setTimeout(function(){ 
+        alert(_point)
+     }, 15000)};
+    
 })
