@@ -29,9 +29,10 @@ $(document).ready(function(){
         $.ajax({
             type: "GET",
             method: "GET",
-            url: "http://localhost:8080/api/admin/get-feedback-is-reply",
+            url: "http://localhost:8080/api/user/my-feedback",
             data: {},
             success: function(data) {
+                console.log(data)
                 showFb(data.data)
             }})
     }
