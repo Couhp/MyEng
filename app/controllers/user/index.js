@@ -10,6 +10,7 @@ const avatar = require(global.__base + 'app/controllers/user/avatar.js');
 const createFeedback = require(global.__base + 'app/controllers/user/createFeedback.js');
 const info = require(global.__base + 'app/controllers/user/info.js');
 const getFeedback = require(global.__base + 'app/controllers/user/getfeedback.js');
+const myFeedback = require(global.__base + 'app/controllers/user/myFeedback.js');
 
 const userController = {
     info: info,
@@ -21,7 +22,8 @@ const userController = {
     updateEXP: UpdateExp,
     avatar: avatar,
     createFeedback: createFeedback,
-    getFeedback: getFeedback
+    getFeedback: getFeedback,
+    myFeedback: myFeedback
 };
 
 module.exports = userController;
