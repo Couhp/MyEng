@@ -23,8 +23,10 @@ let login = (req, res) => {
                 if (!user) {
                     return res.status(404).json({ errCode: 404, msg: 'User not found' });
                 } else {
-                    if (bcrypt.hashSync(password) != user.password) return res.status(400).json({ errCode: 400, msg: 'Password mismatch' });
-                    else {
+                    if (user.isBlock === 1) return res.status(400).json({ errCode: 400, msg: "User was blocked, please contact admin  if you need any further information" });
+                    else if (!bcrypt.compareSync(password, user.password)) {
+                        return res.json({ errCode: 400, msg: 'Password mismatch' });
+                    } else {
                         req.session.userId = user._id;
                         let resData = { user: user };
                         return res.json({ errCode: 200, msg: 'Success', data: resData });
@@ -33,6 +35,7 @@ let login = (req, res) => {
             });
         }
         if (user) {
+            if (user.isBlock === 1) return res.status(400).json({ errCode: 400, msg: "User was blocked, please contact admin  if you need any further information" });
             if (!bcrypt.compareSync(password, user.password)) {
                 return res.json({ errCode: 400, msg: 'Password mismatch' });
             } else {

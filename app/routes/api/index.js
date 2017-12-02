@@ -7,8 +7,9 @@ const user = require('./user.js');
 const friend = require('./friend.js')
 const choose = require('./choose_question.js');
 const fill = require('./fill_question.js');
-
+const admin = require('./admin');
 router.use(session);
+router.use('/admin', admin)
 router.use('/fill', fill);
 router.use('/course', course);
 router.use('/topic', topic);

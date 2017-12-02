@@ -9,6 +9,9 @@ const AdminSchema = Schema({
     password: {
         type: String,
         required: true
+    },
+    email: {
+        type: String
     }
 });
 module.exports = mongoose.model('Admin', AdminSchema);
