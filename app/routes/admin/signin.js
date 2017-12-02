@@ -8,16 +8,12 @@ var express = require('express');
 var http = require('http');
 var router = express.Router();
 
-const signupFile = process.cwd() + "/app/views/public/html/pages-signup.html";
+const signinFile = process.cwd() + "/app/views/public/html/admin-signin.html";
 
 
 router.get("/", (req, res)=> {
-    res.sendFile(signupFile)
+    res.sendFile(signinFile)
 })
-
-
-
-
 
 
 module.exports = router;

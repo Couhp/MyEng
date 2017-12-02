@@ -1,14 +1,16 @@
 from random import randint
 
+name = "topic3"
+
 def gen_option () :
-    lines = open('topic1','r').read().split("\n")
+    lines = open(name,'r').read().split("\n")
     dictionary = {}
     for line in lines :
         if len(line) > 1 :
             key, val = line.split(":")
             dictionary[key] = val
     keys = list(dictionary.keys())
-    length = len(keys)
+    length = len(keys) - 1
 
     def gen_rand(index, length) :
         while True :
@@ -16,9 +18,7 @@ def gen_option () :
             if this != index : return this
 
     def gen_question(index) :
-        
         true_ans = randint(1,4)
-
         question = "The meaning of word \'" + keys[index] + "' : \n"
         option = ""
         for i in range(1,5) :
@@ -31,10 +31,19 @@ def gen_option () :
                 option += "$"
         option += "\n" + str(true_ans - 1) + "\n"
         return question + option
+    
+    def gen_fill_question(index) :
+    
+        question = "Từ sau trong tiếng anh là : \'" + dictionary[keys[index]] + "' : \n" + \
+                    "$" + keys[index] + "\n"
+        return question 
 
-    with open("topic1.opt",'a') as fout :
-        for i in range(1,20) :
+    with open(name + ".opt",'a') as fout :
+        for i in range(1,12) :
             fout.write( gen_question(i))
+    with open(name + ".fil",'a') as fout :
+        for i in range(1,6) :
+            fout.write(gen_fill_question(i))
 
 answer = ""
 def gen_fill () :
@@ -42,6 +51,7 @@ def gen_fill () :
     lines = open('dictionary','r').read().split("\n")
     dictionary = {}
     for line in lines :
+        print(line.split())
         key, val = line.split()
         dictionary[key] = val.rstrip()
     
@@ -63,13 +73,14 @@ def gen_fill () :
         return
 
     questions = open('fill_question','r').readlines()
-    with open('topic1.fil','a') as fout :
+    with open(name +'.fil','a') as fout :
         for question in questions :
             tokens = question.split()
+            question = "Translate into Vietnamese : " + question
             gen_ans(tokens, 0, "")
             answer_out = answer.replace("_"," ").replace("   "," ").replace("  "," ")
             fout.write(question.rstrip() + "\n" + answer_out + "\n")
             answer = ""
         
-
+gen_option()
 gen_fill()

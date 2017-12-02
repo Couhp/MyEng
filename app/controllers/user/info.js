@@ -1,6 +1,6 @@
 const User = require(global.__base + '/app/models/user.js');
 const mongoose = require('mongoose');
-let info = (req, res) => {
+let Info = (req, res) => {
     let id = new mongoose.Types.ObjectId(req.session.userId);
     User.findOne({ _id: id }).exec((err, user) => {
         if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
@@ -9,4 +9,4 @@ let info = (req, res) => {
         }
     });
 }
-module.exports = info;
+module.exports = Info;

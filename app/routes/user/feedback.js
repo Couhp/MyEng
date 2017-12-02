@@ -8,16 +8,13 @@ var express = require('express');
 var http = require('http');
 var router = express.Router();
 
-const signupFile = process.cwd() + "/app/views/public/html/pages-signup.html";
+const mainFile = process.cwd() + "/app/views/public/html/feedback.html";
 
 
 router.get("/", (req, res)=> {
-    res.sendFile(signupFile)
+    console.log(" Cookie : ", req.session)
+    res.sendFile(mainFile)
 })
-
-
-
-
 
 
 module.exports = router;
