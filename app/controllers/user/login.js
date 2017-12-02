@@ -8,7 +8,7 @@ let login = (req, res) => {
     let keys = ['username', 'password'];
     let notExists = utils.checkKeysNotExists(req.body, keys);
     if (notExists !== -1) {
-        return res.status(400).json({
+        return res.json({
             errCode: -1,
             msg: 'Missing argument ' + keys[notExists]
         });
@@ -16,12 +16,12 @@ let login = (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     User.findOne({ username: username }).exec((err, user) => {
-        if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
+        if (err) return res.json({ errCode: 500, msg: 'Internal error' });
         if (!user) {
             User.findOne({ email: username }).exec((err, user) => {
                 if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
                 if (!user) {
-                    return res.status(404).json({ errCode: 404, msg: 'User not found' });
+                    return res.json({ errCode: 404, msg: 'User not found' });
                 } else {
                     if (user.isBlock === 1) return res.status(400).json({ errCode: 400, msg: "User was blocked, please contact admin  if you need any further information" });
                     else if (!bcrypt.compareSync(password, user.password)) {
