@@ -17,10 +17,18 @@ let login = (req, res) => {
     let password = req.body.password;
 
     Admin.findOne({ username: username }).exec((err, admin) => {
+<<<<<<< HEAD
+        console.log(admin)
+        if (err) return res.json({ errCode: 500, msg: "Internal error" });
+        if (!admin) {
+            Admin.findOne({ email: username }).exec((err, admin) => {
+                if (err) return res.json({ errCode: 500, msg: "Internal error" });
+=======
         if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
         if (!admin) {
             Admin.findOne({ email: username }).exec((err, admin) => {
                 if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+>>>>>>> 61df4a1ddaddb40d16c2b3d1552fc111a44fa8ed
                 if (!admin) return res.json({ errCode: 404, msg: " Not found" });
                 else {
                     if (!bcrypt.compareSync(password, admin.password)) {

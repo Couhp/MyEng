@@ -8,18 +8,18 @@ let sigup = (req, res) => {
     let keys = ['username', 'email', 'password', 'displayName', 'birthday', 'livingIn'];
     let notExists = utils.checkKeysNotExists(req.body, keys);
     if (notExists !== -1) {
-        return res.status(400).json({
+        return res.json({
             errCode: -1,
             msg: 'Missing argument ' + keys[notExists]
         });
     }
     // Check mail
     if (!utils.checkMail(req.body.email)) {
-        return res.status(400).json({ errCode: -1, msg: 'Invalid email format' });
+        return res.json({ errCode: -1, msg: 'Invalid email format' });
     }
     // Check date
     if (!moment(req.body.birthday).isValid()) {
-        return res.status(400).json({ errCode: -1, msg: 'Invalid date format' });
+        return res.json({ errCode: -1, msg: 'Invalid date format' });
     }
     //Check type avatar
     // if (req.file != null && req.file != undefined && req.file.mimetype.indexOf("image") === -1) {
@@ -42,25 +42,25 @@ let sigup = (req, res) => {
         current_course_Id: ""
     };
     User.findOne({ username: info.username }).exec((err, user) => {
-        if (err) res.status.json({ errCode: 500, msg: 'Internal error' });
+        if (err) res.json({ errCode: 500, msg: 'Internal error' });
         if (!user) {
             let newUser = new User(info);
             newUser.save(err => {
-                if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
+                if (err) return res.json({ errCode: 500, msg: 'Internal error' });
                 else {
                     User.findOne({ username: newUser.username }).exec((err, user) => {
-                        if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
+                        if (err) return res.json({ errCode: 500, msg: 'Internal error' });
                         else {
                             let resData = { user: user };
                             req.session.userId = user._id
-                            return res.status(200).json({ errCode: 200, msg: "Success", data: resData });
+                            return res.json({ errCode: 200, msg: "Success", data: resData });
                         }
                     });
                 }
             });
 
         } else {
-            return res.status(400).json({ errCode: 400, msg: 'User already exists' });
+            return res.json({ errCode: 400, msg: 'User already exists' });
         }
     });
 }

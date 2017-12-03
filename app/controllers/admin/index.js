@@ -5,6 +5,7 @@ const blockUser = require(global.__base + 'app/controllers/admin/blockUser.js');
 const repFeedback = require(global.__base + 'app/controllers/admin/repFeedback.js');
 const getFeedbackIsRep = require(global.__base + 'app/controllers/admin/getFeedbackIsRep.js');
 const getAllFeedback = require(global.__base + 'app/controllers/admin/getAllFeedback.js');
+const delFeedback = require(global.__base + 'app/controllers/admin/delFeedback.js');
 
 const adminController = {
     login: login,
@@ -13,7 +14,8 @@ const adminController = {
     blockUser: blockUser,
     repFeedback: repFeedback,
     getFeedbackIsRep: getFeedbackIsRep,
-    getAllFeedback: getAllFeedback
+    getAllFeedback: getAllFeedback,
+    delFeedback: delFeedback
 
 }
 module.exports = adminController;

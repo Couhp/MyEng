@@ -4,16 +4,16 @@ let getInfo = (req, res) => {
     if (req.body.userid != null) {
         let id = new mongoose.Types.ObjectId(req.body.userid);
         User.findOne({ _id: id }).exec((err, user) => {
-            if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+            if (err) return res.json({ errCode: 500, msg: "Internal error" });
             else {
-                return res.status(200).json({ errCode: 200, msg: "Success", data: user });
+                return res.json({ errCode: 200, msg: "Success", data: user });
             }
         });
     } else {
         User.findOne({ username: req.body.username }).exec((err, user) => {
-            if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+            if (err) return res.json({ errCode: 500, msg: "Internal error" });
             else {
-                return res.status(200).json({ errCode: 200, msg: "Success", data: user });
+                return res.json({ errCode: 200, msg: "Success", data: user });
             }
         });
     }

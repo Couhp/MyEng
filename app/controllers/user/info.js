@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 let Info = (req, res) => {
     let id = new mongoose.Types.ObjectId(req.session.userId);
     User.findOne({ _id: id }).exec((err, user) => {
-        if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+        if (err) return res.json({ errCode: 500, msg: "Internal error" });
         else {
-            return res.status(200).json({ errCode: 200, msg: "Success", data: user });
+            return res.json({ errCode: 200, msg: "Success", data: user });
         }
     });
 }
