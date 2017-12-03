@@ -23,11 +23,7 @@ let login = (req, res) => {
                 if (!user) {
                     return res.json({ errCode: 404, msg: 'User not found' });
                 } else {
-<<<<<<< HEAD
                     if (user.isBlock === 1) return res.json({ errCode: 400, msg: "User was blocked, please contact admin if you need any further information" });
-=======
-                    if (user.isBlock === 1) return res.json({ errCode: 400, msg: "User was blocked, please contact admin  if you need any further information" });
->>>>>>> 800ff8f033a56eb2d3f034d7a5cdfeac25f783c7
                     else if (!bcrypt.compareSync(password, user.password)) {
                         return res.json({ errCode: 400, msg: 'Password mismatch' });
                     } else {
@@ -39,11 +35,7 @@ let login = (req, res) => {
             });
         }
         if (user) {
-<<<<<<< HEAD
             if (user.isBlock === 1) return res.json({ errCode: 400, msg: "User was blocked, please contact admin if you need any further information" });
-=======
-            if (user.isBlock === 1) return res.json({ errCode: 400, msg: "User was blocked, please contact admin  if you need any further information" });
->>>>>>> 800ff8f033a56eb2d3f034d7a5cdfeac25f783c7
             else if (!bcrypt.compareSync(password, user.password)) {
                 return res.json({ errCode: 400, msg: 'Password mismatch' });
             } else {

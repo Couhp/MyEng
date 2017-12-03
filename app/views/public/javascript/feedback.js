@@ -24,7 +24,10 @@ $(document).ready(function() {
             url: "http://localhost:8080/api/user/feedback",
             data: { "subject": subject, "content": content },
             success: function(data) {
-                console.log(data)
+                if (data.errCode === 200) {
+                    alert(data.msg)
+
+                }
             }
         })
     })

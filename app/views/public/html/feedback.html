@@ -7,12 +7,14 @@
     <title>Learning English</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/trung.css">
     <link rel="stylesheet" href="../css/gopy.css">
-    <script src="../assets/vendor/jquery/jquery.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="../javascript/feedback.js"></script>
+    <!-- Vendor -->
+    <script type="text/javascript" src="../vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../javascript/feedback.js"></script>
 </head>
 
 <body class="bgc">
@@ -76,12 +78,13 @@
                             <label>Nội dung góp ý:</label>
                             <input type="text" class="form-control" id="fb-content">
                         </div>
-                        <button class="btn btn-primary active" sid="sendFeedback">Gửi</button>
+                        <button class="btn btn-primary active" id="sendFeedback">Gửi</button>
                     </div>
 
                     <div class="panel panel-default" style="margin-bottom: 200px; padding:30px 20px 20px 20px;" id="my-content">
                         <h2>Cũ :</h2>
                     </div>
+                    <br/>
 
                 </div>
 
