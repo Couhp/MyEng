@@ -11,7 +11,7 @@ var router = express.Router();
 const welcomeFile = process.cwd() + "/app/views/public/html/welcome.html";
 
 
-router.get("/", (req, res)=> {
+router.get("/", (req, res) => {
     res.sendFile(welcomeFile)
 })
 

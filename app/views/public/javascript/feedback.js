@@ -1,13 +1,10 @@
 $(document).ready(function() {
-<<<<<<< HEAD
-    $("#newFeed").hide()
+    $("#newFeed").hide();
     $("#create").on('click', function() {
         $("#create").hide();
         $("#newFeed").show();
     });
-=======
-
->>>>>>> d10f30036f9be0e1c74f13fb7cbc5f26e7450315
+    $("#temp").hide();
     // ==== GLOBAL VARIABLE =========
     var userId = ""
 
@@ -26,7 +23,6 @@ $(document).ready(function() {
     $("#sendFeedback").on('click', function() {
         var subject = $("#fb-subject").val()
         var content = $("#fb-content").val()
-<<<<<<< HEAD
         if (subject.length === 0 && content.length === 0) {
             $("#fb-subject").css("border", "1px solid red");
             $("#fb-content").css("border", "1px solid red");
@@ -47,24 +43,20 @@ $(document).ready(function() {
                         alert(data.msg)
                         $("#newFeed").hide()
                         $("#create").show()
+                        $("#nothing").hide()
+                        var html = "<div class='alert' id='temp'>" +
+                            "<h4 class='bg-warning'><b><i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser("") + "</strong></a>  : &nbsp;&nbsp;&nbsp;" + subject + "</b></h4>" +
+                            "<blockquote><p class='text-info'>" + content + "</p>" +
+                            "<strong class='text-primary'> Trả lời : &nbsp;&nbsp;&nbsp;   </strong>  Không có trả lời</blockquote><br>" +
+                            "</div>"
+                        $("#my-content").prepend(html)
+                        console.log(html)
+                    } else {
+                        alert(data.msg)
                     }
                 }
             })
         }
-=======
-        $.ajax({
-            type: "POST",
-            method: "POST",
-            url: "http://localhost:8080/api/user/feedback",
-            data: { "subject": subject, "content": content },
-            success: function(data) {
-                if (data.errCode === 200) {
-                    alert(data.msg)
-
-                }
-            }
-        })
->>>>>>> d10f30036f9be0e1c74f13fb7cbc5f26e7450315
     })
     $("#close").on('click', function() {
         $("#newFeed").hide()
@@ -97,15 +89,11 @@ $(document).ready(function() {
 
     var showFb = function(type, data) {
         var divId = ""
-<<<<<<< HEAD
         if (type === 1) {
             divId = "#news-content"
         } else {
             divId = "#my-content"
         }
-=======
-        if (type == 1) { divId = "#news-content" } else divId = "#my-content"
->>>>>>> d10f30036f9be0e1c74f13fb7cbc5f26e7450315
         if (data == null || data.length == 0) {
             $(divId).append(getFbHTML("null"))
         } else {
@@ -115,27 +103,36 @@ $(document).ready(function() {
             });
         }
     }
-<<<<<<< HEAD
     var getUser = function(userid) {
         let res = "";
-        $.ajax({
-            type: "POST",
-            method: "POST",
-            async: false,
-            url: "http://localhost:8080/api/user/getinfo",
-            data: { "userid": userid },
-            success: function(data) {
-                res = data.data.username
-            }
-        })
+        if (userid === "") {
+            $.ajax({
+                type: "GET",
+                method: "GET",
+                async: false,
+                url: "http://localhost:8080/api/user/myinfo",
+                data: {},
+                success: function(data) {
+                    res = data.data.username
+                }
+            })
+        } else {
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                async: false,
+                url: "http://localhost:8080/api/user/getinfo",
+                data: { "userid": userid },
+                success: function(data) {
+                    res = data.data.username
+                }
+            })
+        }
         return res
     }
-=======
-
->>>>>>> d10f30036f9be0e1c74f13fb7cbc5f26e7450315
     var getFbHTML = function(data) {
         if (data == "null") {
-            var html = "<div class='nothing bg-info'><h class='nothing-text'>Không có dữ liệu.</h></div><br/>"
+            var html = "<div class='nothing bg-info' id ='nothing'><h class='nothing-text'>Không có dữ liệu.</h></div><br/>"
             return html
         }
         var subject = (data.subject) != null ? (data.subject) : "No title "
@@ -145,18 +142,10 @@ $(document).ready(function() {
             reply = "Không có trả lời"
         }
         var html = "<div class='alert'>" +
-<<<<<<< HEAD
             "<h4 class='bg-warning'><b><i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.user) + "</strong></a>  : &nbsp;&nbsp;&nbsp;" + subject + "</b></h4>" +
             "<blockquote><p class='text-info'>" + content + "</p>" +
             // "<footer class='text-muted'>By " + getUser(data.user) + "</footer><br>" +
             "<strong class='text-primary'> Trả lời : &nbsp;&nbsp;&nbsp;   </strong>   " + reply + "</blockquote><br>" +
-=======
-            "<h3 class='bg-warning'><b> " + subject + "</b></h3>" +
-            "<blockquote><p class='text-info'>" + content + "</p>" +
-            "<footer class='text-muted'>By " + "Null" + "</footer><br>" +
-            // "<p class='text-muted'>Reply</p>" + 
-            "<p class='text-primary'>  " + reply + "</p></blockquote><br>" +
->>>>>>> d10f30036f9be0e1c74f13fb7cbc5f26e7450315
             "</div>"
         return html
     }
@@ -242,11 +231,9 @@ $(document).ready(function() {
 
 
     var main = function() {
-        callInfo(function() {
-            getAllFb()
-            getMyFb()
-        })
-
+        callInfo()
+        getAllFb()
+        getMyFb()
     }
 
     main()
