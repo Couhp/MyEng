@@ -27,9 +27,30 @@ $(document).ready(function() {
 
     // block user
     $('#usersTable').on('click', 'button', function() {
-        alert($(this).attr('id'))
-    })
-
+        if ($(this).hasClass("btn-danger")) {
+            $(this).removeClass("btn-danger")
+            $(this).addClass("btn-success")
+            $(this).text("Unblock")
+        } else {
+            $(this).removeClass("btn-success")
+            $(this).addClass("btn-danger")
+            $(this).text("Block")
+        }
+        var id = $(this).attr('id')
+        block(id)
+    });
+    // function block or unblock
+    var block = function(id) {
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/admin/block",
+            data: { "userid": id },
+            success: function(data) {
+                console.log(data)
+            }
+        })
+    }
 
     //switch tag in gop y
     $('#admin_menu').on('click', 'a[data-toggle="tab"]', function(e) {
@@ -94,7 +115,7 @@ $(document).ready(function() {
             "<h5>Tiêu đề : " + subject + "</h5>" +
             "<h6>Nội dung : " + content + "</h6>" +
             "<div class='input-group'>" +
-            "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
+            "<textarea id=" + id + " class='form-control custom-control' rows='1' style='resize:none'></textarea>" +
             "<span class='input-group-addon btn btn-primary'>Reply</span>" +
             "</div>" +
             "</div>"
@@ -155,11 +176,11 @@ $(document).ready(function() {
         var html = "<div class='alert alert-warning'>" +
             "<h5 >Tiêu đề: " + subject + "</h5>" +
             "<h6>Nội dung: " + content + "</h6>" +
-            "<h6 class='alert alert-success'>Đã trả lời: " + reply + "</h6><br>" +
-            "<div class='input-group'>" +
-            "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
-            "<span class='input-group-addon btn btn-primary'>Reply</span>" +
-            "</div>" +
+            "<h6 class='alert alert-success'>Đã trả lời: " + reply + "</h6>" +
+            // "<div class='input-group'>" +
+            // "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
+            // "<span class='input-group-addon btn btn-primary'>Reply</span>" +
+            // "</div>" +
             "</div>"
         return html
     }

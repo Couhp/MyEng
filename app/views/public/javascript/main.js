@@ -17,12 +17,12 @@ $("document").ready(function() {
     let _position = 0
     let _point = 0
 
-    
+
     // ================= ROUTING ============================
 
     $("#feedback").on('click', function() {
         window.location = "http://localhost:8080/MyEng/FeedBack";
-    }) 
+    })
 
     $("#main").on('click', function() {
         window.location = "http://localhost:8080/MyEng/Main";
@@ -176,9 +176,11 @@ $("document").ready(function() {
         });
     }
 
-    var timer = function(id) {setTimeout(function(id){
-        endLearn(id, _point)
-     }, 15000)};
+    var timer = function(id) {
+        setTimeout(function(id) {
+            endLearn(id, _point)
+        }, 15000)
+    };
 
     //check anwser with button check-btn
     var turnOnQuestion = function() {
@@ -297,6 +299,9 @@ $("document").ready(function() {
         }
         $("#avatar").attr("src", normalize(data.avatar));
         $("#displayname").text(data.displayName);
+        $("#level").text("Level: " + data.current_level);
+        $("#exp").text(data.exp + " exp");
+        $("#streak").text("Streak: " + data.streak);
     }
 
 
@@ -340,7 +345,7 @@ $("document").ready(function() {
             }
         });
     }
-    
+
     var main = function() {
         callInfo()
         callData()
@@ -350,6 +355,6 @@ $("document").ready(function() {
 
     main()
 
-    
-    
+
+
 })
