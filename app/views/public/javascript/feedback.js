@@ -43,14 +43,13 @@ $(document).ready(function() {
                         alert(data.msg)
                         $("#newFeed").hide()
                         $("#create").show()
-                        $("#nothing").hide()
+                        $("#my-content").children("#nothing").hide();
                         var html = "<div class='alert' id='temp'>" +
                             "<h4 class='bg-warning'><b><i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser("") + "</strong></a>  : &nbsp;&nbsp;&nbsp;" + subject + "</b></h4>" +
                             "<blockquote><p class='text-info'>" + content + "</p>" +
                             "<strong class='text-primary'> Trả lời : &nbsp;&nbsp;&nbsp;   </strong>  Không có trả lời</blockquote><br>" +
                             "</div>"
-                        $("#my-content").prepend(html)
-                        console.log(html)
+                        $("#my-content").append(html)
                     } else {
                         alert(data.msg)
                     }

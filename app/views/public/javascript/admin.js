@@ -157,7 +157,6 @@ $(document).ready(function() {
         var textarea = $(this).siblings("textarea")
         var reply = textarea.val()
         var feedbackId = textarea.attr('id')
-        console.log(reply + feedbackId)
         $.ajax({
             type: "POST",
             method: "POST",
@@ -165,28 +164,35 @@ $(document).ready(function() {
             data: { "feedbackId": feedbackId, "reply": reply },
             success: function(data) {
                 alert(data.msg);
-                textarea.parent().parent().hide()
+                textarea.parent().parent().remove()
+                var html = "<div class='alert alert-warning'>" +
+                    "<i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.data.user) + "</strong></a>" +
+                    "<h5 >Tiêu đề: " + data.data.subject + "</h5>" +
+                    "<h6>Nội dung: " + data.data.content + "</h6>" +
+                    "<h6 class='alert alert-success'>Đã trả lời: " + data.data.reply + "</h6>" +
+                    "</div>";
+                $("#replied_content").prepend(html);
             }
         })
     });
 
     // end reply
 
-    $("#replied_content").on('click', 'span', function() {
-        var textarea = $(this).siblings("textarea")
-        var reply = textarea.val()
-        var feedbackId = textarea.attr('id')
-        $.ajax({
-            type: "POST",
-            method: "POST",
-            url: "http://localhost:8080/api/admin/reply-feedback",
-            data: { "feedbackId": feedbackId, "reply": reply },
-            success: function(data) {
-                alert(data.msg);
-                textarea.parent().parent().hide()
-            }
-        })
-    });
+    // $("#replied_content").on('click', 'span', function() {
+    //     var textarea = $(this).siblings("textarea")
+    //     var reply = textarea.val()
+    //     var feedbackId = textarea.attr('id')
+    //     $.ajax({
+    //         type: "POST",
+    //         method: "POST",
+    //         url: "http://localhost:8080/api/admin/reply-feedback",
+    //         data: { "feedbackId": feedbackId, "reply": reply },
+    //         success: function(data) {
+    //             alert(data.msg);
+    //             textarea.parent().parent().hide()
+    //         }
+    //     })
+    // });
 
 
     //show fb replied
