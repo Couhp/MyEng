@@ -13,3 +13,8 @@ table.dataTable thead .sorting {
 .tab-pane {
     padding-top: 40px;
 }
+
+button.reply {
+    display: block;
+    margin-top: 5px;
+}
