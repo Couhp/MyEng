@@ -22,12 +22,12 @@ $("document").ready(function() {
     let _point = 0
     let _isLearning = 0
 
-    
+
     // ================= ROUTING ============================
 
     $("#feedback").on('click', function() {
         window.location = "http://localhost:8080/MyEng/FeedBack";
-    }) 
+    })
 
     $("#main").on('click', function() {
         window.location = "http://localhost:8080/MyEng/Main";
@@ -181,35 +181,13 @@ $("document").ready(function() {
         });
     }
 
-    //======= TIME CONTROLLER ====================
-
-    var my_timer = function(id) {
-        _isLearning = true
-        var time = 50
-        $("#view-time").show()
-        clock(time, time)
-        setTimeout(function(id){
-            _isLearning = 0
+    var timer = function(id) {
+        setTimeout(function(id) {
             endLearn(id, _point)
-        }, 50 * 1000)
+        }, 15000)
     };
 
-    function clock(time, now) {
-
-        var timeOut = setTimeout(function() {
-            if (_isLearning) {   
-                var timeNow = (now/time) * 100
-                $("#view-time").css("width",String(timeNow) + '%');
-                clock(time, now - 1);
-            } else {
-                clearTimeout(timeOut)
-                $("#view-time").hide();
-                $("#view-time").css("width","100%");
-            }
-        }, 980)
-    }
-    
-     //check anwser with button check-btn
+    //check anwser with button check-btn
     var turnOnQuestion = function() {
         $("#check-btn").on('click', () => {
             if (_position < 10) {
@@ -330,6 +308,9 @@ $("document").ready(function() {
         }
         $("#avatar").attr("src", normalize(data.avatar));
         $("#displayname").text(data.displayName);
+        $("#level").text("Level: " + data.current_level);
+        $("#exp").text(data.exp + " exp");
+        $("#streak").text("Streak: " + data.streak);
     }
 
 
@@ -373,7 +354,7 @@ $("document").ready(function() {
             }
         });
     }
-    
+
     var main = function() {
         callInfo()
         callData()
@@ -383,6 +364,6 @@ $("document").ready(function() {
 
     main()
 
-    
-    
+
+
 })
