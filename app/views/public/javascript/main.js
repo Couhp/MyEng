@@ -1,3 +1,7 @@
+
+
+
+
 $("document").ready(function() {
 
 
@@ -16,6 +20,7 @@ $("document").ready(function() {
     let _queue = [];
     let _position = 0
     let _point = 0
+    let _isLearning = 0
 
     
     // ================= ROUTING ============================
@@ -149,7 +154,7 @@ $("document").ready(function() {
         var id = $(this).attr('id');
         $('#myModal').modal('show');
         $('#timeTrue').on('click', function() {
-            timer();
+            my_timer();
             learn(id);
         });
         $('#timeFalse').on('click', function() {
@@ -176,11 +181,35 @@ $("document").ready(function() {
         });
     }
 
-    var timer = function(id) {setTimeout(function(id){
-        endLearn(id, _point)
-     }, 15000)};
+    //======= TIME CONTROLLER ====================
 
-    //check anwser with button check-btn
+    var my_timer = function(id) {
+        _isLearning = true
+        var time = 50
+        $("#view-time").show()
+        clock(time, time)
+        setTimeout(function(id){
+            _isLearning = 0
+            endLearn(id, _point)
+        }, 50 * 1000)
+    };
+
+    function clock(time, now) {
+
+        var timeOut = setTimeout(function() {
+            if (_isLearning) {   
+                var timeNow = (now/time) * 100
+                $("#view-time").css("width",String(timeNow) + '%');
+                clock(time, now - 1);
+            } else {
+                clearTimeout(timeOut)
+                $("#view-time").hide();
+                $("#view-time").css("width","100%");
+            }
+        }, 980)
+    }
+    
+     //check anwser with button check-btn
     var turnOnQuestion = function() {
         $("#check-btn").on('click', () => {
             if (_position < 10) {
@@ -253,6 +282,8 @@ $("document").ready(function() {
     });
 
     var endLearn = function(id, point) {
+        $("#question").empty();
+        $("#list-answer").empty();
         $("#view-question").hide();
         $("#show-result").show();
         $("#point").text(_point + " / 10");
@@ -265,6 +296,8 @@ $("document").ready(function() {
         if (_position < 10) {
             showQuestion(_position);
         } else {
+            $("#question").empty();
+            $("#list-answer").empty();
             $("#view-question").hide();
             $("#show-result").show();
             $("#point").text(_point + " / 10");
