@@ -17,6 +17,8 @@ $("document").ready(function() {
     let _position = 0
     let _point = 0
     let _isLearning = 0
+    let _waitingQueue = []
+    let _isTiming = 0
 
 
     // ================= ROUTING ============================
@@ -151,9 +153,11 @@ $("document").ready(function() {
         $('#myModal').modal('show');
         $('#timeTrue').on('click', function() {
             my_timer();
+            _isTiming = true
             learn(id);
         });
         $('#timeFalse').on('click', function() {
+            _isTiming = 0
             learn(id);
         });
     });
@@ -177,16 +181,36 @@ $("document").ready(function() {
         });
     }
 
-    var timer = function(id) {
-        setTimeout(function(id) {
+    var my_timer = function(id) {
+        _isLearning = true
+        var time = 50
+        $("#view-time").show()
+        clock(time, time)
+        setTimeout(function(id){
+            _isLearning = 0
             endLearn(id, _point)
-        }, 15000)
+        }, 50 * 1000)
     };
+
+    function clock(time, now) {
+
+        var timeOut = setTimeout(function() {
+            if (_isLearning) {   
+                var timeNow = (now/time) * 100
+                $("#view-time").css("width",String(timeNow) + '%');
+                clock(time, now - 1);
+            } else {
+                clearTimeout(timeOut)
+                $("#view-time").hide();
+                $("#view-time").css("width","100%");
+            }
+        }, 980)
+    }
 
     //check anwser with button check-btn
     var turnOnQuestion = function() {
         $("#check-btn").on('click', () => {
-            if (_position < 10) {
+            if (_position < 10 ) {
                 if (_queue[_position].type == 1) {
                     answer = $('input[type="radio"]:checked').val();
                     true_ans = _queue[_position].answer
