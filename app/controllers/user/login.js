@@ -8,7 +8,7 @@ let login = (req, res) => {
     let keys = ['username', 'password'];
     let notExists = utils.checkKeysNotExists(req.body, keys);
     if (notExists !== -1) {
-        return res.status(400).json({
+        return res.json({
             errCode: -1,
             msg: 'Missing argument ' + keys[notExists]
         });

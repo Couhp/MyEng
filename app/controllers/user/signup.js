@@ -3,22 +3,23 @@ const utils = require(global.__base + 'app/utils/index');
 const moment = require('moment');
 const bcrypt = require('bcrypt-nodejs');
 let sigup = (req, res) => {
+    console.log(req.body);
     // Check key not exists
     let keys = ['username', 'email', 'password', 'displayName', 'birthday', 'livingIn'];
     let notExists = utils.checkKeysNotExists(req.body, keys);
     if (notExists !== -1) {
-        return res.status(400).json({
+        return res.json({
             errCode: -1,
             msg: 'Missing argument ' + keys[notExists]
         });
     }
     // Check mail
     if (!utils.checkMail(req.body.email)) {
-        return res.status(400).json({ errCode: -1, msg: 'Invalid email format' });
+        return res.json({ errCode: -1, msg: 'Invalid email format' });
     }
     // Check date
     if (!moment(req.body.birthday).isValid()) {
-        return res.status(400).json({ errCode: -1, msg: 'Invalid date format' });
+        return res.json({ errCode: -1, msg: 'Invalid date format' });
     }
     //Check type avatar
     // if (req.file != null && req.file != undefined && req.file.mimetype.indexOf("image") === -1) {

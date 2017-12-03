@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning English</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/trung.css">
+    <link rel="stylesheet" href="../css/gopy.css">
+    <script src="../assets/vendor/jquery/jquery.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../javascript/feedback.js"></script>
+</head>
+
+<body class="bgc">
+    <!-- header page -->
+
+    <nav id="myScrollspy" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a id="logo" class="navbar-brand">WebSiteName</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a>
+                        <button class="button-header btn-info" id="main">Trang chủ</button>
+                    </a>
+                </li>
+                <li>
+                    <a >
+                        <button class="button-header btn-info" id="feedback">Góp Ý</button>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="profile">
+                        <img id="avatar" class="img-circle" alt="user img" width="30" height="30">
+                        <i id="displayname"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container row">
+        <div class="col-md-1"></div>
+        <!-- main panel -->
+        <div class="col-md-7 main-panel">
+            <h1 class="topic-heading">Dòng thảo luận</h1>
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home">Mới</a></li>
+                <li><a href="#menu1">Của Tôi</a></li>
+                
+
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <h3>Góp ý mới</h3>
+                    <div id="news-content"></div>
+                </div>
+                <div id="menu1" class="tab-pane fade ">
+                    <h3>Góp ý của tôi</h3>
+                    <div class="panel panel-default" style="padding:30px 30px 30px 30px;">
+                        <div class="form-group">
+                            <label >Tiêu đề :</label>
+                            <input type="text" class="form-control" id="fb-subject">
+                          </div>
+                          <div class="form-group">
+                            <label >Nội dung góp ý:</label>
+                            <input type="text" class="form-control" id="fb-content">                            
+                        </div>
+                        <button class="btn btn-primary active"sid="sendFeedback">Gửi</button>
+                    </div>
+                    
+                    <div class="panel panel-default" style="margin-bottom: 200px; padding:30px 20px 20px 20px;" id="my-content">
+                        <h2>Cũ :</h2>
+                    </div>
+                    
+                </div>
+                   
+                </div>
+                
+
+            </div>
+
+        </div>
+        
+    </div>
+
+
+</body>
+
+</html>

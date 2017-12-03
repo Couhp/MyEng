@@ -1,17 +1,17 @@
-$(document).ready(() => {
+$(document).ready(()=> {
+    
 
-
+    //getFormData($("#submitForm"))
     $('#submit').on('click', function() {
-
-        let url = "http://localhost:8080/api/user/login"
-        
+    
+        let url =  "http://localhost:8080/api/user/signup";
+    
         $.ajax({
             type: "POST",
-            method: "POST",
+            method : "POST",
             url: url,
             data: $("#submitForm").serializeArray(),
             success: function(data){
-                console.log(data.errCode)
                 if (data.errCode == 200) {
                     document.cookie = "userId=" + data.data.user._id + ";"
                     window.location = "http://localhost:8080/MyEng/Main";
@@ -22,6 +22,6 @@ $(document).ready(() => {
                 }
             }
         });
-
+    
     })
-})
+    })
