@@ -47,6 +47,10 @@ $(document).ready(function() {
             })
         }
     })
+    $("#close").on('click', function() {
+        $("#newFeed").hide()
+        $("#create").show()
+    });
 
     var getMyFb = function() {
         $.ajax({

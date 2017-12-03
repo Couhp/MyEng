@@ -62,7 +62,7 @@
 
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
-                    <h3>Góp ý mới</h3>
+                    <h3>Góp ý đã được trả lời:</h3><br/>
                     <div id="news-content"></div>
                 </div>
                 <div id="menu1" class="tab-pane fade ">
@@ -80,7 +80,13 @@
                             <label>Nội dung góp ý:</label>
                             <input type="text" class="form-control" id="fb-content" placeholder="Nội dung" required /><br/>
                         </div>
-                        <button type="submit" class="btn btn-primary active" id="sendFeedback">Gửi</button>
+                        <div class="row">
+                            <div class="col-xs-3"> <button type="submit" class="btn btn-primary active" id="sendFeedback">Gửi &nbsp;</button>
+                            </div>
+                            <div class="col-xs-9"> <button class="btn btn-danger active" style="margin-left: -77px;" id="close">Đóng</button>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="panel panel-default" style="margin-bottom: 300px; padding:10px 20px 20px 20px; " id="my-content">
