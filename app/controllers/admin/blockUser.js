@@ -6,16 +6,16 @@ const mongoose = require("mongoose");
 let block = (req, res) => {
     let id = new mongoose.Types.ObjectId(req.body.userid);
     User.findOne({ _id: id }).exec((err, user) => {
-        if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+        if (err) return res.json({ errCode: 500, msg: "Internal error" });
         else {
             if (user.isBlock === 1) {
                 let info = {
                     isBlock: 0
                 }
                 User.update({ _id: id }, info, { upsert: true }).exec((err) => {
-                    if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+                    if (err) return res.json({ errCode: 500, msg: "Internal error" });
                     else {
-                        return res.status(200).json({ errCode: 200, msg: "Success" });
+                        return res.json({ errCode: 200, msg: "Success" });
                     }
                 });
             } else {
@@ -23,9 +23,9 @@ let block = (req, res) => {
                     isBlock: 1
                 }
                 User.update({ _id: id }, info, { upsert: true }).exec((err) => {
-                    if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+                    if (err) return res.json({ errCode: 500, msg: "Internal error" });
                     else {
-                        return res.status(200).json({ errCode: 200, msg: "Success" });
+                        return res.json({ errCode: 200, msg: "Success" });
                     }
                 });
             }

@@ -11,8 +11,8 @@ let createFeedback = (req, res) => {
     }
     let feedback = new Feedback(info);
     feedback.save((err) => {
-        if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
-        else return res.status(200).json({ errCode: 200, msg: "Success" });
+        if (err) return res.json({ errCode: 500, msg: "Internal error" });
+        else return res.json({ errCode: 200, msg: "Success" });
     })
 }
 module.exports = createFeedback;

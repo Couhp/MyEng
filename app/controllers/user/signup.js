@@ -41,25 +41,25 @@ let sigup = (req, res) => {
         current_course_Id: ""
     };
     User.findOne({ username: info.username }).exec((err, user) => {
-        if (err) res.status.json({ errCode: 500, msg: 'Internal error' });
+        if (err) res.json({ errCode: 500, msg: 'Internal error' });
         if (!user) {
             let newUser = new User(info);
             newUser.save(err => {
-                if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
+                if (err) return res.json({ errCode: 500, msg: 'Internal error' });
                 else {
                     User.findOne({ username: newUser.username }).exec((err, user) => {
-                        if (err) return res.status(500).json({ errCode: 500, msg: 'Internal error' });
+                        if (err) return res.json({ errCode: 500, msg: 'Internal error' });
                         else {
                             let resData = { user: user };
                             req.session.userId = user._id
-                            return res.status(200).json({ errCode: 200, msg: "Success", data: resData });
+                            return res.json({ errCode: 200, msg: "Success", data: resData });
                         }
                     });
                 }
             });
 
         } else {
-            return res.status(400).json({ errCode: 400, msg: 'User already exists' });
+            return res.json({ errCode: 400, msg: 'User already exists' });
         }
     });
 }

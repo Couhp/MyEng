@@ -15,5 +15,6 @@ router.post("/block", isAdmin, deserializeAdmin, adminController.blockUser);
 router.post("/reply-feedback", isAdmin, deserializeAdmin, adminController.repFeedback);
 router.get("/get-feedback", isAdmin, deserializeAdmin, adminController.getAllFeedback);
 router.get("/get-feedback-is-reply", isAuthenticated, deserialize, adminController.getFeedbackIsRep);
+router.post("/del-feedback", adminController.delFeedback);
 
 module.exports = router;

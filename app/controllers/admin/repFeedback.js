@@ -8,12 +8,12 @@ let repFeedback = (req, res) => {
         isRep: 1
     }
     Feedback.update({ _id: id }, info, { upsert: true }).exec((err) => {
-        if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+        if (err) return res.json({ errCode: 500, msg: "Internal error" });
         else {
             Feedback.findOne({ _id: id }).exec((err, feedback) => {
-                if (err) return res.status(500).json({ errCode: 500, msg: "Internal error" });
+                if (err) return res.json({ errCode: 500, msg: "Internal error" });
                 else {
-                    return res.status(200).json({ errCode: 200, msg: "Success", data: feedback });
+                    return res.json({ errCode: 200, msg: "Success", data: feedback });
                 }
             });
         }
