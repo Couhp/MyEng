@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Learning English</title>
-
+    <Link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="../css/trung.css">
@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a >
+                    <a>
                         <button class="button-header btn-info" id="feedback">Góp Ý</button>
                     </a>
                 </li>
@@ -56,7 +56,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#home">Mới</a></li>
                 <li><a href="#menu1">Của Tôi</a></li>
-                
+
 
             </ul>
 
@@ -66,35 +66,54 @@
                     <div id="news-content"></div>
                 </div>
                 <div id="menu1" class="tab-pane fade ">
-                    <h3>Góp ý của tôi</h3>
-                    <div class="panel panel-default" style="padding:30px 30px 30px 30px;">
-                        <div class="form-group">
-                            <label >Tiêu đề :</label>
-                            <input type="text" class="form-control" id="fb-subject">
-                          </div>
-                          <div class="form-group">
-                            <label >Nội dung góp ý:</label>
-                            <input type="text" class="form-control" id="fb-content">                            
+                    <div class="container">
+                        <div class="col-sm-6">
+                            <h3>Góp ý của tôi</h3>
                         </div>
-                        <button class="btn btn-primary active"sid="sendFeedback">Gửi</button>
+                        <div class="col-sm-6"><button id="create" class="btn btn-primary" style="margin-left:-146px; margin-top:15px"><i class="fa fa-plus " aria-hidden="true"></i> Tạo mới</button><br/><br/></div>
                     </div>
-                    
-                    <div class="panel panel-default" style="margin-bottom: 200px; padding:30px 20px 20px 20px;" id="my-content">
-                        <h2>Cũ :</h2>
+
+                    <div class="panel panel-default" style="padding:30px 30px 30px 30px;" id="newFeed">
+                        <div class="form-group">
+                            <label>Tiêu đề :</label>
+                            <input type="text" class="form-control" id="fb-subject" placeholder="Tiêu đề" required /><br/>
+                            <label>Nội dung góp ý:</label>
+                            <input type="text" class="form-control" id="fb-content" placeholder="Nội dung" required /><br/>
+                        </div>
+                        <button type="submit" class="btn btn-primary active" id="sendFeedback">Gửi</button>
                     </div>
-                    
+
+                    <div class="panel panel-default" style="margin-bottom: 300px; padding:10px 20px 20px 20px; " id="my-content">
+                        <h2>Cũ hơn:</h2>
+                    </div>
+
                 </div>
-                   
-                </div>
-                
 
             </div>
 
+
         </div>
-        
+
+    </div>
+
     </div>
 
 
 </body>
 
 </html>
+<style>
+    .nothing {
+        border: 1px solid red;
+        background-color: pink;
+        height: 25px;
+        width: 100%;
+        border-radius: 6px;
+        opacity: 0.7;
+    }
+    
+    .nothing-text {
+        margin-left: 262px;
+        font-weight: bold;
+    }
+</style>
