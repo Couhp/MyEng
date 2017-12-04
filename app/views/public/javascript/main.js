@@ -205,10 +205,9 @@ $("document").ready(function() {
                     // Fill quesrion 
                     answer = $('#area-answer').val();
                     true_ans = _queue[_position].answer
-                    console.log(answer)
                     var ok = false
-                    for (x in true_ans) {
-                        if (x.trim() == answer.trim()) {
+                    for (var i = 0; i < true_ans.length; i++) {
+                        if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
                             $("div.group-button").css("background-color", "#bff199");
                             ok = true;
                             _point += 1;
@@ -229,6 +228,12 @@ $("document").ready(function() {
         })
     }
 
+    function Compare(str1, str2) {
+        for (let i = 0; i < str1.length; i++) {
+            if (str1[i] !== str2[i]) return false
+        }
+        return true
+    }
 
     //disable check-btn when show view-question
     $('#list-answer').on('click', 'input[name ="answer"]', function() {
