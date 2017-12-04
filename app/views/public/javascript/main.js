@@ -21,6 +21,8 @@ $("document").ready(function() {
     let _position = 0
     let _point = 0
     let _isLearning = 0
+    let _waitingQueue = []
+    let _isTiming = 0
 
 
     // ================= ROUTING ============================
@@ -155,9 +157,11 @@ $("document").ready(function() {
         $('#myModal').modal('show');
         $('#timeTrue').on('click', function() {
             my_timer();
+            _isTiming = true
             learn(id);
         });
         $('#timeFalse').on('click', function() {
+            _isTiming = 0
             learn(id);
         });
     });
@@ -190,7 +194,7 @@ $("document").ready(function() {
     //check anwser with button check-btn
     var turnOnQuestion = function() {
         $("#check-btn").on('click', () => {
-            if (_position < 10) {
+            if (_position < 10 ) {
                 if (_queue[_position].type == 1) {
                     answer = $('input[type="radio"]:checked').val();
                     true_ans = _queue[_position].answer
