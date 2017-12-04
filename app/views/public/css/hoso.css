@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 * {
     margin: 0;
     /* padding: 0; */
     font-family: initial;
 }
-=======
-*{margin: 0;/* padding: 0; */font-family: initial;}
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
 .container-fluid {
     margin-top: 10px;
@@ -21,18 +17,12 @@
 }
 
 input.input_password {
-<<<<<<< HEAD
-    width: 428px;
-=======
-    width: 500px;
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
+    width: 425px;
     margin-left: -100px;
     height: 30px;
     margin-top: 18px;
     padding: 10px 10px;
     font-size: 17px;
-<<<<<<< HEAD
-    border-radius: 15px;
 }
 
 .btn.btn-primary {
@@ -43,11 +33,6 @@ input.input_password {
     margin-left: 28px;
     background: #31c37a;
 }
-=======
-}
-
-.btn.btn-primary {border-radius: 30px;padding-left: 40px;padding-right: 40px;font-size: 18px;margin-left: 28px;background: #31c37a;}
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
 .container.block4 {
     text-align: center;
@@ -66,6 +51,7 @@ input.input_malop {
 h2.text2 {
     font-size: 20px;
     margin-left: 65px;
+    margin-top: 7px;
 }
 
 h2.text2.date {
@@ -78,19 +64,16 @@ hr {
     margin-top: -12px;
 }
 
-<<<<<<< HEAD
 a:hover,
 a:focus {
-=======
-a:hover, a:focus {
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
     text-decoration: none;
 }
 
 .col-sm-8.left {
     background: #e2e2e2;
-    border-radius: 51px;
+    border-radius: 81px;
     border-right: 10px solid white;
+    margin-bottom: 50px;
 }
 
 .col-sm-4.right {
@@ -98,10 +81,7 @@ a:hover, a:focus {
     padding: 15px 0px;
     border-radius: 25px;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 .container-fluid.block_4 {
     margin: 15px;
     padding: 10px 0px;
@@ -111,10 +91,6 @@ a:hover, a:focus {
     margin-right: 83px;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 label.level {
     border: 2px solid;
     border-radius: 25px;
@@ -141,12 +117,7 @@ label.level {
     height: 300px;
 }
 
-<<<<<<< HEAD
 .container-fluid.all_block_right {}
-=======
-.container-fluid.all_block_right {
-}
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
 .container-fluid.all_block_right.detail {
     margin-left: 20px;
@@ -209,10 +180,6 @@ h2.user_name {
     font-family: serif;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 #logo {
     font-size: 25px;
     color: white;
@@ -426,4 +393,23 @@ textarea {
 .group-button {
     background-color: #f0f0f0;
     padding: 40px 100px 50px 100px;
+}
+
+.form-control {
+    display: block;
+    width: 106%;
+    height: 34px;
+    padding: 15px 27px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }

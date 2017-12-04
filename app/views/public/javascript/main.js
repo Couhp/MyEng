@@ -32,6 +32,10 @@ $("document").ready(function() {
     $("#main").on('click', function() {
         window.location = "http://localhost:8080/MyEng/Main";
     })
+    $("#displayName").on('click', function() {
+        console.log("hoyiou")
+        window.location = "http://localhost:8080/MyEng/profile/098714102";
+    })
 
     //=========================================================
 
@@ -439,7 +443,8 @@ $("document").ready(function() {
 
         }
         $("#avatar").attr("src", normalize(data.avatar));
-        $("#displayname").text(data.displayName);
+        console.log("<img src = '.." + normalize(data.avatar) + "' width= '100%' class='user_graphic'>");
+        $("#displayname").append("<strong><a href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);

@@ -21,11 +21,7 @@ a:hover, a:focus {
 }
 
 .level span.text {
-<<<<<<< HEAD
-    margin-right: 80px;
-=======
     margin-right: 83px;
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 }
 
 
@@ -286,13 +282,10 @@ button em {
     background-image: url(../images/1.jpg);
 } */
 
-<<<<<<< HEAD
-=======
 div input {
     height: 20px;
 }
 
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 #question-panel .panel-body {
     margin: 10px 10px 0px 10px !important;
     height: 300px;
