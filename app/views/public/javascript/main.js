@@ -142,7 +142,9 @@ $("document").ready(function() {
             $("#list-answer").empty();
             $("#list-answer").append(area);
             // $("#check-btn").prop('disabled', true);
+            $("#check-btn").prop('disabled', false);
         }
+
     }
 
     // Click to direct to Learn-Interface
@@ -186,7 +188,7 @@ $("document").ready(function() {
         var time = 50
         $("#view-time").show()
         clock(time, time)
-        setTimeout(function(id){
+        setTimeout(function(id) {
             _isLearning = 0
             endLearn(id, _point)
         }, 50 * 1000)
@@ -195,14 +197,14 @@ $("document").ready(function() {
     function clock(time, now) {
 
         var timeOut = setTimeout(function() {
-            if (_isLearning) {   
-                var timeNow = (now/time) * 100
-                $("#view-time").css("width",String(timeNow) + '%');
+            if (_isLearning) {
+                var timeNow = (now / time) * 100
+                $("#view-time").css("width", String(timeNow) + '%');
                 clock(time, now - 1);
             } else {
                 clearTimeout(timeOut)
                 $("#view-time").hide();
-                $("#view-time").css("width","100%");
+                $("#view-time").css("width", "100%");
             }
         }, 980)
     }
@@ -210,7 +212,7 @@ $("document").ready(function() {
     //check anwser with button check-btn
     var turnOnQuestion = function() {
         $("#check-btn").on('click', () => {
-            if (_position < 10 ) {
+            if (_position < 10) {
                 if (_queue[_position].type == 1) {
                     answer = $('input[type="radio"]:checked').val();
                     true_ans = _queue[_position].answer
@@ -303,13 +305,13 @@ $("document").ready(function() {
         }
     });
 
-    $("#list-answer").on('change', 'textarea', function() {
-        if ($.trim($('textarea').val()).length < 1) {
-            $("#check-btn").prop('disabled', true);
-        } else {
-            $("#check-btn").prop('disabled', false);
-        }
-    });
+    // $("#list-answer").on('change', 'textarea', function() {
+    //     if ($.trim($('textarea').val()).length < 1) {
+    //         $("#check-btn").prop('disabled', true);
+    //     } else {
+    //         $("#check-btn").prop('disabled', false);
+    //     }
+    // });
 
 
     function setInfo(data) {

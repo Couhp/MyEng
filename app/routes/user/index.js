@@ -14,11 +14,16 @@ const welcomeRouter = require(global.__base + 'app/routes/user/welcome.js');
 const mainRouter = require(global.__base + 'app/routes/user/main.js');
 const rootRouter = require(global.__base + 'app/routes/user/root.js');
 const feedBack = require(global.__base + 'app/routes/user/feedback.js');
+const profile = require(global.__base + 'app/routes/user/profile.js');
+const acc = require(global.__base + 'app/routes/user/account.js');
+
 router.use("/SignIn", signInRouter)
 router.use("/SignUp", signUpRouter)
 router.use("/Welcome", welcomeRouter)
 router.use("/Main", mainRouter)
 router.use("/Feedback", feedBack)
+router.use("/:id", profile)
+router.use("/Account", acc)
 router.use("/", rootRouter)
 
 
