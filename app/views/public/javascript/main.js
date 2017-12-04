@@ -19,6 +19,7 @@ $("document").ready(function() {
     let _isLearning = 0
     let _waitingQueue = []
     let _isTiming = 0
+    let _level = 1
 
 
     // ================= ROUTING ============================
@@ -37,16 +38,21 @@ $("document").ready(function() {
         return Math.floor((Math.random() * 3) + 1);
     }
 
-    function genQuestionHTML(data) {
+    function genTopicHTML(data, index) {
         //console.log(data)
         let name = data.name
         let id = data._id
         _topicId.push(clone(id))
+        var theme =  random()
+        if (index > _level) {
+            var theme = "-del"
+        }
+        var image = "../images/" + index + ".png"
 
-        result = '   <div id= ' + id + ' class="theme-div" data-toggle="modal" >  ' +
+        result = '   <div class="theme-div" data-toggle="modal" >  ' +
             // '                            <a href="">  ' +
-            '                                <div class="theme-circle' + random() + '">  ' +
-            '                                    <img src="../images/' + random() + '.jpg" class="img-circle theme-img" alt="user img">   ' +
+            '                                <div id= ' + id + ' class="theme-circle theme-circle' + theme + '">  ' +
+            '                                    <img src="' + image +'" class="img-circle theme-img" alt="user img">   ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
             '                                    <div class="progress">  ' +
             '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
@@ -59,17 +65,35 @@ $("document").ready(function() {
             '                       </div>  ';
 
         return result;
+    }
 
+    var genPassLevelHTML = function(index) {
+        
+        var html =  '<div class=""col-md-2"></div>' + 
+                    '<div class=""col-md-6">' + 
+                    '<div class="gold-btn btn btn-warning" id="pass' + index + '" >Vượt mức</div></div>'
+        return html
     }
 
 
     function genTopic(data) {
         // Data : List Topic
         // console.log(data)
-        data.forEach(element => {
-            let question = genQuestionHTML(element)
-            $("#question-box").append(question)
-        });
+        // data.forEach(element => {
+        //     let topic = genTopicHTML(element)
+
+        //     $("#question-box").append(topic)
+        // });
+
+        for(var x = 0; x < data.length; ++x) {
+            var element = data[x]
+            if (x != 0 && x % 3 == 0) {
+                let topic = genPassLevelHTML(x)
+                $("#question-box").append(topic)
+            }
+            let topic = genTopicHTML(element, x)
+            $("#question-box").append(topic)
+        }
 
     }
 
@@ -81,7 +105,7 @@ $("document").ready(function() {
             type: "POST",
             method: "POST",
             url: "http://localhost:8080/api/choose/question",
-            data: { topicid: id },
+            data: { "topicid": id },
             success: function(data) {
 
                 mylist = mylist.concat(data.data)
@@ -92,7 +116,7 @@ $("document").ready(function() {
                     type: "POST",
                     method: "POST",
                     url: "http://localhost:8080/api/fill/question",
-                    data: { topicid: id },
+                    data: { "topicid": id },
                     success: function(data) {
                         sublist = data.data
                         for (var i = 0; i < sublist.length; i++) {
@@ -146,7 +170,7 @@ $("document").ready(function() {
     }
 
     // Click to direct to Learn-Interface
-    $("div.theme-box").on('click', 'div.theme-div', function() {
+    $("div.theme-box").on('click', 'div.theme-circle', function() {
         $("#main-interface").hide();
         $("#view-question").show();
         var id = $(this).attr('id');
@@ -161,6 +185,10 @@ $("document").ready(function() {
             learn(id);
         });
     });
+
+    $("div.theme-box").on('click', 'div.gold-btn', function() {
+        console.log($(this).attr('id'))
+    })
 
     var learn = function(id) {
         turnOnQuestion()
@@ -312,7 +340,8 @@ $("document").ready(function() {
     });
 
 
-    function setInfo(data) {
+    function setInfo(data, callback) {
+        _level = data.current_level
 
         function normalize(str) {
             if (str.indexOf("/") === 1) {
@@ -331,6 +360,8 @@ $("document").ready(function() {
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);
+
+        callback()
     }
 
 
@@ -354,7 +385,7 @@ $("document").ready(function() {
                         for (var i = 0; i < data.data.length; ++i) {
                             topic_data.push(clone(data.data[i]))
                         }
-
+                        
                         genTopic(topic_data)
 
                     }
@@ -363,21 +394,24 @@ $("document").ready(function() {
         });
     }
 
-    var callInfo = function() {
+    var callInfo = function(callback) {
         $.ajax({
             type: "GET",
             method: "GET",
             url: "http://localhost:8080/api/user/myinfo",
             data: "",
             success: function(data) {
-                setInfo(data.data)
+                console.log(data.data)
+                setInfo(data.data, callback)
             }
         });
     }
 
     var main = function() {
-        callInfo()
-        callData()
+        callInfo(function() {
+            callData()
+        })
+        
     }
 
     //==================== RUN EXCUTION ========================

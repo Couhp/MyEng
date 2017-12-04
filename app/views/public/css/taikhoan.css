@@ -1,3 +1,162 @@
+*{margin: 0;/* padding: 0; */font-family: initial;}
+
+.container-fluid.block_3 {
+    margin-bottom: 20px;
+}
+
+.container-fluid.block_2 {
+    margin-bottom: 30px;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+.col-sm-8.left {
+    background: #e2e2e2;
+    border-radius: 51px;
+    border-right: 10px solid white;
+}
+
+.col-sm-4.right {
+    background: #e2e2e2;
+    padding: 15px 0px;
+    border-radius: 25px;
+}
+
+
+button.btn.btn-info.btn-lg {
+    padding: 0px 13px;
+    margin-left: 70px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-body {
+    height: 94px;
+}
+
+button.btn.btn-default {
+}
+
+input#imgInp {
+    margin-top: 14px;
+}
+
+input#imgInp {
+}
+
+img#blah {
+    width: 100px;
+    height: 70px;
+    margin-left: 85px;
+    margin-top: 0px;
+}
+
+input#email {
+    width: 524px;
+    height: 30px;
+}
+
+input#username {
+    width: 524px;
+    height: 30px;
+}
+
+
+.container-fluid.block_4 {
+    margin: 15px;
+    padding: 10px 0px;
+}
+
+.level span.text {
+    margin-right: 100px;
+}
+
+
+label.level {
+    border: 2px solid;
+    border-radius: 25px;
+    padding: 8px 3px 3px 3px;
+    width: 100%;
+    color: green;
+    margin: 3px 3px 3px 3px;
+}
+
+input.radio_element {
+    margin-left: 15px;
+}
+
+li {
+    list-style-type: none;
+}
+
+label.level {
+    margin-top: 21px;
+}
+
+.img_bird img {
+    margin: 20px 0px;
+    height: 300px;
+}
+
+.container-fluid.all_block_right {
+}
+
+.container-fluid.all_block_right.detail {
+    margin-left: 20px;
+    font-size: 25px;
+    margin-top: 17px;
+    border-radius: 30px;
+    background: white;
+    margin-right: 10px;
+}
+
+.container-fluid.all_block_right.detail:hover {
+    background: #5bc0de;
+}
+
+img.user_graphic {
+    border-radius: 50%;
+    margin-top: 23px;
+    width: 60px;
+    height: 60px;
+}
+
+h2.text {
+    font-size: 20px;
+    color: black;
+    margin-top: 0px;
+}
+
+h2.user_name {
+    font-size: 30px;
+    margin-left: -60px;
+}
+
+.block_2 .h2.text {
+    font-size: 20px;
+    color: gray;
+}
+
+.block_1 .btn.btn-primary.button_tiendo {
+    border-radius: 30px;
+    margin-top: 15px;
+    margin-left: -187px;
+    font-size: 15px;
+    background: #12e212;
+    margin-bottom: 50px;
+    padding: 8px 40px;
+}
+
+.block_1 .h2 {
+    font-size: 25px;
+    font-family: serif;
+}
+
+
 #logo {
     font-size: 25px;
     color: white;
@@ -111,17 +270,6 @@
     width: 80px;
 }
 
-.theme-circle-del {
-    background-color: grey;
-    border-radius: 98px;
-    display: inline-block;
-    height: 80px;
-    margin-top: 12px;
-    filter: grayscale(90%);
-    width: 80px;
-    pointer-events: none;
-}
-
 .theme-img {
     margin: 12px;
     height: 55px;
@@ -169,10 +317,6 @@
     padding-top: 20px;
 }
 
-.gold-btn {
-    font-family: museo-sans-rounded,sans-serif!important;
-    font-size: 17px;
-}
 
 /* button.theme {
     border-width: 0px;
