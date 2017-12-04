@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 * {
     margin: 0;
     /* padding: 0; */
     font-family: initial;
 }
+=======
+*{margin: 0;/* padding: 0; */font-family: initial;}
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
 .container-fluid.block_3 {
     margin-bottom: 20px;
@@ -12,8 +16,12 @@
     margin-bottom: 30px;
 }
 
+<<<<<<< HEAD
 a:hover,
 a:focus {
+=======
+a:hover, a:focus {
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
     text-decoration: none;
 }
 
@@ -29,6 +37,10 @@ a:focus {
     border-radius: 25px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 button.btn.btn-info.btn-lg {
     padding: 0px 13px;
     margin-left: 70px;
@@ -42,13 +54,23 @@ button.btn.btn-info.btn-lg {
     height: 94px;
 }
 
+<<<<<<< HEAD
 button.btn.btn-default {}
+=======
+button.btn.btn-default {
+}
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
 input#imgInp {
     margin-top: 14px;
 }
 
+<<<<<<< HEAD
 input#imgInp {}
+=======
+input#imgInp {
+}
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
 img#blah {
     width: 100px;
@@ -67,6 +89,10 @@ input#username {
     height: 30px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 .container-fluid.block_4 {
     margin: 15px;
     padding: 10px 0px;
@@ -76,6 +102,10 @@ input#username {
     margin-right: 100px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 label.level {
     border: 2px solid;
     border-radius: 25px;
@@ -102,7 +132,12 @@ label.level {
     height: 300px;
 }
 
+<<<<<<< HEAD
 .container-fluid.all_block_right {}
+=======
+.container-fluid.all_block_right {
+}
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
 .container-fluid.all_block_right.detail {
     margin-left: 20px;
@@ -155,6 +190,10 @@ h2.user_name {
     font-family: serif;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 #logo {
     font-size: 25px;
     color: white;
@@ -368,8 +407,11 @@ textarea {
 .group-button {
     background-color: #f0f0f0;
     padding: 40px 100px 50px 100px;
+<<<<<<< HEAD
 }
 
 input[type=radio] {
     height: 20px;
+=======
+>>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 }

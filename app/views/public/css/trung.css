@@ -58,6 +58,7 @@
 .main-panel {
     background-color: white;
     margin: 30px 40px 40px 10px;
+    padding: 20px 15px 20px 15px;
     border-radius: 15px;
 }
 
@@ -111,6 +112,17 @@
     width: 80px;
 }
 
+.theme-circle-del {
+    background-color: grey;
+    border-radius: 98px;
+    display: inline-block;
+    height: 80px;
+    margin-top: 12px;
+    filter: grayscale(90%);
+    width: 80px;
+    pointer-events: none;
+}
+
 .theme-img {
     margin: 12px;
     height: 55px;
@@ -158,6 +170,11 @@
     padding-top: 20px;
 }
 
+.gold-btn {
+    font-family: museo-sans-rounded, sans-serif!important;
+    font-size: 17px;
+}
+
 
 /* button.theme {
     border-width: 0px;
@@ -183,7 +200,7 @@ button em {
 } */
 
 div input {
-    height: 20px;
+    height: 22px;
 }
 
 div label {
