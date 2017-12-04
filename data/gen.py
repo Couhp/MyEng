@@ -1,6 +1,6 @@
 from random import randint
 
-name = "topic3"
+name = "topic4"
 
 def gen_option () :
     lines = open(name,'r').read().split("\n")
@@ -35,14 +35,14 @@ def gen_option () :
     def gen_fill_question(index) :
     
         question = "Từ sau trong tiếng anh là : \'" + dictionary[keys[index]] + "' : \n" + \
-                    "$" + keys[index] + "\n"
+                     keys[index] + "\n"
         return question 
 
     with open(name + ".opt",'a') as fout :
         for i in range(1,12) :
             fout.write( gen_question(i))
     with open(name + ".fil",'a') as fout :
-        for i in range(1,6) :
+        for i in range(1,8) :
             fout.write(gen_fill_question(i))
 
 answer = ""

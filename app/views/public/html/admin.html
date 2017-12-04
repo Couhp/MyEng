@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS -->
+    <Link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../vendor/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="../css/admin.css" />
@@ -39,26 +40,44 @@
                     </thead>
                 </table>
             </div>
-            <div id="menu2" class="tab-pane">
-                <ul class="nav nav-tabs" id="menu2_tabs">
-                    <li class="active"><a href="#none_replied" data-toggle="tab">Góp ý chưa trả lời</a></li>
-                    <li><a href="#replied" data-toggle="tab">Góp ý đã trả lời</a></li>
-                </ul>
+            <div id="menu2" class="tab-pane fade">
+                <div class="container">
+                    <ul class="nav nav-tabs" id="menu2_tabs">
+                        <li class="active"><a href="#none_replied" data-toggle="tab" id="nr">Góp ý chưa trả lời</a></li>
+                        <li><a href="#replied" data-toggle="tab" id="r">Góp ý đã trả lời</a></li><br/>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active" id="none_replied" class="tab-pane fade">
+                            <div id="news-content"></div>
+                        </div>
+                        <div id="replied" class="tab-pane fade">
+                            <div id="replied_content"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="menu3" class="tab-pane fade">
                 <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
             </div>
         </div>
-        <div class="tab-content">
-            <div id="none_replied" class="tab-pane fade">
-                <div id="news-content"></div>
-            </div>
-            <div id="replied" class="tab-pane fade">
-                <div id="replied_content"></div>
-            </div>
-        </div>
+
     </div>
 
 </body>
 
 </html>
+<style>
+    .nothing {
+        border: 1px solid red;
+        background-color: pink;
+        height: 25px;
+        width: 100%;
+        border-radius: 6px;
+        opacity: 0.7;
+    }
+    
+    .nothing-text {
+        margin-left: 488px;
+        font-weight: bold;
+    }
+</style>
