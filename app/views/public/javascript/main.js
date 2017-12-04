@@ -1,7 +1,3 @@
-
-
-
-
 $("document").ready(function() {
 
 
@@ -185,11 +181,31 @@ $("document").ready(function() {
         });
     }
 
-    var timer = function(id) {
-        setTimeout(function(id) {
+    var my_timer = function(id) {
+        _isLearning = true
+        var time = 50
+        $("#view-time").show()
+        clock(time, time)
+        setTimeout(function(id){
+            _isLearning = 0
             endLearn(id, _point)
-        }, 15000)
+        }, 50 * 1000)
     };
+
+    function clock(time, now) {
+
+        var timeOut = setTimeout(function() {
+            if (_isLearning) {   
+                var timeNow = (now/time) * 100
+                $("#view-time").css("width",String(timeNow) + '%');
+                clock(time, now - 1);
+            } else {
+                clearTimeout(timeOut)
+                $("#view-time").hide();
+                $("#view-time").css("width","100%");
+            }
+        }, 980)
+    }
 
     //check anwser with button check-btn
     var turnOnQuestion = function() {

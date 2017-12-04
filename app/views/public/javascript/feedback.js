@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    $("#newFeed").hide();
+    $("#create").on('click', function() {
+        $("#create").hide();
+        $("#newFeed").show();
+    });
+    $("#temp").hide();
     // ==== GLOBAL VARIABLE =========
     var userId = ""
 
@@ -17,18 +23,40 @@ $(document).ready(function() {
     $("#sendFeedback").on('click', function() {
         var subject = $("#fb-subject").val()
         var content = $("#fb-content").val()
-        $.ajax({
-            type: "POST",
-            method: "POST",
-            url: "http://localhost:8080/api/user/feedback",
-            data: { "subject": subject, "content": content },
-            success: function(data) {
-                if (data.errCode === 200) {
-                    alert(data.msg)
-
+        if (subject.length === 0 && content.length === 0) {
+            $("#fb-subject").css("border", "1px solid red");
+            $("#fb-content").css("border", "1px solid red");
+        } else if (subject.length === 0) {
+            $("#fb-subject").css("border", "1px solid red");
+            $("#fb-content").css("border", "1px solid black");
+        } else if (content.length === 0) {
+            $("#fb-subject").css("border", "1px solid black");
+            $("#fb-content").css("border", "1px solid red");
+        } else {
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/api/user/feedback",
+                data: { "subject": subject, "content": content },
+                success: function(data) {
+                    if (data.errCode === 200) {
+                        alert(data.msg)
+                        $("#newFeed").hide()
+                        $("#create").show()
+                        $("#nothing").hide()
+                        var html = "<div class='alert' id='temp'>" +
+                            "<h4 class='bg-warning'><b><i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser("") + "</strong></a>  : &nbsp;&nbsp;&nbsp;" + subject + "</b></h4>" +
+                            "<blockquote><p class='text-info'>" + content + "</p>" +
+                            "<strong class='text-primary'> Trả lời : &nbsp;&nbsp;&nbsp;   </strong>  Không có trả lời</blockquote><br>" +
+                            "</div>"
+                        $("#my-content").prepend(html)
+                        console.log(html)
+                    } else {
+                        alert(data.msg)
+                    }
                 }
-            }
-        })
+            })
+        }
     })
     $("#close").on('click', function() {
         $("#newFeed").hide()
@@ -61,7 +89,11 @@ $(document).ready(function() {
 
     var showFb = function(type, data) {
         var divId = ""
-        if (type == 1) { divId = "#news-content" } else divId = "#my-content"
+        if (type === 1) {
+            divId = "#news-content"
+        } else {
+            divId = "#my-content"
+        }
         if (data == null || data.length == 0) {
             $(divId).append(getFbHTML("null"))
         } else {
@@ -71,9 +103,36 @@ $(document).ready(function() {
             });
         }
     }
+    var getUser = function(userid) {
+        let res = "";
+        if (userid === "") {
+            $.ajax({
+                type: "GET",
+                method: "GET",
+                async: false,
+                url: "http://localhost:8080/api/user/myinfo",
+                data: {},
+                success: function(data) {
+                    res = data.data.username
+                }
+            })
+        } else {
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                async: false,
+                url: "http://localhost:8080/api/user/getinfo",
+                data: { "userid": userid },
+                success: function(data) {
+                    res = data.data.username
+                }
+            })
+        }
+        return res
+    }
     var getFbHTML = function(data) {
         if (data == "null") {
-            var html = "<div class='nothing bg-info'><h class='nothing-text'>Không có dữ liệu.</h></div><br/>"
+            var html = "<div class='nothing bg-info' id ='nothing'><h class='nothing-text'>Không có dữ liệu.</h></div><br/>"
             return html
         }
         var subject = (data.subject) != null ? (data.subject) : "No title "
@@ -83,11 +142,10 @@ $(document).ready(function() {
             reply = "Không có trả lời"
         }
         var html = "<div class='alert'>" +
-            "<h3 class='bg-warning'><b> " + subject + "</b></h3>" +
+            "<h4 class='bg-warning'><b><i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.user) + "</strong></a>  : &nbsp;&nbsp;&nbsp;" + subject + "</b></h4>" +
             "<blockquote><p class='text-info'>" + content + "</p>" +
-            "<footer class='text-muted'>By " + "Null" + "</footer><br>" +
-            // "<p class='text-muted'>Reply</p>" + 
-            "<p class='text-primary'>  " + reply + "</p></blockquote><br>" +
+            // "<footer class='text-muted'>By " + getUser(data.user) + "</footer><br>" +
+            "<strong class='text-primary'> Trả lời : &nbsp;&nbsp;&nbsp;   </strong>   " + reply + "</blockquote><br>" +
             "</div>"
         return html
     }
@@ -173,11 +231,9 @@ $(document).ready(function() {
 
 
     var main = function() {
-        callInfo(function() {
-            getAllFb()
-            getMyFb()
-        })
-
+        callInfo()
+        getAllFb()
+        getMyFb()
     }
 
     main()

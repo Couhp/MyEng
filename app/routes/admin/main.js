@@ -9,10 +9,14 @@ var http = require('http');
 var router = express.Router();
 
 const file = process.cwd() + "/app/views/public/html/admin.html";
+const signinFile = process.cwd() + "/app/views/public/html/admin-signin.html";
 
-
-router.get("/", (req, res)=> {
-    res.sendFile(file)
+router.get("/", (req, res) => {
+    if (req.session.adminId === null || req.session.adminId === undefined) {
+        res.sendFile(signinFile)
+    } else {
+        res.sendFile(file)
+    }
 })
 
 

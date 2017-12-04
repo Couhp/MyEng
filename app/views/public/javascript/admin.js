@@ -1,6 +1,8 @@
 $(document).ready(function() {
-
     //set data in datatable
+    $("#replied").on('click', function() {
+        $("#none_replied").hide();
+    });
     var table = $('#usersTable').DataTable({
         "ajax": {
             "url": "http://localhost:8080/api/admin/all-user",
@@ -71,6 +73,14 @@ $(document).ready(function() {
         }
 
     });
+    $("#r").click(function() {
+        $(this).addClass('active');
+        $("#none_replied").hide();
+    });
+    $("#nr").click(function() {
+        $(this).addClass('active');
+        $("#none_replied").show();
+    });
 
     //get fb
     var getFb = function() {
@@ -80,7 +90,6 @@ $(document).ready(function() {
                 url: "http://localhost:8080/api/admin/get-feedback",
                 data: {},
                 success: function(data) {
-                    console.log(data)
                     showFb(data.data)
                 }
             })
@@ -93,7 +102,6 @@ $(document).ready(function() {
             url: "http://localhost:8080/api/admin/get-feedback-is-reply",
             data: {},
             success: function(data) {
-                console.log(data)
                 showRepFb(data.data)
             }
         })
@@ -101,17 +109,39 @@ $(document).ready(function() {
 
     //Show fb none reply
     var showFb = function(data) {
+        if (data.length === 0) {
+            var html = getFbHTML(data)
+            $("#news-content").append(html)
+        }
         data.forEach(element => {
             var html = getFbHTML(element)
             $("#news-content").append(html)
         });
     }
-
+    var getUser = function(userid) {
+        let res = "";
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            async: false,
+            url: "http://localhost:8080/api/user/getinfo",
+            data: { "userid": userid },
+            success: function(data) {
+                res = data.data.username
+            }
+        })
+        return res
+    }
     var getFbHTML = function(data) {
+        if (data === null || data === undefined || data.length === 0) {
+            var html = "<br/><div class='nothing bg-info'><h class='nothing-text'>Không có dữ liệu.</h></div><br/>"
+            return html
+        }
         var subject = data.subject
         var content = data.content
         var id = data._id
-        var html = "<div class='alert alert-warning'>" +
+        var html = "<br/><div class='alert alert-warning'>" +
+            "<i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.user) + "</strong></a>" +
             "<h5>Tiêu đề : " + subject + "</h5>" +
             "<h6>Nội dung : " + content + "</h6>" +
             "<div class='input-group'>" +
@@ -126,7 +156,6 @@ $(document).ready(function() {
     $("#news-content").on('click', 'span', function() {
         var textarea = $(this).siblings("textarea")
         var reply = textarea.val()
-            // var oldFd =
         var feedbackId = textarea.attr('id')
         console.log(reply + feedbackId)
         $.ajax({
@@ -135,7 +164,8 @@ $(document).ready(function() {
             url: "http://localhost:8080/api/admin/reply-feedback",
             data: { "feedbackId": feedbackId, "reply": reply },
             success: function(data) {
-                console.log(data)
+                alert(data.msg);
+                textarea.parent().parent().hide()
             }
         })
     });
@@ -152,7 +182,8 @@ $(document).ready(function() {
             url: "http://localhost:8080/api/admin/reply-feedback",
             data: { "feedbackId": feedbackId, "reply": reply },
             success: function(data) {
-                console.log(data)
+                alert(data.msg);
+                textarea.parent().parent().hide()
             }
         })
     });
@@ -166,14 +197,13 @@ $(document).ready(function() {
         });
     }
 
-
-
     var getRepFbHTML = function(data) {
         var subject = data.subject
         var content = data.content
         var id = data._id
         var reply = data.reply
         var html = "<div class='alert alert-warning'>" +
+            "<i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.user) + "</strong></a>" +
             "<h5 >Tiêu đề: " + subject + "</h5>" +
             "<h6>Nội dung: " + content + "</h6>" +
             "<h6 class='alert alert-success'>Đã trả lời: " + reply + "</h6>" +
