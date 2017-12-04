@@ -194,10 +194,6 @@ $("document").ready(function() {
                 '  </div>  ';
             $("#list-answer").empty();
             $("#list-answer").append(area);
-<<<<<<< HEAD
-            // $("#check-btn").prop('disabled', true);
-=======
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
             $("#check-btn").prop('disabled', false);
         }
 
@@ -257,17 +253,6 @@ $("document").ready(function() {
         });
     }
 
-<<<<<<< HEAD
-    var my_timer = function(id) {
-        _isLearning = true
-        var time = 50
-        $("#view-time").show()
-        clock(time, time)
-        setTimeout(function(id) {
-            _isLearning = 0
-            endLearn(id, _point)
-        }, 50 * 1000)
-=======
     var submitLevel = function() {
         // Send a ajax to submit level
     }
@@ -293,7 +278,6 @@ $("document").ready(function() {
             }, time * 1000)
         }
 
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
     };
 
     function clock(time, now) {
@@ -314,11 +298,7 @@ $("document").ready(function() {
     //check anwser with button check-btn
     var turnOnQuestion = function() {
         $("#check-btn").on('click', () => {
-<<<<<<< HEAD
-            if (_position < 10) {
-=======
             if (_position < _numberQuestion) {
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
                 if (_queue[_position].type == 1) {
                     answer = $('input[type="radio"]:checked').val();
                     true_ans = _queue[_position].answer
@@ -340,7 +320,8 @@ $("document").ready(function() {
                     true_ans = _queue[_position].answer
                     var ok = false
                     for (var i = 0; i < true_ans.length; i++) {
-                        if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
+                        if (answer.trim().localeCompare(true_ans[i].trim()) === 0 && answer !== " " && answer !== "") {
+                            // if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
                             $("div.group-button").css("background-color", "#bff199");
                             ok = true;
                             _point += 1;
@@ -362,8 +343,9 @@ $("document").ready(function() {
     }
 
     function Compare(str1, str2) {
+        if (str2 === "" || str2 === " ") return false
         for (let i = 0; i < str1.length; i++) {
-            if (str1[i] !== str2[i]) return false
+            if (str1[i].toLowerCase() !== str2[i].toLowerCase()) return false
         }
         return true
     }
@@ -420,24 +402,15 @@ $("document").ready(function() {
         }
     });
 
-<<<<<<< HEAD
-    // $("#list-answer").on('change', 'textarea', function() {
-    //     if ($.trim($('textarea').val()).length < 1) {
-=======
     //check textarea empty
     // function checkTextArea(element) {
     //     if ($.trim(element.value) < 1) {
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
     //         $("#check-btn").prop('disabled', true);
     //     } else {
     //         $("#check-btn").prop('disabled', false);
     //     }
-<<<<<<< HEAD
-    // });
-=======
 
     // }
->>>>>>> 5b366dbd3979aeac181921756e6e3421d3b9ef6b
 
     // $('textarea').onchange = checkTextArea($('textarea'))
 
