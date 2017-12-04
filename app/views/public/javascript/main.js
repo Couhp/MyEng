@@ -44,7 +44,7 @@ $("document").ready(function() {
         let name = data.name
         let id = data._id
         _topicId.push(clone(id))
-        var theme =  random()
+        var theme = random()
         if (index > _level) {
             var theme = "-del"
         }
@@ -53,7 +53,7 @@ $("document").ready(function() {
         result = '   <div class="theme-div" data-toggle="modal" >  ' +
             // '                            <a href="">  ' +
             '                                <div id= ' + id + ' class="theme-circle theme-circle' + theme + '">  ' +
-            '                                    <img src="' + image +'" class="img-circle theme-img" alt="user img">   ' +
+            '                                    <img src="' + image + '" class="img-circle theme-img" alt="user img">   ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
             '                                    <div class="progress">  ' +
             '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
@@ -69,10 +69,10 @@ $("document").ready(function() {
     }
 
     var genPassLevelHTML = function(index) {
-        
-        var html =  '<div class=""col-md-2"></div>' + 
-                    '<div class=""col-md-6">' + 
-                    '<div class="gold-btn btn btn-warning" id="pass' + index + '" >Vượt mức</div></div>'
+
+        var html = '<div class=""col-md-2"></div>' +
+            '<div class=""col-md-6">' +
+            '<div class="gold-btn btn btn-warning" id="pass' + index + '" >Vượt mức</div></div>'
         return html
     }
 
@@ -86,7 +86,7 @@ $("document").ready(function() {
         //     $("#question-box").append(topic)
         // });
 
-        for(var x = 0; x < data.length; ++x) {
+        for (var x = 0; x < data.length; ++x) {
             var element = data[x]
             if (x != 0 && x % 3 == 0) {
                 let topic = genPassLevelHTML(x)
@@ -131,32 +131,32 @@ $("document").ready(function() {
         });
     }
 
-    var getPassingQuestion = function (index, callback) {
-        var getChoose = function(id1,callback1) {
+    var getPassingQuestion = function(index, callback) {
+        var getChoose = function(id1, callback1) {
             $.ajax({
-            type: "POST",
-            method: "POST",
-            url: "http://localhost:8080/api/choose/question",
-            data: { "topicid": id1 },
-            success: function(data) {callback1(data.data.slice(0,4))}
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/api/choose/question",
+                data: { "topicid": id1 },
+                success: function(data) { callback1(data.data.slice(0, 4)) }
             })
         }
         var my_list = []
-        
+
         getChoose(_topicId[index], function(data) {
             my_list = my_list.concat(data)
-            getChoose (_topicId[index - 1], function(data) {
+            getChoose(_topicId[index - 1], function(data) {
                 my_list = my_list.concat(data)
-                getChoose (_topicId[index - 2], function(data) {
+                getChoose(_topicId[index - 2], function(data) {
                     my_list = my_list.concat(data)
                     for (var i = 0; i < my_list.length; i++) {
                         my_list[i].type = 1
                     }
-                    callback( my_list)
+                    callback(my_list)
                 })
             })
         })
-        
+
     }
 
     //function show question when choose theme
@@ -194,7 +194,7 @@ $("document").ready(function() {
                 '  </div>  ';
             $("#list-answer").empty();
             $("#list-answer").append(area);
-            // $("#check-btn").prop('disabled', true);
+            $("#check-btn").prop('disabled', false);
         }
     }
 
@@ -218,7 +218,7 @@ $("document").ready(function() {
     $("div.theme-box").on('click', 'div.gold-btn', function() {
         $("#main-interface").hide();
         $("#view-question").show();
-        var id = $(this).attr('id').replace("pass",'')
+        var id = $(this).attr('id').replace("pass", '')
         my_timer(1)
         learnPassing(id)
     })
@@ -233,7 +233,7 @@ $("document").ready(function() {
         })
     }
 
-    var learnPassing = function (id) {
+    var learnPassing = function(id) {
         _numberQuestion = 12
         turnOnQuestion()
         getPassingQuestion(id, function(data) {
@@ -262,35 +262,34 @@ $("document").ready(function() {
             var time = 60
             $("#view-time").show()
             clock(time, time)
-            setTimeout(function(id){
+            setTimeout(function(id) {
                 _isLearning = 0
                 endLearn(id, _point, 1)
             }, time * 1000)
-        }
-        else {
+        } else {
             _isLearning = true
             var time = 50
             $("#view-time").show()
             clock(time, time)
-            setTimeout(function(id){
+            setTimeout(function(id) {
                 _isLearning = 0
                 endLearn(id, _point)
             }, time * 1000)
         }
-        
+
     };
 
     function clock(time, now) {
 
         var timeOut = setTimeout(function() {
-            if (_isLearning) {   
-                var timeNow = (now/time) * 100
-                $("#view-time").css("width",String(timeNow) + '%');
+            if (_isLearning) {
+                var timeNow = (now / time) * 100
+                $("#view-time").css("width", String(timeNow) + '%');
                 clock(time, now - 1);
             } else {
                 clearTimeout(timeOut)
                 $("#view-time").hide();
-                $("#view-time").css("width","100%");
+                $("#view-time").css("width", "100%");
             }
         }, 980)
     }
@@ -298,7 +297,7 @@ $("document").ready(function() {
     //check anwser with button check-btn
     var turnOnQuestion = function() {
         $("#check-btn").on('click', () => {
-            if (_position < _numberQuestion ) {
+            if (_position < _numberQuestion) {
                 if (_queue[_position].type == 1) {
                     answer = $('input[type="radio"]:checked').val();
                     true_ans = _queue[_position].answer
@@ -372,7 +371,7 @@ $("document").ready(function() {
         }
     });
 
-    var endLearn = function(id, point, type=0) {
+    var endLearn = function(id, point, type = 0) {
         $("#question").empty();
         $("#list-answer").empty();
         $("#view-question").hide();
@@ -400,13 +399,25 @@ $("document").ready(function() {
         }
     });
 
-    $("#list-answer").on('change', 'textarea', function() {
-        if ($.trim($('textarea').val()).length < 1) {
-            $("#check-btn").prop('disabled', true);
-        } else {
-            $("#check-btn").prop('disabled', false);
-        }
-    });
+    //check textarea empty
+    // function checkTextArea(element) {
+    //     if ($.trim(element.value) < 1) {
+    //         $("#check-btn").prop('disabled', true);
+    //     } else {
+    //         $("#check-btn").prop('disabled', false);
+    //     }
+
+    // }
+
+    // $('textarea').onchange = checkTextArea($('textarea'))
+
+    // $("#list-answer").on('change', 'textarea', function() {
+    //     if ($.trim($('textarea').val()).length < 1) {
+    //         $("#check-btn").prop('disabled', true);
+    //     } else {
+    //         $("#check-btn").prop('disabled', false);
+    //     }
+    // });
 
 
     function setInfo(data, callback) {
@@ -454,7 +465,7 @@ $("document").ready(function() {
                         for (var i = 0; i < data.data.length; ++i) {
                             topic_data.push(clone(data.data[i]))
                         }
-                        
+
                         genTopic(topic_data)
 
                     }
@@ -480,7 +491,7 @@ $("document").ready(function() {
         callInfo(function() {
             callData()
         })
-        
+
     }
 
     //==================== RUN EXCUTION ========================

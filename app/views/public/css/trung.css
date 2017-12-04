@@ -58,6 +58,7 @@
 .main-panel {
     background-color: white;
     margin: 30px 40px 40px 10px;
+    padding: 20px 15px 20px 15px;
     border-radius: 15px;
 }
 
@@ -170,9 +171,10 @@
 }
 
 .gold-btn {
-    font-family: museo-sans-rounded,sans-serif!important;
+    font-family: museo-sans-rounded, sans-serif!important;
     font-size: 17px;
 }
+
 
 /* button.theme {
     border-width: 0px;
