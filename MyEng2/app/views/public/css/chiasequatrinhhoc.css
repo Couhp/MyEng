@@ -33,11 +33,12 @@ a:hover, a:focus {
 
 .col-sm-8.left {
     background: #e2e2e2;
-    border-radius: 25px;
+    border-radius: 51px;
+    border-right: 10px solid white;
 }
 
 .col-sm-4.right {
-    background: #5bc0de;
+    background: #e2e2e2;
     padding: 15px 0px;
     border-radius: 25px;
 }

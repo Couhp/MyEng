@@ -12,8 +12,14 @@ a:hover, a:focus {
     text-decoration: none;
 }
 
+.col-sm-8.left {
+    background: #e2e2e2;
+    border-radius: 51px;
+    border-right: 10px solid white;
+}
+
 .col-sm-4.right {
-    background: #5bc0de;
+    background: #e2e2e2;
     padding: 15px 0px;
     border-radius: 25px;
 }
@@ -59,10 +65,6 @@ input#username {
     height: 30px;
 }
 
-.col-sm-8.left {
-    background: #e2e2e2;
-    border-radius: 25px;
-}
 
 .container-fluid.block_4 {
     margin: 15px;

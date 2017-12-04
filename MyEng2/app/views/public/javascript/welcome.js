@@ -9,6 +9,12 @@
 			window.alert(data)
 		})
 	})
+
+
+	$(function(){
+		new WOW().init(); 
+	})
+  
 })
 
 
