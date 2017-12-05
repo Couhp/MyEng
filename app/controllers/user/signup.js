@@ -34,7 +34,7 @@ let sigup = (req, res) => {
         livingIn: req.body.livingIn,
         gender: req.body.gender === 'Nam' ? 0 : 1,
         isBlock: 0,
-        avatar: "/upload/images/default-avt",
+        avatar: "/upload/images/default-avt.png",
         job: req.body.job,
         streak: 0,
         current_level: 1,

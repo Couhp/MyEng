@@ -1,8 +1,10 @@
 const User = require(global.__base + '/app/models/user.js');
 const mongoose = require("mongoose");
 let updateExp = (req, res) => {
+    console.log(req.body)
+    console.log("ior    uyeq")
     let userid = new mongoose.Types.ObjectId(req.session.userId);
-    let topicid = new mongoose.Types.ObjectId(req.body.topicid);
+    // let topicid = new mongoose.Types.ObjectId(req.body.topicid);
     let exp_plus = req.body.exp;
     User.findOne({ _id: userid }).exec((err, user) => {
         if (err) return res.json({ errCode: 500, msg: "Internal error" });

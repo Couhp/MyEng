@@ -152,6 +152,7 @@ $("document").ready(function() {
             my_list = my_list.concat(data)
             getChoose(_topicId[index - 1], function(data) {
                 my_list = my_list.concat(data)
+                console.log(my_list)
                 getChoose(_topicId[index - 2], function(data) {
                     my_list = my_list.concat(data)
                     for (var i = 0; i < my_list.length; i++) {
@@ -448,9 +449,11 @@ $("document").ready(function() {
         _level = data.current_level
 
         function normalize(str) {
-            if (str.indexOf("/") === 1) {
+            console.log(str.indexOf("/") )
+            if (str.indexOf("/") !== -1) {
                 let arr = str.split('/');
-                arr.splice(0, 1);
+                arr.splice(0, arr.length-2)
+                console.log(arr)
                 return '/' + arr.join('/');
             } else {
                 let arr = str.split('\\');
@@ -460,7 +463,7 @@ $("document").ready(function() {
 
         }
         $("#avatar").attr("src", normalize(data.avatar));
-        console.log("<img src = '.." + normalize(data.avatar) + "' width= '100%' class='user_graphic'>");
+        console.log( normalize(data.avatar))
         $("#displayname").append("<strong><a href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");

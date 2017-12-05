@@ -10,7 +10,7 @@ let updateLevel = (req, res) => {
             let info = {
                 current_level: lvl
             }
-            User.update({ _id: id }, info, { upsert: true }).exec((err) => {
+            User.update({ _id: userid }, info, { upsert: true }).exec((err) => {
                 if (err) return res.json({ errCode: 500, msg: "Internal error" });
                 else return res.json({ errCode: 200, msg: "Success" });
             });
