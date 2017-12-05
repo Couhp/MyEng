@@ -121,6 +121,7 @@
     pointer-events: none;
     width: 80px;
     pointer-events: none;
+    filter: grayscale(90%);
 }
 
 .theme-img {
@@ -176,8 +177,8 @@
 }
 
 .gold-btn-del {
-    background-color: grey;
     pointer-events: none;
+    filter: grayscale(90%);
    
 }
 
