@@ -134,6 +134,9 @@ $(document).ready(function() {
         });
     }
     var getUser = function(userid) {
+        if (userid === null || userid === undefined) {
+            return "Anonymous"
+        }
         let res = "";
         $.ajax({
             type: "POST",
@@ -232,7 +235,7 @@ $(document).ready(function() {
             // "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
             // "<span class='input-group-addon btn btn-primary'>Reply</span>" +
             // "</div>" +
-            "</div>"
+            "</div>";
         return html
     }
     getFb();
