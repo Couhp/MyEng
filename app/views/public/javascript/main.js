@@ -13,6 +13,7 @@ $("document").ready(function() {
     // ==============   GLOBAL VAR ==================
 
     let _topicId = [];
+    let _id = ""
     let _queue = [];
     let _position = 0
     let _point = 0
@@ -230,6 +231,7 @@ $("document").ready(function() {
 
     var learn = function(id) {
         _numberQuestion = 10
+        _id = id
         turnOnQuestion()
         getQuestion(id, function(data) {
             console.log(data)
@@ -374,7 +376,7 @@ $("document").ready(function() {
         if (_position < 10) {
             showQuestion(_position);
         } else {
-            endLearn();
+            endLearn(_id, _point);
         }
     });
 
