@@ -20,8 +20,8 @@ $(document).ready(() => {
                 } else if (data.errCode === 404) {
                     alert(data.msg);
                 } else {
-                    document.cookie = "userId=" + data.data.user._id + ";"
-                    window.location = "http://localhost:8080/MyEng/Main";
+                    // document.cookie = "userId=" + data.data.user._id + ";"
+                    window.location = "http://localhost:8080/MyEng/SignIn";
                 }
             }
         });

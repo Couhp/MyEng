@@ -1,4 +1,4 @@
-$("document").ready(function() {
+$("document").ready(function () {
 
 
     function clone(obj) {
@@ -13,6 +13,7 @@ $("document").ready(function() {
     // ==============   GLOBAL VAR ==================
 
     let _topicId = [];
+    let _id = ""
     let _queue = [];
     let _position = 0
     let _point = 0
@@ -20,19 +21,20 @@ $("document").ready(function() {
     let _waitingQueue = []
     let _isTiming = 0
     let _level = 1
+    let _passinglevel = 0
     let _numberQuestion = 0
 
 
     // ================= ROUTING ============================
 
-    $("#feedback").on('click', function() {
+    $("#feedback").on('click', function () {
         window.location = "http://localhost:8080/MyEng/FeedBack";
     })
 
-    $("#main").on('click', function() {
+    $("#main").on('click', function () {
         window.location = "http://localhost:8080/MyEng/Main";
     })
-    $("#displayName").on('click', function() {
+    $("#displayName").on('click', function () {
         console.log("hoyiou")
         window.location = "http://localhost:8080/MyEng/profile/098714102";
     })
@@ -49,7 +51,7 @@ $("document").ready(function() {
         let id = data._id
         _topicId.push(clone(id))
         var theme = random()
-        if (index > _level) {
+        if (index >= _level) {
             var theme = "-del"
         }
         var image = "../images/" + index + ".png"
@@ -72,11 +74,14 @@ $("document").ready(function() {
         return result;
     }
 
-    var genPassLevelHTML = function(index) {
-
+    var genPassLevelHTML = function (index, isdel = false) {
+        let del = ''
+        if (isdel) {
+            del = 'gold-btn-del';
+        }
         var html = '<div class=""col-md-2"></div>' +
             '<div class=""col-md-6">' +
-            '<div class="gold-btn btn btn-warning" id="pass' + index + '" >Vượt mức</div></div>'
+            '<div class="gold-btn ' + del + ' btn btn-warning" id="pass' + index + '" >Vượt mức</div></div>'
         return html
     }
 
@@ -93,14 +98,22 @@ $("document").ready(function() {
         for (var x = 0; x < data.length; ++x) {
             var element = data[x]
             if (x != 0 && x % 3 == 0) {
-                let topic = genPassLevelHTML(x)
-                $("#question-box").append(topic)
+                if (x <= _level) {
+                    let topic = genPassLevelHTML(x, true)
+                    $("#question-box").append(topic)
+                }
+                else {
+                    let topic = genPassLevelHTML(x)
+                    $("#question-box").append(topic)
+                }
             }
             let topic = genTopicHTML(element, x)
             $("#question-box").append(topic)
         }
-
+        
     }
+
+
 
 
     // The following code return a callback(data) with 10 question
@@ -111,7 +124,7 @@ $("document").ready(function() {
             method: "POST",
             url: "http://localhost:8080/api/choose/question",
             data: { "topicid": id },
-            success: function(data) {
+            success: function (data) {
 
                 mylist = mylist.concat(data.data)
                 for (var i = 0; i < mylist.length; i++) {
@@ -122,7 +135,7 @@ $("document").ready(function() {
                     method: "POST",
                     url: "http://localhost:8080/api/fill/question",
                     data: { "topicid": id },
-                    success: function(data) {
+                    success: function (data) {
                         sublist = data.data
                         for (var i = 0; i < sublist.length; i++) {
                             sublist[i].type = 2
@@ -135,376 +148,409 @@ $("document").ready(function() {
         });
     }
 
-    var getPassingQuestion = function(index, callback) {
-        var getChoose = function(id1, callback1) {
-            $.ajax({
-                type: "POST",
-                method: "POST",
-                url: "http://localhost:8080/api/choose/question",
-                data: { "topicid": id1 },
-                success: function(data) { callback1(data.data.slice(0, 4)) }
-            })
-        }
-        var my_list = []
-
-        getChoose(_topicId[index], function(data) {
-            my_list = my_list.concat(data)
-            getChoose(_topicId[index - 1], function(data) {
-                my_list = my_list.concat(data)
-                getChoose(_topicId[index - 2], function(data) {
-                    my_list = my_list.concat(data)
-                    for (var i = 0; i < my_list.length; i++) {
-                        my_list[i].type = 1
-                    }
-                    callback(my_list)
-                })
-            })
-        })
-
-    }
-
-    //function show question when choose theme
-    function showQuestion(index) {
-        question = _queue[index]
-        _position = index
-        console.log("question", question)
-        $("#question").text(question["quesion"]);
-        if (question["type"] == 1) {
-            var list = question["option"];
-            answers = '   <form id="form-answer">  ' +
-                '   <div class="radio">  ' +
-                '                                   <label><input type="radio" name="answer" value=0>' + list[0] + '</label>  ' +
-                '                               </div>  ' +
-                '                               <div class="radio">  ' +
-                '                                   <label><input type="radio" name="answer" value=1>' + list[1] + '</label>  ' +
-                '                               </div>  ' +
-                '                               <div class="radio">  ' +
-                '                                   <label><input type="radio" name="answer" value=2>' + list[2] + '</label>  ' +
-                '                               </div>  ' +
-                '                               <div class="radio">  ' +
-                '                                   <label><input type="radio" name="answer" value=3>' + list[3] + '</label>  ' +
-                '                              </div>  ' +
-                '  </form>  ';
-            $("#list-answer").empty();
-            $("#list-answer").append(answers);
-            if (!$('input[type="radio"]').is(':checked')) {
-                $("#check-btn").prop('disabled', true);
-            }
-
-        } else {
-            area = '   <div class="form-group">  ' +
-                '     <h3><label for="comment"></label></h3>  ' +
-                '     <textarea class="form-control" rows="6" id="area-answer"></textarea>  ' +
-                '  </div>  ';
-            $("#list-answer").empty();
-            $("#list-answer").append(area);
-            $("#check-btn").prop('disabled', false);
-        }
-
-    }
-
-    // Click to direct to Learn-Interface
-    $("div.theme-box").on('click', 'div.theme-circle', function() {
-        $("#main-interface").hide();
-        $("#view-question").show();
-        var id = $(this).attr('id');
-        $('#myModal').modal('show');
-        $('#timeTrue').on('click', function() {
-            my_timer();
-            _isTiming = true
-            learn(id);
-        });
-        $('#timeFalse').on('click', function() {
-            _isTiming = 0
-            learn(id);
-        });
-    });
-
-    $("div.theme-box").on('click', 'div.gold-btn', function() {
-        $("#main-interface").hide();
-        $("#view-question").show();
-        var id = $(this).attr('id').replace("pass", '')
-        my_timer(1)
-        learnPassing(id)
-    })
-
-    var learn = function(id) {
-        _numberQuestion = 10
-        turnOnQuestion()
-        getQuestion(id, function(data) {
-            console.log(data)
-            _queue = data
-            showQuestion(0)
-        })
-    }
-
-    var learnPassing = function(id) {
-        _numberQuestion = 12
-        turnOnQuestion()
-        getPassingQuestion(id, function(data) {
-            _queue = data
-            showQuestion(0)
-        })
-    }
-
-    var submitPoint = function(topicid, exp) {
+    var getPassingQuestion = function (index, callback) {
+    var getChoose = function (id1, callback1) {
         $.ajax({
             type: "POST",
             method: "POST",
-            url: "http://localhost:8080/api/user/exp",
-            data: { "topicid": topicid, "exp": exp },
-            success: function(data) {}
-        });
-    }
-
-    var submitLevel = function() {
-        // Send a ajax to submit level
-    }
-
-    var my_timer = function(type) {
-        if (type) {
-            _isLearning = true
-            var time = 60
-            $("#view-time").show()
-            clock(time, time)
-            setTimeout(function(id) {
-                _isLearning = 0
-                endLearn(id, _point, 1)
-            }, time * 1000)
-        } else {
-            _isLearning = true
-            var time = 50
-            $("#view-time").show()
-            clock(time, time)
-            setTimeout(function(id) {
-                _isLearning = 0
-                endLearn(id, _point)
-            }, time * 1000)
-        }
-
-    };
-
-    function clock(time, now) {
-
-        var timeOut = setTimeout(function() {
-            if (_isLearning) {
-                var timeNow = (now / time) * 100
-                $("#view-time").css("width", String(timeNow) + '%');
-                clock(time, now - 1);
-            } else {
-                clearTimeout(timeOut)
-                $("#view-time").hide();
-                $("#view-time").css("width", "100%");
-            }
-        }, 980)
-    }
-
-    //check anwser with button check-btn
-    var turnOnQuestion = function() {
-        $("#check-btn").on('click', () => {
-            if (_position < _numberQuestion) {
-                if (_queue[_position].type == 1) {
-                    answer = $('input[type="radio"]:checked').val();
-                    true_ans = _queue[_position].answer
-                    if (answer == true_ans) {
-                        // Answer right
-                        _point += 1
-                        _position += 1
-                        $("div.group-button").css("background-color", "#bff199");
-
-                    } else {
-                        // Answer wrong
-                        _position += 1
-                        $("div.group-button").css("background-color", "#ffd3d1");
-                    }
-                    $("input").prop('disabled', true);
-                } else {
-                    // Fill quesrion 
-                    answer = $('#area-answer').val();
-                    true_ans = _queue[_position].answer
-                    var ok = false
-                    for (var i = 0; i < true_ans.length; i++) {
-                        if (answer.trim().localeCompare(true_ans[i].trim()) === 0 && answer !== " " && answer !== "") {
-                            // if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
-                            $("div.group-button").css("background-color", "#bff199");
-                            ok = true;
-                            _point += 1;
-                            break;
-                        }
-                    }
-                    // Answer wrong
-                    if (!ok) {
-                        $("div.group-button").css("background-color", "#ffd3d1");
-                    }
-                    _position += 1
-                    $("textarea").prop('disabled', true);
-                }
-                $("#check-btn").hide();
-                $("#next-btn").show();
-                $("#ignore-btn").prop('disabled', true);
-            }
+            url: "http://localhost:8080/api/choose/question",
+            data: { "topicid": id1 },
+            success: function (data) { callback1(data.data.slice(0, 4)) }
         })
     }
+    var my_list = []
 
-    function Compare(str1, str2) {
-        if (str2 === "" || str2 === " ") return false
-        for (let i = 0; i < str1.length; i++) {
-            if (str1[i].toLowerCase() !== str2[i].toLowerCase()) return false
+    getChoose(_topicId[index], function (data) {
+        my_list = my_list.concat(data)
+        getChoose(_topicId[index - 1], function (data) {
+            my_list = my_list.concat(data)
+            console.log(my_list)
+            getChoose(_topicId[index - 2], function (data) {
+                my_list = my_list.concat(data)
+                for (var i = 0; i < my_list.length; i++) {
+                    my_list[i].type = 1
+                }
+                callback(my_list)
+            })
+        })
+    })
+
+}
+
+//function show question when choose theme
+function showQuestion(index) {
+    question = _queue[index]
+    _position = index
+    console.log("question", question)
+    $("#question").text(question["quesion"]);
+    if (question["type"] == 1) {
+        var list = question["option"];
+        answers = '   <form id="form-answer">  ' +
+            '   <div class="radio">  ' +
+            '                                   <label><input type="radio" name="answer" value=0>' + list[0] + '</label>  ' +
+            '                               </div>  ' +
+            '                               <div class="radio">  ' +
+            '                                   <label><input type="radio" name="answer" value=1>' + list[1] + '</label>  ' +
+            '                               </div>  ' +
+            '                               <div class="radio">  ' +
+            '                                   <label><input type="radio" name="answer" value=2>' + list[2] + '</label>  ' +
+            '                               </div>  ' +
+            '                               <div class="radio">  ' +
+            '                                   <label><input type="radio" name="answer" value=3>' + list[3] + '</label>  ' +
+            '                              </div>  ' +
+            '  </form>  ';
+        $("#list-answer").empty();
+        $("#list-answer").append(answers);
+        if (!$('input[type="radio"]').is(':checked')) {
+            $("#check-btn").prop('disabled', true);
         }
-        return true
+
+    } else {
+        area = '   <div class="form-group">  ' +
+            '     <h3><label for="comment"></label></h3>  ' +
+            '     <textarea class="form-control" rows="6" id="area-answer"></textarea>  ' +
+            '  </div>  ';
+        $("#list-answer").empty();
+        $("#list-answer").append(area);
+        $("#check-btn").prop('disabled', false);
     }
 
-    //disable check-btn when show view-question
-    $('#list-answer').on('click', 'input[name ="answer"]', function() {
-        $("#check-btn").prop('disabled', false);
-    });
+}
 
-    $('#done-btn').on('click', function() {
-        $("#show-result").hide();
-        $("#main-interface").show();
+// Click to direct to Learn-Interface
+$("div.theme-box").on('click', 'div.theme-circle', function () {
+    $("#main-interface").hide();
+    $("#view-question").show();
+    var id = $(this).attr('id');
+    $('#myModal').modal('show');
+    $('#timeTrue').on('click', function () {
+        my_timer();
+        _isTiming = true
+        learn(id);
     });
+    $('#timeFalse').on('click', function () {
+        _isTiming = 0
+        learn(id);
+    });
+});
 
-    $('#next-btn').on('click', function() {
-        $("div.group-button").css("background-color", "#f0f0f0");
-        $("#next-btn").hide();
-        $('#check-btn').show();
-        $("input").prop('disabled', false);
-        $("textarea").prop('disabled', false);
-        $("#ignore-btn").prop('disabled', false);
-        if (_position < 10) {
-            showQuestion(_position);
-        } else {
-            endLearn();
+$("div.theme-box").on('click', 'div.gold-btn', function () {
+    $("#main-interface").hide();
+    $("#view-question").show();
+    _isTiming = true
+    var id = $(this).attr('id').replace("pass", '')
+    my_timer(true)
+    learnPassing(id)
+})
+
+var learn = function (id) {
+    _numberQuestion = 10
+    _id = id
+    turnOnQuestion()
+    getQuestion(id, function (data) {
+        console.log(data)
+        _queue = data
+        showQuestion(0)
+    })
+}
+
+var learnPassing = function (id) {
+    _numberQuestion = 12
+    _passinglevel = id
+    turnOnQuestion()
+    getPassingQuestion(id, function (data) {
+        _queue = data
+        showQuestion(0)
+    })
+}
+
+var submitPoint = function (topicid, exp) {
+    $.ajax({
+        type: "POST",
+        method: "POST",
+        url: "http://localhost:8080/api/user/exp",
+        data: { "topicid": topicid, "exp": exp },
+        success: function (data) {
+
         }
     });
 
-    var endLearn = function(id, point, type = 0) {
+}
+
+var submitLevel = function (level) {
+    // Send a ajax to submit level
+    $.ajax({
+        type: "POST",
+        method: "POST",
+        url: "http://localhost:8080/api/user/level",
+        data: { "level": level },
+        success: function (data) { }
+    });
+}
+
+var my_timer = function (type) {
+    if (type) {
+        _isLearning = true
+        var time = 60
+        $("#view-time").show()
+        clock(time, time)
+        setTimeout(function (id) {
+            _isLearning = 0
+            endLearn(id, _point, true)
+        }, time * 1000)
+    } else {
+        _isLearning = true
+        var time = 50
+        $("#view-time").show()
+        clock(time, time)
+        setTimeout(function (id) {
+            _isLearning = 0
+            endLearn(id, _point)
+        }, time * 1000)
+    }
+
+};
+
+function clock(time, now) {
+
+    var timeOut = setTimeout(function () {
+        if (_isLearning) {
+            var timeNow = (now / time) * 100
+            $("#view-time").css("width", String(timeNow) + '%');
+            clock(time, now - 1);
+        } else {
+            clearTimeout(timeOut)
+            $("#view-time").hide();
+            $("#view-time").css("width", "100%");
+        }
+    }, 980)
+}
+
+//check anwser with button check-btn
+var turnOnQuestion = function () {
+    $("#check-btn").on('click', () => {
+        if (_position < _numberQuestion) {
+            if (_queue[_position].type == 1) {
+                answer = $('input[type="radio"]:checked').val();
+                true_ans = _queue[_position].answer
+                if (answer == true_ans) {
+                    // Answer right
+                    _point += 1
+                    _position += 1
+                    $("div.group-button").css("background-color", "#bff199");
+
+                } else {
+                    // Answer wrong
+                    _position += 1
+                    $("div.group-button").css("background-color", "#ffd3d1");
+                }
+                $("input").prop('disabled', true);
+            } else {
+                // Fill quesrion 
+                answer = $('#area-answer').val();
+                true_ans = _queue[_position].answer
+                var ok = false
+                for (var i = 0; i < true_ans.length; i++) {
+                    if (answer.trim().localeCompare(true_ans[i].trim()) === 0 && answer !== " " && answer !== "") {
+                        // if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
+                        $("div.group-button").css("background-color", "#bff199");
+                        ok = true;
+                        _point += 1;
+                        break;
+                    }
+                }
+                // Answer wrong
+                if (!ok) {
+                    $("div.group-button").css("background-color", "#ffd3d1");
+                }
+                _position += 1
+                $("textarea").prop('disabled', true);
+            }
+            $("#check-btn").hide();
+            $("#next-btn").show();
+            $("#ignore-btn").prop('disabled', true);
+        }
+    })
+}
+
+function Compare(str1, str2) {
+    if (str2 === "" || str2 === " ") return false
+    for (let i = 0; i < str1.length; i++) {
+        if (str1[i].toLowerCase() !== str2[i].toLowerCase()) return false
+    }
+    return true
+}
+
+//disable check-btn when show view-question
+$('#list-answer').on('click', 'input[name ="answer"]', function () {
+    $("#check-btn").prop('disabled', false);
+});
+
+$('#done-btn').on('click', function () {
+    $("#show-result").hide();
+    $("#main-interface").show();
+    location.reload();
+});
+
+$('#next-btn').on('click', function () {
+    $("div.group-button").css("background-color", "#f0f0f0");
+    $("#next-btn").hide();
+    $('#check-btn').show();
+    $("input").prop('disabled', false);
+    $("textarea").prop('disabled', false);
+    $("#ignore-btn").prop('disabled', false);
+
+    if (_position < _numberQuestion) {
+        showQuestion(_position);
+    } else {
+        console.log(":::", _isTiming)
+        if (!_isTiming) endLearn(_id, _point)
+        else endLearn(_id, _point, true);
+    }
+
+});
+
+var endLearn = function (id, point, type = 0) {
+    $("#question").empty();
+    $("#list-answer").empty();
+    $("#view-question").hide();
+    $("#show-result").show();
+    $("#point").text(_point + " / " + _numberQuestion);
+    if (type == 0) {
+        submitPoint(id, point)
+        if (point >= 8) submitLevel(_level + 1)
+    }
+    else {
+        if (point >= 10) {
+            submitLevel(Number(_passinglevel) + 1)
+            submitPoint(id, 100)
+        }
+    }
+
+    _point = 0;
+    _queue = null;
+}
+$("#ignore-btn").on('click', function () {
+    _position += 1;
+    if (_position < _numberQuestion) {
+        showQuestion(_position);
+    } else {
         $("#question").empty();
         $("#list-answer").empty();
         $("#view-question").hide();
         $("#show-result").show();
         $("#point").text(_point + " / 10");
-        if (type == 0) submitPoint(id, point)
-        else {
-            if (point >= 10) submitLevel()
+        _point = 0;
+    }
+});
+
+//check textarea empty
+// function checkTextArea(element) {
+//     if ($.trim(element.value) < 1) {
+//         $("#check-btn").prop('disabled', true);
+//     } else {
+//         $("#check-btn").prop('disabled', false);
+//     }
+
+// }
+
+// $('textarea').onchange = checkTextArea($('textarea'))
+
+// $("#list-answer").on('change', 'textarea', function() {
+//     if ($.trim($('textarea').val()).length < 1) {
+//         $("#check-btn").prop('disabled', true);
+//     } else {
+//         $("#check-btn").prop('disabled', false);
+//     }
+// });
+
+
+function setInfo(data, callback) {
+    _level = data.current_level
+
+    function normalize(str) {
+        console.log(str.indexOf("/"))
+        if (str.indexOf("/") !== -1) {
+            let arr = str.split('/');
+            arr.splice(0, arr.length - 2)
+            console.log(arr)
+            return '/' + arr.join('/');
+        } else {
+            let arr = str.split('\\');
+            arr.splice(0, 1);
+            return '/' + arr.join('/');
         }
 
-        _point = 0;
-        _queue = null;
     }
-    $("#ignore-btn").on('click', function() {
-        _position += 1;
-        if (_position < 10) {
-            showQuestion(_position);
-        } else {
-            $("#question").empty();
-            $("#list-answer").empty();
-            $("#view-question").hide();
-            $("#show-result").show();
-            $("#point").text(_point + " / 10");
-            _point = 0;
+    $("#avatar").attr("src", normalize(data.avatar));
+    console.log(normalize(data.avatar))
+    $("#displayname").append("<strong><a href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
+    $("#level").text("Level: " + data.current_level);
+    $("#exp").text(data.exp + " exp");
+    $("#streak").text("Streak: " + data.streak);
+
+    callback()
+}
+
+
+var callData = function () {
+    $.ajax({
+        type: "GET",
+        method: "GET",
+        url: "http://localhost:8080/api/course/all",
+        data: "",
+        success: function (data) {
+
+            let courseId = data.data[0]["_id"]
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/api/topic/all",
+                data: { "courseid": courseId },
+                success: function (data) {
+
+                    let topic_data = []
+
+                    for (var i = 0; i < data.data.length; ++i) {
+                        topic_data.push(clone(data.data[i]))
+                    }
+                    console.log(topic_data)
+                    topic_data.sort(function (a, b) {
+                        if (a.exp_topic >= b.exp_topic) return true
+                        return false
+                    })
+
+                    genTopic(topic_data)
+
+                }
+            });
         }
     });
+}
 
-    //check textarea empty
-    // function checkTextArea(element) {
-    //     if ($.trim(element.value) < 1) {
-    //         $("#check-btn").prop('disabled', true);
-    //     } else {
-    //         $("#check-btn").prop('disabled', false);
-    //     }
-
-    // }
-
-    // $('textarea').onchange = checkTextArea($('textarea'))
-
-    // $("#list-answer").on('change', 'textarea', function() {
-    //     if ($.trim($('textarea').val()).length < 1) {
-    //         $("#check-btn").prop('disabled', true);
-    //     } else {
-    //         $("#check-btn").prop('disabled', false);
-    //     }
-    // });
-
-
-    function setInfo(data, callback) {
-        _level = data.current_level
-
-        function normalize(str) {
-            if (str.indexOf("/") === 1) {
-                let arr = str.split('/');
-                arr.splice(0, 1);
-                return '/' + arr.join('/');
-            } else {
-                let arr = str.split('\\');
-                arr.splice(0, 1);
-                return '/' + arr.join('/');
-            }
-
+var callInfo = function (callback) {
+    $.ajax({
+        type: "GET",
+        method: "GET",
+        url: "http://localhost:8080/api/user/myinfo",
+        data: "",
+        success: function (data) {
+            console.log(data.data)
+            setInfo(data.data, callback)
         }
-        $("#avatar").attr("src", normalize(data.avatar));
-        console.log("<img src = '.." + normalize(data.avatar) + "' width= '100%' class='user_graphic'>");
-        $("#displayname").append("<strong><a href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
-        $("#level").text("Level: " + data.current_level);
-        $("#exp").text(data.exp + " exp");
-        $("#streak").text("Streak: " + data.streak);
+    });
+}
 
-        callback()
-    }
+var main = function () {
+    callInfo(function () {
+        callData()
+    })
 
+}
 
-    var callData = function() {
-        $.ajax({
-            type: "GET",
-            method: "GET",
-            url: "http://localhost:8080/api/course/all",
-            data: "",
-            success: function(data) {
+//==================== RUN EXCUTION ========================
 
-                let courseId = data.data[0]["_id"]
-                $.ajax({
-                    type: "POST",
-                    method: "POST",
-                    url: "http://localhost:8080/api/topic/all",
-                    data: { "courseid": courseId },
-                    success: function(data) {
-
-                        let topic_data = []
-                        for (var i = 0; i < data.data.length; ++i) {
-                            topic_data.push(clone(data.data[i]))
-                        }
-
-                        genTopic(topic_data)
-
-                    }
-                });
-            }
-        });
-    }
-
-    var callInfo = function(callback) {
-        $.ajax({
-            type: "GET",
-            method: "GET",
-            url: "http://localhost:8080/api/user/myinfo",
-            data: "",
-            success: function(data) {
-                console.log(data.data)
-                setInfo(data.data, callback)
-            }
-        });
-    }
-
-    var main = function() {
-        callInfo(function() {
-            callData()
-        })
-
-    }
-
-    //==================== RUN EXCUTION ========================
-
-    main()
+main()
 
 
 
