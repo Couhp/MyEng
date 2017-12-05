@@ -118,7 +118,7 @@
     display: inline-block;
     height: 80px;
     margin-top: 12px;
-    filter: grayscale(90%);
+    pointer-events: none;
     width: 80px;
     pointer-events: none;
 }
@@ -173,6 +173,12 @@
 .gold-btn {
     font-family: museo-sans-rounded, sans-serif!important;
     font-size: 17px;
+}
+
+.gold-btn-del {
+    background-color: grey;
+    pointer-events: none;
+   
 }
 
 
