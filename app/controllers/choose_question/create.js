@@ -10,7 +10,7 @@ let createDB = (req, res) => {
         if (last) {
             console.log(arr)
             for (i = 0; i < arr.length; i += 3) {
-                let id = new mongoose.Types.ObjectId("5a23da24d25f79427c640442");
+                let id = new mongoose.Types.ObjectId("5a23d99949f91842b4e67c5e");
                 let info = {
                     quesion: arr[i],
                     option: arr[i + 1].split("$"),

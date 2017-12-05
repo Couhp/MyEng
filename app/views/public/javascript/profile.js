@@ -30,6 +30,12 @@ $("document").ready(function() {
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);
         $("#profile_name").text(data.displayName)
+        $("#input_name").attr("value", data.displayName);
+        $("#input_email").attr("value", data.email);
+        $("#input_job").attr("value", data.job);
+        $("#input_address").attr("value", data.livingIn);
+        $("#input_birth").attr("value", data.birthday);
+        $("#input_username").attr("value", data.username);
     }
     var callInfo = function() {
         $.ajax({
