@@ -7,6 +7,41 @@ $("document").ready(function() {
     $("#main").on('click', function() {
         window.location = "http://localhost:8080/MyEng/Main";
     })
+    $("#updatePass").on('click', function() {
+        var oldP = $("#cur_pass").val()
+        var newP = $("#new_pass").val()
+        if (newP.length === 0) {
+            alert("Mật khẩu mới không hợp lệ")
+        } else {
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/api/user/password",
+                data: { oldP: oldP, newP: newP },
+                success: function(data) {
+                    alert(data.msg)
+
+                }
+            });
+        }
+    });
+    $("#updateInfo").on('click', function() {
+        var name = $("#input_name").val()
+        var email = $("#input_email").val()
+        var job = $("#input_job").val()
+        var address = $("#input_address").val()
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/user/update",
+            data: { displayName: name, email: email, job: job, livingIn: address },
+            success: function(data) {
+                alert(data.msg)
+                $("#profile_name").text(name)
+            }
+        });
+
+    });
 
     function setInfo(data) {
         _level = data.current_level

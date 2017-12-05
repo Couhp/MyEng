@@ -16,6 +16,18 @@
     margin: 7px 0px;
 }
 
+#updateAvt {
+    margin-left: 251px;
+}
+
+#blah {
+    border: 2px solid transparent;
+    vertical-align: middle;
+    margin-left: 124px;
+    margin-top: -16px;
+    border-color: black;
+}
+
 input.input_password {
     width: 425px;
     margin-left: -100px;
@@ -32,6 +44,13 @@ input.input_password {
     font-size: 18px;
     margin-left: 28px;
     background: #31c37a;
+}
+
+.btn-lg {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 1.3333333;
+    border-radius: 6px;
 }
 
 .container.block4 {
