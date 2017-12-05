@@ -1,5 +1,20 @@
 $(document).ready(function() {
     //set data in datatable
+    $("#logout").on('click', function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/admin/logout",
+            data: "",
+            success: function(data) {
+                if (data.errCode === 0) {
+                    window.location = "http://localhost:8080/Admin/SignIn";
+                } else {
+                    arlert("ERROR to log out!")
+                }
+            }
+        });
+    })
     $("#replied").on('click', function() {
         $("#none_replied").hide();
     });

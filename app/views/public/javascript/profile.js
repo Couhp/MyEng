@@ -1,5 +1,20 @@
 $("document").ready(function() {
 
+    $("#logout").on('click', function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/user/logout",
+            data: "",
+            success: function(data) {
+                if (data.errCode === 0) {
+                    window.location = "http://localhost:8080/MyEng/Main";
+                } else {
+                    arlert("ERROR to log out!")
+                }
+            }
+        });
+    })
     $("#feedback").on('click', function() {
         window.location = "http://localhost:8080/MyEng/FeedBack";
     })
