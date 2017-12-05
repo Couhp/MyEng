@@ -255,12 +255,22 @@ $("document").ready(function() {
             method: "POST",
             url: "http://localhost:8080/api/user/exp",
             data: { "topicid": topicid, "exp": exp },
-            success: function(data) {}
+            success: function(data) {
+                location.reload();
+            }
         });
+        
     }
 
-    var submitLevel = function() {
+    var submitLevel = function(level) {
         // Send a ajax to submit level
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/user/level",
+            data: { "level":level},
+            success: function(data) {}
+        });
     }
 
     var my_timer = function(type) {
@@ -386,9 +396,14 @@ $("document").ready(function() {
         $("#view-question").hide();
         $("#show-result").show();
         $("#point").text(_point + " / 10");
-        if (type == 0) submitPoint(id, point)
+        if (type == 0) {
+            submitPoint(id, point)
+            if (point >= 8) submitLevel (_level + 1)
+        }
         else {
-            if (point >= 10) submitLevel()
+            let new_lv = (_level+1) ? ((_level+1)%3 ==0) : (_level+2) ? ((_level+2)%3 ==0) : (_level+3) 
+            if (point >= 10) submitLevel(new_lv)
+            submitPoint(id, 100)
         }
 
         _point = 0;
@@ -472,9 +487,15 @@ $("document").ready(function() {
                     success: function(data) {
 
                         let topic_data = []
+
                         for (var i = 0; i < data.data.length; ++i) {
                             topic_data.push(clone(data.data[i]))
                         }
+                        console.log(topic_data)
+                        topic_data.sort(function(a,b) {
+                            if (a.exp_topic >= b.exp_topic) return true
+                            return false
+                        })
 
                         genTopic(topic_data)
 
