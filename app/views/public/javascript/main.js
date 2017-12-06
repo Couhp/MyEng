@@ -496,7 +496,7 @@ $("document").ready(function() {
         }
         $("#avatar").attr("src", normalize(data.avatar));
         console.log(normalize(data.avatar))
-        $("#displayname").append("<strong><a href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
+        $("#displayname").append("<strong><a class='display' style='font-family:abc;' href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);

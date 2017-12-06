@@ -89,17 +89,18 @@ a:focus {
     text-decoration: none;
 }
 
-.col-sm-8.left {
+
+/* .col-sm-8.left {
     background: #e2e2e2;
     border-radius: 81px;
     border-right: 10px solid white;
     margin-bottom: 50px;
-}
+} */
 
 .col-sm-4.right {
-    background: #e2e2e2;
+    background: white;
     padding: 15px 0px;
-    border-radius: 25px;
+    border-radius: 15px;
 }
 
 .container-fluid.block_4 {
@@ -180,6 +181,7 @@ h2.title.text {
 }
 
 h2.user_name {
+    font-weight: bold;
     font-size: 30px;
     margin-left: -60px;
 }
@@ -412,9 +414,11 @@ textarea {
 .group-button {
     background-color: #f0f0f0;
     padding: 40px 100px 50px 100px;
+    opacity: 0.85;
 }
 
 .form-control {
+    opacity: 0.85;
     display: block;
     width: 106%;
     height: 34px;
@@ -441,4 +445,30 @@ textarea {
 input[type="file"] {
     display: block;
     margin-top: -8px;
+}
+
+.navbar-default {
+    background-color: white;
+    border-color: white;
+    opacity: 0.85;
+}
+
+@font-face {
+    font-family: abc;
+    src: url(../fonts/Raleway-Light-vi.ttf);
+}
+
+div {
+    font-family: abc;
+    font-weight: bold;
+}
+
+.display {
+    font-family: abc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+body {
+    background-attachment: fixed;
 }
