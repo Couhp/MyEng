@@ -32,6 +32,10 @@
     top: 120px;
 }
 
+.btn-logout {
+    margin-top: 14px;
+}
+
 
 /*main css*/
 
@@ -179,7 +183,6 @@
 .gold-btn-del {
     pointer-events: none;
     filter: grayscale(90%);
-   
 }
 
 

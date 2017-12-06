@@ -55,24 +55,6 @@ $(document).ready(function() {
     }
 
     //switch tag in gop y
-    $('#admin_menu').on('click', 'a[data-toggle="tab"]', function(e) {
-        e.preventDefault();
-
-        var $link = $(this);
-
-        if (!$link.parent().hasClass('active')) {
-
-            //remove active class from other tab-panes
-            $('.tab-content:not(.' + $link.attr('href').replace('#', '') + ') .tab-pane').removeClass('active');
-
-            // click first submenu tab for active section
-            $('a[href="' + $link.attr('href') + '_all"][data-toggle="tab"]').click();
-
-            // activate tab-pane for active section
-            $('.tab-content.' + $link.attr('href').replace('#', '') + ' .tab-pane:first').addClass('active');
-        }
-
-    });
     $("#r").click(function() {
         $(this).addClass('active');
         $("#none_replied").hide();
@@ -84,17 +66,17 @@ $(document).ready(function() {
 
     //get fb
     var getFb = function() {
-            $.ajax({
-                type: "GET",
-                method: "GET",
-                url: "http://localhost:8080/api/admin/get-feedback",
-                data: {},
-                success: function(data) {
-                    showFb(data.data)
-                }
-            })
-        }
-        //get fb is replied
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/admin/get-feedback",
+            data: {},
+            success: function(data) {
+                showFb(data.data)
+            }
+        })
+    };
+    //get fb is replied
     var getFbReplied = function() {
         $.ajax({
             type: "GET",
@@ -176,23 +158,27 @@ $(document).ready(function() {
         })
     });
 
-    // end reply
 
-    // $("#replied_content").on('click', 'span', function() {
-    //     var textarea = $(this).siblings("textarea")
-    //     var reply = textarea.val()
-    //     var feedbackId = textarea.attr('id')
-    //     $.ajax({
-    //         type: "POST",
-    //         method: "POST",
-    //         url: "http://localhost:8080/api/admin/reply-feedback",
-    //         data: { "feedbackId": feedbackId, "reply": reply },
-    //         success: function(data) {
-    //             alert(data.msg);
-    //             textarea.parent().parent().hide()
-    //         }
-    //     })
-    // });
+    // modify answer
+    $("#replied_content").on('click', 'span', function() {
+        var textarea = $(this).siblings("textarea")
+        var reply = textarea.val()
+        var feedbackId = textarea.attr('id')
+        var span = $(this)
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/admin/reply-feedback",
+            data: { "feedbackId": feedbackId, "reply": reply },
+            success: function(data) {
+                alert(data.msg);
+                span.parent().hide()
+                span.parent().siblings('button').show()
+                span.parent().siblings('h6.alert').text("Đã trả lời: " + reply)
+            }
+        })
+
+    });
 
 
     //show fb replied
@@ -201,6 +187,8 @@ $(document).ready(function() {
             var html = getRepFbHTML(element)
             $("#replied_content").append(html)
         });
+        $("#replied_content").find(".input-group").hide()
+
     }
 
     var getRepFbHTML = function(data) {
@@ -213,13 +201,23 @@ $(document).ready(function() {
             "<h5 >Tiêu đề: " + subject + "</h5>" +
             "<h6>Nội dung: " + content + "</h6>" +
             "<h6 class='alert alert-success'>Đã trả lời: " + reply + "</h6>" +
-            // "<div class='input-group'>" +
-            // "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
-            // "<span class='input-group-addon btn btn-primary'>Reply</span>" +
-            // "</div>" +
+            "<button class='btn btn-info'>Chỉnh sửa câu trả lời</button>" +
+            "<div class='input-group'>" +
+            "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
+            "<span class='input-group-addon btn btn-primary'>Reply</span>" +
+            "</div>" +
             "</div>"
         return html
     }
+
+    $("#replied_content").on("click", "button.btn-info", function() {
+        var inputGroup = $(this).siblings("div.input-group")
+        $(this).hide()
+        inputGroup.show()
+
+    })
+
+
     getFb();
     getFbReplied();
 });
