@@ -70,24 +70,24 @@ $(document).ready(function() {
     }
 
     //switch tag in gop y
-    $('#admin_menu').on('click', 'a[data-toggle="tab"]', function(e) {
-        e.preventDefault();
+    // $('#admin_menu').on('click', 'a[data-toggle="tab"]', function(e) {
+    //     e.preventDefault();
 
-        var $link = $(this);
+    //     var $link = $(this);
 
-        if (!$link.parent().hasClass('active')) {
+    //     if (!$link.parent().hasClass('active')) {
 
-            //remove active class from other tab-panes
-            $('.tab-content:not(.' + $link.attr('href').replace('#', '') + ') .tab-pane').removeClass('active');
+    //         //remove active class from other tab-panes
+    //         $('.tab-content:not(.' + $link.attr('href').replace('#', '') + ') .tab-pane').removeClass('active');
 
-            // click first submenu tab for active section
-            $('a[href="' + $link.attr('href') + '_all"][data-toggle="tab"]').click();
+    //         // click first submenu tab for active section
+    //         $('a[href="' + $link.attr('href') + '_all"][data-toggle="tab"]').click();
 
-            // activate tab-pane for active section
-            $('.tab-content.' + $link.attr('href').replace('#', '') + ' .tab-pane:first').addClass('active');
-        }
+    //         // activate tab-pane for active section
+    //         $('.tab-content.' + $link.attr('href').replace('#', '') + ' .tab-pane:first').addClass('active');
+    //     }
 
-    });
+    // });
     $("#r").click(function() {
         $(this).addClass('active');
         $("#none_replied").hide();

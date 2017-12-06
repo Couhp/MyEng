@@ -53,6 +53,8 @@ $("document").ready(function() {
             success: function(data) {
                 alert(data.msg)
                 $("#profile_name").text(name)
+                $("#displayname").empty()
+                $("#displayname").append("<strong><a href='/MyEng/" + data.id + "'>" + name + "</a></strong>");
             }
         });
 

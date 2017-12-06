@@ -11,7 +11,7 @@ let updateInfo = (req, res) => {
     User.update({ _id: id }, info, { upsert: true }).exec((err) => {
         if (err) return res.json({ errCode: 500, msg: "Internal error" });
         else {
-            return res.json({ errCode: 200, msg: "Update success!" });
+            return res.json({ errCode: 200, msg: "Update success!", id: req.session.userId });
         }
     })
 }
