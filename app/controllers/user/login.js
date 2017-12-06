@@ -1,6 +1,8 @@
 const User = require(global.__base + '/app/models/user.js');
 const utils = require(global.__base + 'app/utils/index');
 const bcrypt = require('bcrypt-nodejs');
+const redis = require('redis'),
+    client = redis.createClient();
 
 let login = (req, res) => {
     console.log(req.body);
@@ -28,8 +30,21 @@ let login = (req, res) => {
                         return res.json({ errCode: 400, msg: 'Password mismatch' });
                     } else {
                         req.session.userId = user._id;
-                        let resData = { user: user };
-                        return res.json({ errCode: 200, msg: 'Success', data: resData });
+                        client.exists(req.session.userId, function(err, num) {
+                            if (num === 1) {
+                                client.hgetall(req.session.userId, function(err, data) {
+                                    if (err) console.log(err);
+                                    let train = data.trainExp;
+                                    return res.json({ errCode: 200, train: train, msg: 'Success', data: user });
+                                })
+                            } else {
+                                user.streak = 0;
+                                User.update({ _id: user._id }, { streak: 0 }, { upsert: true }).exec((err) => {
+                                    if (err) return res.json({ errCode: 500, msg: err });
+                                });
+                                return res.json({ errCode: 200, train: 0, msg: 'Success', data: user });
+                            }
+                        });
                     }
                 }
             });
@@ -40,8 +55,22 @@ let login = (req, res) => {
                 return res.json({ errCode: 400, msg: 'Password mismatch' });
             } else {
                 req.session.userId = user._id;
-                let resData = { user: user };
-                return res.json({ errCode: 200, msg: 'Success', data: resData });
+                client.exists(req.session.userId.toString(), function(err, num) {
+                    if (num === 1) {
+                        client.hgetall(req.session.userId.toString(), function(err, data) {
+                            console.log(data);
+                            if (err) console.log(err);
+                            let train = data.trainExp;
+                            return res.json({ errCode: 200, train: train, msg: 'Success', data: user });
+                        })
+                    } else {
+                        user["streak"] = 0;
+                        User.update({ _id: user._id }, { streak: 0 }, { upsert: true }).exec((err) => {
+                            if (err) return res.json({ errCode: 500, msg: err });
+                        });
+                        return res.json({ errCode: 200, train: 0, msg: 'Success', data: user });
+                    }
+                });
             }
         }
 

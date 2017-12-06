@@ -496,7 +496,7 @@ $("document").ready(function() {
     // });
 
 
-    function setInfo(data, callback) {
+    function setInfo(data, train, callback) {
         _level = data.current_level
 
         function normalize(str) {
@@ -519,6 +519,8 @@ $("document").ready(function() {
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);
+        $("#target").text(train + " exp");
+
 
         callback()
     }
@@ -566,8 +568,8 @@ $("document").ready(function() {
             url: "http://localhost:8080/api/user/myinfo",
             data: "",
             success: function(data) {
-                console.log(data.data)
-                setInfo(data.data, callback)
+                console.log(data)
+                setInfo(data.data, data.train, callback)
             }
         });
     }
