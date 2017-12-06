@@ -209,15 +209,15 @@
                             </div>
                             <div class="modal-body">
                                 <div>
-                                    <form>
-                                        <input type="radio" id="e30" checked>&nbsp;&nbsp; 30 EXP/ngày (Dễ)<br/><br/>
-                                        <input type="radio" id="e50">&nbsp; &nbsp; 50 EXP/ngày (Vừa)<br/><br/>
-                                        <input type="radio" id="e70">&nbsp; &nbsp; 70 EXP/ngày (Khó)<br/><br/>
+                                    <form action="/api/user/train" method="post">
+                                        <input type="radio" name="train" value="30" id="e30" checked>&nbsp;&nbsp; 30 EXP/ngày (Dễ)<br/><br/>
+                                        <input type="radio" name="train" value="50" id="e50">&nbsp; &nbsp; 50 EXP/ngày (Vừa)<br/><br/>
+                                        <input type="radio" name="train" value="70" id="e70">&nbsp; &nbsp; 70 EXP/ngày (Khó)<br/><br/>
+                                        <button type="submit" class="btn btn-default" id="updateTrain">OK</button>
                                     </form>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal" id="updateTrain">OK</button>
                             </div>
                         </div>
 

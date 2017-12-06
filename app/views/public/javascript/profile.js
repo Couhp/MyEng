@@ -15,6 +15,10 @@ $("document").ready(function() {
             }
         });
     })
+    $("#updateTrain").on('click', function() {
+
+
+    });
     $("#feedback").on('click', function() {
         window.location = "http://localhost:8080/MyEng/FeedBack";
     })
