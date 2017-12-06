@@ -29,6 +29,7 @@ router.post('/update', isUser, deserializeUser, userController.update);
 router.post('/password', isUser, deserializeUser, userController.updatePassword);
 router.post('/exp', isUser, deserializeUser, userController.updateEXP);
 router.post('/level', isUser, deserializeUser, userController.updateLevel);
+router.post('/train', isUser, deserializeUser, userController.newTrain);
 router.post('/avt', isUser, deserializeUser, upload.single("file"), userController.avatar);
 router.post('/feedback', userController.createFeedback);
 router.get("/feed/:id", isAuthenticated, deserialize, userController.getFeedback);
