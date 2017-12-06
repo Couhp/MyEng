@@ -64,9 +64,11 @@ $("document").ready(function() {
         _level = data.current_level
 
         function normalize(str) {
-            if (str.indexOf("/") === 1) {
+            console.log(str.indexOf("/"))
+            if (str.indexOf("/") !== -1) {
                 let arr = str.split('/');
-                arr.splice(0, 1);
+                arr.splice(0, arr.length - 2)
+                console.log(arr)
                 return '/' + arr.join('/');
             } else {
                 let arr = str.split('\\');

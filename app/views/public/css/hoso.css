@@ -17,15 +17,16 @@
 }
 
 #updateAvt {
-    margin-left: 251px;
+    margin-left: 235px;
 }
 
 #blah {
-    border: 2px solid transparent;
+    border: 2px solid white;
     vertical-align: middle;
     margin-left: 124px;
     margin-top: -16px;
     border-color: black;
+    border-color: white;
 }
 
 input.input_password {
@@ -384,9 +385,7 @@ button em {
     background-image: url(../images/1.jpg);
 } */
 
-div input {
-    height: 20px;
-}
+div input {}
 
 div label {
     font-size: 20px;
@@ -432,4 +431,14 @@ textarea {
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.modal-body {
+    position: relative;
+    padding: 40px;
+}
+
+input[type="file"] {
+    display: block;
+    margin-top: -8px;
 }

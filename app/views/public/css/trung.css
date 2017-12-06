@@ -179,7 +179,6 @@
 .gold-btn-del {
     pointer-events: none;
     filter: grayscale(90%);
-   
 }
 
 
@@ -235,4 +234,13 @@ textarea {
 .group-button {
     background-color: #f0f0f0;
     padding: 40px 100px 50px 100px;
+}
+
+.navbar-default {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    height: 74px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
