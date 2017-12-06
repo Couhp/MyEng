@@ -30,6 +30,6 @@ router.post('/password', isUser, deserializeUser, userController.updatePassword)
 router.post('/exp', isUser, deserializeUser, userController.updateEXP);
 router.post('/level', isUser, deserializeUser, userController.updateLevel);
 router.post('/avt', isUser, deserializeUser, upload.single("file"), userController.avatar);
-router.post('/feedback', isUser, deserializeUser, userController.createFeedback);
+router.post('/feedback', userController.createFeedback);
 router.get("/feed/:id", isAuthenticated, deserialize, userController.getFeedback);
 module.exports = router;

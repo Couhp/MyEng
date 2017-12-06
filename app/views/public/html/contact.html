@@ -17,10 +17,11 @@
 
     <!-- Skin CSS -->
     <link rel="stylesheet" href="../vendor/stylesheets/skins/default.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
 
 </head>
 
-<body>
+<body style="background-image:url(/images/anh-nen-2.png)">
     <!-- start: page -->
     <section class="body-sign">
         <div class="center-sign">
@@ -42,41 +43,41 @@
                     <form id="submitForm" onsubmit="myFunction(); return false;">
                         <div class="form-group">
                             <label>Tên bạn</label>
-                            <input name="username" type="text" class="form-control mb-md" required />
+                            <input id="name" type="text" class="form-control mb-md" required />
                         </div>
 
-                        
+
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input name="email" type="email" class="form-control mb-md" required/>
+                            <input id="email" type="email" class="form-control mb-md" required/>
                         </div>
 
 
                         <div class="form-group">
                             <label>Nội dung liên hệ </label>
-                            <textarea name="livingIn" type="text" class="form-control mb-md" rows="4"></textarea>
+                            <textarea id="content" type="text" class="form-control mb-md" rows="4"></textarea>
                         </div>
 
-                            <div class="row">
+                        <div class="row">
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" id="submit">Gửi</button>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" id="submit">Gửi</button>
 
-                                </div>
                             </div>
+                        </div>
 
-                            <span class="mt-lg mb-lg line-thru text-center text-uppercase">
+                        <span class="mt-lg mb-lg line-thru text-center text-uppercase">
 								<span>Hoặc</span>
-                            </span>
+                        </span>
 
-                            <p class="text-center">Bạn đã có một tài khoản <a href="/MyEng/SignIn">Đăng nhập!</a></p>
+                        <p class="text-center">Bạn đã có một tài khoản <a href="/MyEng/SignIn">Đăng nhập!</a></p>
 
                     </form>
-                    </div>
                 </div>
-
-                <p class="text-center text-muted mt-md mb-md">&copy; Copyright 2014. All Rights Reserved.</p>
             </div>
+
+            <p class="text-center text-muted mt-md mb-md">&copy; Copyright 2014. All Rights Reserved.</p>
+        </div>
     </section>
 
 
@@ -105,7 +106,7 @@
     <script type="text/javascript" src="../javascript/contact.js"></script>
 
 
-    
+
 </body>
 
 </html>

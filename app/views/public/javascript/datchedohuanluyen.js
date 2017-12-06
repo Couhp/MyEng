@@ -1,21 +1,21 @@
-﻿ $(function(){
-	// new WOW().init(); 
-function readURL(input) {
+﻿ $(function() {
+     new WOW().init();
 
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
+     function readURL(input) {
 
-    reader.onload = function(e) {
-      $('#blah').attr('src', e.target.result);
-    }
+         if (input.files && input.files[0]) {
+             var reader = new FileReader();
 
-    reader.readAsDataURL(input.files[0]);
-  }
-}
+             reader.onload = function(e) {
+                 $('#blah').attr('src', e.target.result);
+             }
 
-$("#imgInp").change(function() {
-  readURL(this);
-});
+             reader.readAsDataURL(input.files[0]);
+         }
+     }
 
-})  
+     $("#imgInp").change(function() {
+         readURL(this);
+     });
 
+ })

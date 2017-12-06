@@ -1,5 +1,20 @@
 $("document").ready(function() {
 
+    $("#logout").on('click', function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/user/logout",
+            data: "",
+            success: function(data) {
+                if (data.errCode === 0) {
+                    window.location = "http://localhost:8080/MyEng/Main";
+                } else {
+                    arlert("ERROR to log out!")
+                }
+            }
+        });
+    })
 
     function clone(obj) {
         if (null == obj || "object" != typeof obj) return obj;
@@ -36,7 +51,6 @@ $("document").ready(function() {
         window.location = "http://localhost:8080/MyEng/Main";
     })
     $("#displayName").on('click', function() {
-        console.log("hoyiou")
         window.location = "http://localhost:8080/MyEng/profile/098714102";
     })
 
@@ -501,7 +515,7 @@ $("document").ready(function() {
         }
         $("#avatar").attr("src", normalize(data.avatar));
         console.log(normalize(data.avatar))
-        $("#displayname").append("<strong><a href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
+        $("#displayname").append("<strong><a class='display' style='font-family:abc;' href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);

@@ -15,15 +15,21 @@
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../javascript/admin.js"></script>
     <script type="text/javascript" src="../vendor/jquery.dataTables.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+
 </head>
 
 <body>
 
     <div class="container">
-        <h2>Giao diện Admin</h2>
-        <a href="/api/user/logout" class="btn btn-danger btn-md pull-right">
-            <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a>
+        <div class="row">
+            <div class="col-xs-10">
+                <h2>Giao diện Admin</h2>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn" style="margin-top: 25px;" id="logout">Đăng xuất</button>
+            </div>
+        </div>
         <ul class="nav nav-tabs" id="admin_menu">
             <li class="active"><a data-toggle="tab" href="#menu1">Quản lý người dùng</a></li>
             <li><a data-toggle="tab" href="#menu2">Quản lý góp ý</a></li>

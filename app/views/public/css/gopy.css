@@ -1,42 +1,102 @@
-.col-md-7 main-panel h1{
-	font-size:2 em;
-	line-height: 38px;
+.col-md-7 main-panel h1 {
+    font-size: 2 em;
+    line-height: 38px;
     color: #3c3c3c;
     font-weight: 300;
     margin: 0 0 50px 0;
 }
+
+.display {
+    font-family: abc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+body {
+    background-attachment: fixed;
+}
+
 .topic-heading {
-	-webkit-animation: blink .75s linear infinite;
-	-moz-animation: blink .75s linear infinite;
-	-o-animation: blink .75s linear infinite;
-	 animation: blink .75s linear infinite;
+    -webkit-animation: blink .75s linear infinite;
+    -moz-animation: blink .75s linear infinite;
+    -o-animation: blink .75s linear infinite;
+    animation: blink .75s linear infinite;
 }
-@@keyframes topic-heading{
-    0%{color:black}
-    25%{color:red}
-    100%{color:yellow}
+
+@keyframes topic-heading {
+    0% {
+        color: black
+    }
+    25% {
+        color: red
+    }
+    100% {
+        color: yellow
+    }
 }
-@@-webkit-keyframes topic-heading {
-	0% { opacity: 1; }
-	50% { opacity: 1; }
-	50.01% { opacity: 0; }
-	100% { opacity: 0; }
+
+@-webkit-keyframes topic-heading {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    50.01% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
 }
-@@-moz-keyframes topic-heading {
-	0% { opacity: 1; }
-	50% { opacity: 1; }
-	50.01% { opacity: 0; }
-	100% { opacity: 0; }
+
+@-moz-keyframes topic-heading {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    50.01% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
 }
-@@-ms-keyframes topic-heading {
-	0% { opacity: 1; }
-	50% { opacity: 1; }
-	50.01% { opacity: 0; }
-	100% { opacity: 0; }
+
+@-ms-keyframes topic-heading {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    50.01% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
 }
-@@-o-keyframes topic-heading {
-	0% { opacity: 1; }
-	50% { opacity: 1; }
-	50.01% { opacity: 0; }
-	100% { opacity: 0; }
+
+@-o-keyframes topic-heading {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    50.01% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.navbar-default {
+    background-color: white;
+    border-color: white;
+    opacity: 0.85;
 }

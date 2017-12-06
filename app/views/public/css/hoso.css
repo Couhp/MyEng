@@ -9,7 +9,7 @@
 }
 
 .container-fluid.block_1 {
-    margin-bottom: 65px;
+    margin-bottom: 31px;
 }
 
 .container-fluid.block_2 {
@@ -17,15 +17,16 @@
 }
 
 #updateAvt {
-    margin-left: 251px;
+    margin-left: 235px;
 }
 
 #blah {
-    border: 2px solid transparent;
+    border: 2px solid white;
     vertical-align: middle;
     margin-left: 124px;
     margin-top: -16px;
     border-color: black;
+    border-color: white;
 }
 
 input.input_password {
@@ -92,22 +93,23 @@ a:focus {
     text-decoration: none;
 }
 
-.col-sm-8.left {
+
+/* .col-sm-8.left {
     background: #e2e2e2;
     border-radius: 81px;
     border-right: 10px solid white;
     margin-bottom: 50px;
-}
+} */
 
 .col-sm-4.right {
-    background: #e2e2e2;
+    background: white;
     padding: 15px 0px;
-    border-radius: 25px;
+    border-radius: 15px;
 }
 
 .container-fluid.block_4 {
     margin: 15px;
-    padding: 10px 0px;
+    padding: 0px 0px;
 }
 
 .level span.text {
@@ -183,6 +185,7 @@ h2.title.text {
 }
 
 h2.user_name {
+    font-weight: bold;
     font-size: 30px;
     margin-left: -60px;
 }
@@ -388,9 +391,7 @@ button em {
     background-image: url(../images/1.jpg);
 } */
 
-div input {
-    height: 20px;
-}
+div input {}
 
 div label {
     font-size: 20px;
@@ -417,9 +418,11 @@ textarea {
 .group-button {
     background-color: #f0f0f0;
     padding: 40px 100px 50px 100px;
+    opacity: 0.85;
 }
 
 .form-control {
+    opacity: 0.85;
     display: block;
     width: 106%;
     height: 34px;
@@ -436,4 +439,40 @@ textarea {
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.modal-body {
+    position: relative;
+    padding: 40px;
+}
+
+input[type="file"] {
+    display: block;
+    margin-top: -8px;
+}
+
+.navbar-default {
+    background-color: white;
+    border-color: white;
+    opacity: 0.85;
+}
+
+@font-face {
+    font-family: abc;
+    src: url(../fonts/Raleway-Light-vi.ttf);
+}
+
+div {
+    font-family: abc;
+    font-weight: bold;
+}
+
+.display {
+    font-family: abc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+body {
+    background-attachment: fixed;
 }

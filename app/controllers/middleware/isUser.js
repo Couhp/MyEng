@@ -6,7 +6,7 @@ let isAuthenticated = (req, res, next) => {
     let userId = req.session.userId;
     if (userId === null || userId === undefined) {
         req.session.destroy();
-        return res.status(400).json({ errCode: -4, msg: 'User not login yet' });
+        return res.json({ errCode: -4, msg: 'User not login yet' });
     }
 
     next();

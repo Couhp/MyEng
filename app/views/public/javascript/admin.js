@@ -1,5 +1,20 @@
 $(document).ready(function() {
     //set data in datatable
+    $("#logout").on('click', function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/admin/logout",
+            data: "",
+            success: function(data) {
+                if (data.errCode === 0) {
+                    window.location = "http://localhost:8080/Admin/SignIn";
+                } else {
+                    arlert("ERROR to log out!")
+                }
+            }
+        });
+    })
     $("#replied").on('click', function() {
         $("#none_replied").hide();
     });
@@ -55,6 +70,24 @@ $(document).ready(function() {
     }
 
     //switch tag in gop y
+    // $('#admin_menu').on('click', 'a[data-toggle="tab"]', function(e) {
+    //     e.preventDefault();
+
+    //     var $link = $(this);
+
+    //     if (!$link.parent().hasClass('active')) {
+
+    //         //remove active class from other tab-panes
+    //         $('.tab-content:not(.' + $link.attr('href').replace('#', '') + ') .tab-pane').removeClass('active');
+
+    //         // click first submenu tab for active section
+    //         $('a[href="' + $link.attr('href') + '_all"][data-toggle="tab"]').click();
+
+    //         // activate tab-pane for active section
+    //         $('.tab-content.' + $link.attr('href').replace('#', '') + ' .tab-pane:first').addClass('active');
+    //     }
+
+    // });
     $("#r").click(function() {
         $(this).addClass('active');
         $("#none_replied").hide();
@@ -101,6 +134,9 @@ $(document).ready(function() {
         });
     }
     var getUser = function(userid) {
+        if (userid === null || userid === undefined) {
+            return "Anonymous"
+        }
         let res = "";
         $.ajax({
             type: "POST",

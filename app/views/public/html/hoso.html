@@ -10,26 +10,28 @@
     <link rel="stylesheet" href="../vendor/bootstrap.css">
     <link rel="stylesheet" href="../css/hoso.css">
     <link rel="stylesheet" href="../vendor/animate.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+
 </head>
 
-<body>
+<body style="background-image:url(/images/anh-nen-2.png)">
 
 
     <div class="container-fluid">
         <nav id="myScrollspy" class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a id="logo" class="navbar-brand">My Eng</a>
+                    <a id="logo" class="navbar-brand wow slideInRight" data-wow-delay="0.2s">My Eng</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li>
                         <a>
-                            <button class="button-header btn-info" id="main">Trang chủ</button>
+                            <div><button class="button-header btn-info" id="main">Trang chủ</button></div>
                         </a>
                     </li>
                     <li>
                         <a>
-                            <button class="button-header btn-info" id="feedback">Góp ý</button>
+                            <div><button class="button-header btn-info" id="feedback">Góp ý</button></div>
                         </a>
                     </li>
                 </ul>
@@ -40,9 +42,10 @@
                             <i id="displayname"></i>
                         </a>
                     </li>
-                    <a href="/api/user/logout" class="btn btn-danger btn-md btn-logout">
-                        <span class="glyphicon glyphicon-log-out"></span> Log out
-                    </a>
+                    <li>
+                        <div><button class="button-header btn-info" style="margin-top: 12px;" id="logout">Đăng xuất</button></div>
+                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -54,7 +57,6 @@
             <div class="container-fluid matkhau">
                 <div class="container-fluid block_1">
                     <div class="col-sm-8 text-left">
-                        <div class="h2">Hồ sơ</div>
                     </div>
                     <div class="col-sm-4">
                         <div class="btn btn-primary button_tiendo" id="updateInfo">Lưu thay đổi</div>
@@ -70,7 +72,7 @@
                 </div>
                 <div class="container-fluid block_2">
                     <div class="col-sm-3">
-                        <h4 class="text2">Tên</h4>
+                        <h4 class="text2">Name</h4>
                     </div>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" class="input_password" id="input_name">
@@ -88,7 +90,7 @@
 
                 <div class="container-fluid block_4">
                     <div class="col-sm-3">
-                        <h4 class="text2">Công việc</h4>
+                        <h4 class="text2">Job</h4>
                     </div>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" class="input_password tieusu" id="input_job">
@@ -97,7 +99,7 @@
 
                 <div class="container-fluid block_4">
                     <div class="col-sm-3">
-                        <h4 class="text2">Nơi ở</h4>
+                        <h4 class="text2">Live in</h4>
                     </div>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" class="input_password tieusu" id="input_address">
@@ -106,7 +108,7 @@
 
                 <div class="container-fluid block_4">
                     <div class="col-sm-3">
-                        <h4 class="text2">Ngày sinh</h4>
+                        <h4 class="text2">Birthday</h4>
                     </div>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" class="input_password tieusu" id="input_birth" disabled="disabled">
@@ -114,7 +116,7 @@
                 </div>
                 <div class="container-fluid block_7">
                     <div class="col-sm-3">
-                        <h4 class="text">Ảnh Hồ Sơ</h4>
+                        <h4 class="text">Avatar</h4>
                     </div>
                     <div class="col-sm-6">
 
@@ -159,7 +161,6 @@
                 </div>
                 <div class="col-sm-8 ">
                     <h2 class="user_name " id="profile_name"></h2>
-                    <h2 class="text ">Hồ sơ của bạn</h2>
                 </div>
             </div>
             <div class="container-fluid all_block_right detail ">
@@ -198,7 +199,7 @@
                 </div>
             </div>
             <div class=" container-fluid all_block_right detail ">
-                <a href="datchedohuanluyen.html ">Đặt chế độ huấn luyện</a>
+                <div style='font-family:abc;' href="datchedohuanluyen.html ">Đặt chế độ huấn luyện</div>
             </div>
         </div>
 

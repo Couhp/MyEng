@@ -1,4 +1,19 @@
 $(document).ready(function() {
+    $("#logout").on('click', function() {
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/user/logout",
+            data: "",
+            success: function(data) {
+                if (data.errCode === 0) {
+                    window.location = "http://localhost:8080/MyEng/Main";
+                } else {
+                    arlert("ERROR to log out!")
+                }
+            }
+        });
+    })
     $("#newFeed").hide();
     $("#create").on('click', function() {
         $("#create").hide();
@@ -154,9 +169,11 @@ $(document).ready(function() {
     function setInfo(data) {
 
         function normalize(str) {
-            if (str.indexOf("/") === 1) {
+            console.log(str.indexOf("/"))
+            if (str.indexOf("/") !== -1) {
                 let arr = str.split('/');
-                arr.splice(0, 1);
+                arr.splice(0, arr.length - 2)
+                console.log(arr)
                 return '/' + arr.join('/');
             } else {
                 let arr = str.split('\\');
@@ -221,7 +238,7 @@ $(document).ready(function() {
 
         }
         $("#avatar").attr("src", normalize(data.avatar));
-        $("#displayname").text(data.displayName);
+        $("#displayname").append("<strong><a class='display' href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);
