@@ -93,6 +93,10 @@
         margin-top: 20px;
     }
     
+    .theme-circle {
+        cursor: pointer;
+    }
+    
     .theme-circle1 {
         background-color: #1caff6;
         border-radius: 98px;
@@ -189,28 +193,6 @@
         pointer-events: none;
         filter: grayscale(90%);
     }
-    /* button.theme {
-    border-width: 0px;
-    padding: 0px;
-    white-space: nowrap;
-    overflow: visible;
-    background-color: #7eb530;
-    border-radius: 98px;
-    display: inline-block;
-    height: 80px;
-    margin-top: 12px;
-    width: 80px;
-}
-
-button em {
-    vertical-align: middle;
-    display: inline-block;
-    border-radius: 98px;
-    margin: 12px;
-    height: 55px;
-    width: 55px;
-    background-image: url(../images/1.jpg);
-} */
     
     body {
         background-attachment: fixed;
@@ -232,9 +214,6 @@ button em {
     textarea {
         font-size: 20px !important;
     }
-    /* #check-btn #next-btn {
-    display: inline;
-} */
     
     .alert-result {
         display: inline;
@@ -266,4 +245,23 @@ button em {
         font-family: 123;
         font-size: 16px;
         font-weight: bold;
+    }
+    
+    .modal {
+        text-align: center;
+    }
+    
+    @media screen and (min-width: 768px) {
+        .modal:before {
+            display: inline-block;
+            vertical-align: middle;
+            content: " ";
+            height: 60%;
+        }
+    }
+    
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
     }

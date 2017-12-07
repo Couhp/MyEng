@@ -18,3 +18,7 @@ button.reply {
     display: block;
     margin-top: 5px;
 }
+
+span {
+    cursor: pointer;
+}

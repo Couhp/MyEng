@@ -56,6 +56,7 @@ $(document).ready(function() {
         var id = $(this).attr('id')
         block(id)
     });
+
     // function block or unblock
     var block = function(id) {
         $.ajax({
@@ -69,25 +70,7 @@ $(document).ready(function() {
         })
     }
 
-    //switch tag in gop y
-    // $('#admin_menu').on('click', 'a[data-toggle="tab"]', function(e) {
-    //     e.preventDefault();
-
-    //     var $link = $(this);
-
-    //     if (!$link.parent().hasClass('active')) {
-
-    //         //remove active class from other tab-panes
-    //         $('.tab-content:not(.' + $link.attr('href').replace('#', '') + ') .tab-pane').removeClass('active');
-
-    //         // click first submenu tab for active section
-    //         $('a[href="' + $link.attr('href') + '_all"][data-toggle="tab"]').click();
-
-    //         // activate tab-pane for active section
-    //         $('.tab-content.' + $link.attr('href').replace('#', '') + ' .tab-pane:first').addClass('active');
-    //     }
-
-    // });
+    //show inside tab
     $("#r").click(function() {
         $(this).addClass('active');
         $("#none_replied").hide();
@@ -150,6 +133,8 @@ $(document).ready(function() {
         })
         return res
     }
+
+    //get feed back 
     var getFbHTML = function(data) {
         if (data === null || data === undefined || data.length === 0) {
             var html = "<br/><div class='nothing bg-info'><h class='nothing-text'>Không có dữ liệu.</h></div><br/>"
@@ -196,7 +181,7 @@ $(document).ready(function() {
 
 
     // modify answer
-    $("#replied_content").on('click', 'span', function() {
+    $("#replied_content").on('click', 'span.btn-info', function() {
         var textarea = $(this).siblings("textarea")
         var reply = textarea.val()
         var feedbackId = textarea.attr('id')
@@ -216,6 +201,12 @@ $(document).ready(function() {
 
     });
 
+    // cancel modify anwser
+    $("#replied_content").on('click', 'span.btn-warning', function() {
+        $(this).parent().hide()
+        $(this).parent().siblings('button').show()
+    });
+
 
     //show fb replied
     var showRepFb = function(data) {
@@ -227,12 +218,14 @@ $(document).ready(function() {
 
     }
 
+    //get fb replied
     var getRepFbHTML = function(data) {
         var subject = data.subject
         var content = data.content
         var id = data._id
         var reply = data.reply
         var html = "<div class='alert alert-warning'>" +
+            "<span id=" + "del" + id + " class='pull-right glyphicon glyphicon-remove' data-toggle='tooltip' title='Delete feedback!'></span>" +
             "<i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.user) + "</strong></a>" +
             "<h5 >Tiêu đề: " + subject + "</h5>" +
             "<h6>Nội dung: " + content + "</h6>" +
@@ -240,19 +233,40 @@ $(document).ready(function() {
             "<button class='btn btn-info'>Chỉnh sửa câu trả lời</button>" +
             "<div class='input-group'>" +
             "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
-            "<span class='input-group-addon btn btn-primary'>Reply</span>" +
-            "</div>" +
-            "</div>"
+            "<span class='input-group-addon btn btn-warning'>Cancel</span>" +
+            "<span class='input-group-addon btn btn-info'>Reply</span>"
+        "</div>" +
+        "</div>"
         return html
     }
 
+    //show textarea and hide button modify
     $("#replied_content").on("click", "button.btn-info", function() {
         var inputGroup = $(this).siblings("div.input-group")
         $(this).hide()
         inputGroup.show()
 
-    })
+    });
 
+    //delete feedback
+    $("#replied_content").on("click", "span.glyphicon-remove", function() {
+        var delspan = $(this)
+        var id = delspan.attr('id').slice(3)
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/admin/del-feedback",
+            data: { "feedbackid": id },
+            success: function(data) {
+                if (data.errCode === 200) {
+                    alert("delete feedback: " + data.msg)
+                    delspan.parent().remove()
+                } else {
+                    alert("delete feedback: " + data.msg)
+                }
+            }
+        })
+    });
 
     getFb();
     getFbReplied();
