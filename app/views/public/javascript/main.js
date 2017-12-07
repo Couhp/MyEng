@@ -364,7 +364,7 @@ $("document").ready(function() {
                     true_ans = _queue[_position].answer
                     var ok = false
                     for (var i = 0; i < true_ans.length; i++) {
-                        if (answer.trim().localeCompare(true_ans[i].trim()) === 0 && answer !== " " && answer !== "") {
+                        if (answer.trim().toLowerCase().localeCompare(true_ans[i].trim().toLowerCase()) === 0 && answer !== " " && answer !== "") {
                             // if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
                             $("div.group-button").css("background-color", "#bff199");
                             ok = true;
