@@ -1,8 +1,6 @@
 $(document).ready(() => {
 
-
-    $('#submit').on('click', function() {
-
+    var submit = function() {
         let url = "http://localhost:8080/api/user/login"
 
         $.ajax({
@@ -18,11 +16,20 @@ $(document).ready(() => {
                 } else if (data.errCode === 404) {
                     alert(data.msg);
                 } else {
-                    document.cookie = "userId=" + data.data.user._id + ";"
                     window.location = "http://localhost:8080/MyEng/Main";
                 }
             }
         });
 
+    }
+
+    $('#submit').on('click', function() {
+        submit()
     })
+
+    $(document).keypress(function(e) {
+        if (e.which == 13) {
+            submit()
+        }
+    });
 })

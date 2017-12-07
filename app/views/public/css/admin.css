@@ -18,3 +18,15 @@ button.reply {
     display: block;
     margin-top: 5px;
 }
+
+span {
+    cursor: pointer;
+}
+
+#create {
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-right: 5px;
+}

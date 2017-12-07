@@ -6,6 +6,9 @@ const repFeedback = require(global.__base + 'app/controllers/admin/repFeedback.j
 const getFeedbackIsRep = require(global.__base + 'app/controllers/admin/getFeedbackIsRep.js');
 const getAllFeedback = require(global.__base + 'app/controllers/admin/getAllFeedback.js');
 const delFeedback = require(global.__base + 'app/controllers/admin/delFeedback.js');
+const addTopic = require(global.__base + 'app/controllers/admin/addTopic.js');
+const addChoose = require(global.__base + 'app/controllers/admin/addChoose.js');
+const addFill = require(global.__base + 'app/controllers/admin/addFill.js');
 
 const adminController = {
     login: login,
@@ -15,7 +18,10 @@ const adminController = {
     repFeedback: repFeedback,
     getFeedbackIsRep: getFeedbackIsRep,
     getAllFeedback: getAllFeedback,
-    delFeedback: delFeedback
+    delFeedback: delFeedback,
+    addTopic: addTopic,
+    addFill: addFill,
+    addChoose: addChoose
 
 }
 module.exports = adminController;

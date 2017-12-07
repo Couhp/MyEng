@@ -38,6 +38,7 @@ $("document").ready(function() {
     let _level = 1
     let _passinglevel = 0
     let _numberQuestion = 0
+    let _enterKey = true
 
 
     // ================= ROUTING ============================
@@ -71,7 +72,6 @@ $("document").ready(function() {
         var image = "../images/" + index + ".png"
 
         result = '   <div class="theme-div" data-toggle="modal" >  ' +
-            // '                            <a href="">  ' +
             '                                <div id= ' + id + ' class="theme-circle theme-circle' + theme + '">  ' +
             '                                    <img src="' + image + '" class="img-circle theme-img" alt="user img">   ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
@@ -82,7 +82,6 @@ $("document").ready(function() {
             '                                        </div>  ' +
             '                                    </div>  ' +
             '                                </div>  ' +
-            // '                            </a>  ' +
             '                       </div>  ';
 
         return result;
@@ -364,7 +363,7 @@ $("document").ready(function() {
                     true_ans = _queue[_position].answer
                     var ok = false
                     for (var i = 0; i < true_ans.length; i++) {
-                        if (answer.trim().localeCompare(true_ans[i].trim()) === 0 && answer !== " " && answer !== "") {
+                        if (answer.trim().toLowerCase().localeCompare(true_ans[i].trim().toLowerCase()) === 0 && answer !== " " && answer !== "") {
                             // if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
                             $("div.group-button").css("background-color", "#bff199");
                             ok = true;
@@ -385,6 +384,24 @@ $("document").ready(function() {
             }
         })
     }
+
+    //trung edit: set event key press
+
+    $(document).keypress(function(e) {
+        if (e.which == 13) {
+            console.log($("#check-btn").prop("disabled"))
+            console.log($("#next-btn").is(":visible"))
+            if (_enterKey && $("#check-btn").prop("disabled") == false) {
+                $("#check-btn").click()
+                _enterKey = false
+            } else if ($("#next-btn").is(":visible")) {
+                $("#next-btn").click()
+                _enterKey = true
+            }
+        }
+    });
+
+
 
     function Compare(str1, str2) {
         if (str2 === "" || str2 === " ") return false
@@ -477,7 +494,7 @@ $("document").ready(function() {
     // });
 
 
-    function setInfo(data, callback) {
+    function setInfo(data, train, callback) {
         _level = data.current_level
 
         function normalize(str) {
@@ -500,6 +517,8 @@ $("document").ready(function() {
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);
+        $("#target").text(train + " exp");
+
 
         callback()
     }
@@ -547,8 +566,8 @@ $("document").ready(function() {
             url: "http://localhost:8080/api/user/myinfo",
             data: "",
             success: function(data) {
-                console.log(data.data)
-                setInfo(data.data, callback)
+                console.log(data)
+                setInfo(data.data, data.train, callback)
             }
         });
     }
