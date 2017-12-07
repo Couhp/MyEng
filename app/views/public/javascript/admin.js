@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    //set data in datatable
     $("#logout").on('click', function() {
         $.ajax({
             type: "GET",
@@ -15,9 +14,13 @@ $(document).ready(function() {
             }
         });
     })
+
     $("#replied").on('click', function() {
         $("#none_replied").hide();
     });
+
+    //============= menu quan ly nguoi dung =================//
+    //set data in datatable
     var table = $('#usersTable').DataTable({
         "ajax": {
             "url": "http://localhost:8080/api/admin/all-user",
@@ -70,6 +73,10 @@ $(document).ready(function() {
         })
     }
 
+    //========= end menu quan ly nguoi dung ===============//
+
+
+    //========= menu quan ly feedback ====================//
     //show inside tab
     $("#r").click(function() {
         $(this).addClass('active');
@@ -144,6 +151,7 @@ $(document).ready(function() {
         var content = data.content
         var id = data._id
         var html = "<br/><div class='alert alert-warning'>" +
+            "<span id=" + "del" + id + " class='pull-right glyphicon glyphicon-remove' data-toggle='tooltip' title='Delete feedback!'></span>" +
             "<i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.user) + "</strong></a>" +
             "<h5>Tiêu đề : " + subject + "</h5>" +
             "<h6>Nội dung : " + content + "</h6>" +
@@ -156,7 +164,7 @@ $(document).ready(function() {
     }
 
 
-    $("#news-content").on('click', 'span', function() {
+    $("#news-content").on('click', 'span.btn-primary', function() {
         var textarea = $(this).siblings("textarea")
         var reply = textarea.val()
         var feedbackId = textarea.attr('id')
@@ -169,12 +177,21 @@ $(document).ready(function() {
                 alert(data.msg);
                 textarea.parent().parent().remove()
                 var html = "<div class='alert alert-warning'>" +
+                    "<span id=" + "del" + feedbackId + " class='pull-right glyphicon glyphicon-remove' data-toggle='tooltip' title='Delete feedback!'></span>" +
                     "<i class='fa fa-user' aria-hidden='true'>&nbsp;</i><a href='#' style='text-decoration: none;'><strong class='text-primary'> " + getUser(data.data.user) + "</strong></a>" +
                     "<h5 >Tiêu đề: " + data.data.subject + "</h5>" +
                     "<h6>Nội dung: " + data.data.content + "</h6>" +
                     "<h6 class='alert alert-success'>Đã trả lời: " + data.data.reply + "</h6>" +
+                    "<button class='btn btn-info'>Chỉnh sửa câu trả lời</button>" +
+                    "<div class='input-group'>" +
+                    "<textarea id=" + feedbackId + " class='form-control custom-control' rows='1' style='resize:none'></textarea>" +
+                    "<span class='input-group-addon btn btn-warning'>Cancel</span>" +
+                    "<span class='input-group-addon btn btn-info'>Reply</span>" +
+                    "</div>" +
                     "</div>";
                 $("#replied_content").prepend(html);
+                $("#replied_content").find(".input-group").hide()
+
             }
         })
     });
@@ -232,7 +249,7 @@ $(document).ready(function() {
             "<h6 class='alert alert-success'>Đã trả lời: " + reply + "</h6>" +
             "<button class='btn btn-info'>Chỉnh sửa câu trả lời</button>" +
             "<div class='input-group'>" +
-            "<textarea id=" + id + " class='form-control custom-control' rows='3' style='resize:none'></textarea>" +
+            "<textarea id=" + id + " class='form-control custom-control' rows='1' style='resize:none'></textarea>" +
             "<span class='input-group-addon btn btn-warning'>Cancel</span>" +
             "<span class='input-group-addon btn btn-info'>Reply</span>"
         "</div>" +
@@ -256,18 +273,78 @@ $(document).ready(function() {
             type: "POST",
             method: "POST",
             url: "http://localhost:8080/api/admin/del-feedback",
-            data: { "feedbackid": id },
+            data: { "feedbackId": id },
             success: function(data) {
                 if (data.errCode === 200) {
-                    alert("delete feedback: " + data.msg)
                     delspan.parent().remove()
-                } else {
-                    alert("delete feedback: " + data.msg)
                 }
+                alert("delete feedback: " + data.msg)
+            }
+        })
+    });
+
+    $("#news-content").on("click", "span.glyphicon-remove", function() {
+        var delspan = $(this)
+        var id = delspan.attr('id').slice(3)
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/admin/del-feedback",
+            data: { "feedbackId": id },
+            success: function(data) {
+                if (data.errCode === 200) {
+                    delspan.parent().remove()
+                }
+                alert("delete feedback: " + data.msg)
             }
         })
     });
 
     getFb();
     getFbReplied();
+
+    //================ end quan ly feedback =================//
+
+    //============== menu quan ly du lieu ==================//
+    // create topic table
+
+    var table = $('#topicsTable').DataTable({
+        "ajax": {
+            "url": "http://localhost:8080/api/topic/all",
+            "type": "post",
+            "data": { "courseid": "5a1224a17605d32d985a8156" }
+        },
+        "columns": [
+            { "data": "name" },
+            { "data": "description" },
+            { "data": "exp_topic" },
+            { "data": null }
+        ],
+        "columnDefs": [{
+            "targets": -1,
+            "data": "",
+            "render": function(data, type, row, meta) {
+                return '<button id= hihi' + data["_id"] + ' class="btn btn-info">Choose question </button>' +
+                    '<button id= hehe' + data["_id"] + ' class="btn btn-success">Fill question</button>';
+
+            }
+        }]
+    });
+
+    //create topic 
+    $("#createTopic").on("click", function() {
+        var topicname = $("#topicname").val()
+        var description = $("#description").val()
+        var exp = $("#exp").val()
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/admin/add-topic",
+            data: { "name": topicname, "description": description, "exp": exp },
+            success: function(data) {
+                console.log(data)
+            }
+        })
+    })
+
 });

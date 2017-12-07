@@ -22,3 +22,11 @@ button.reply {
 span {
     cursor: pointer;
 }
+
+#create {
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-right: 5px;
+}
