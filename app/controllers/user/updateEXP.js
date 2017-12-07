@@ -6,7 +6,7 @@ let updateExp = (req, res) => {
     var d = new Date();
     var n = d.getDate();
     let userid = new mongoose.Types.ObjectId(req.session.userId);
-    let exp_plus = req.body.exp;
+    let exp_plus = Number(req.body.exp) * 10;
     console.log(exp_plus)
     User.findOne({ _id: userid }).exec((err, user) => {
         if (err) return res.json({ errCode: 500, msg: "Internal error" });
