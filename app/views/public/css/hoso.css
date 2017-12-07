@@ -53,6 +53,10 @@ input.input_password {
     border-radius: 6px;
 }
 
+.btn-logout {
+    margin-top: 14px;
+}
+
 .container.block4 {
     text-align: center;
     margin-left: -152px;

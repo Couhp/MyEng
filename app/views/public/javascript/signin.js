@@ -1,8 +1,6 @@
 $(document).ready(() => {
 
-
-    $('#submit').on('click', function() {
-
+    var submit = function() {
         let url = "http://localhost:8080/api/user/login"
 
         $.ajax({
@@ -23,5 +21,15 @@ $(document).ready(() => {
             }
         });
 
+    }
+
+    $('#submit').on('click', function() {
+        submit()
     })
+
+    $(document).keypress(function(e) {
+        if (e.which == 13) {
+            submit()
+        }
+    });
 })
