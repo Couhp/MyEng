@@ -324,8 +324,8 @@ $(document).ready(function() {
             "targets": -1,
             "data": "",
             "render": function(data, type, row, meta) {
-                return '<button id= hihi' + data["_id"] + ' class="btn btn-info">Choose question </button>' +
-                    '<button id= hehe' + data["_id"] + ' class="btn btn-success">Fill question</button>';
+                return '<button id= hihi' + data["_id"] + ' class="btn btn-info choose-question" data-toggle="modal" data-target="#modalChoose">Choose question </button>' +
+                    '<button id= hehe' + data["_id"] + ' class="btn btn-success fill-question" data-toggle="modal" data-target="#modalFill">Fill question</button>';
 
             }
         }]
@@ -342,9 +342,55 @@ $(document).ready(function() {
             url: "http://localhost:8080/api/admin/add-topic",
             data: { "name": topicname, "description": description, "exp": exp },
             success: function(data) {
-                console.log(data)
+                alert(data.msg)
             }
         })
+        location.reload(true)
+            // $("#admin_menu").tabs({ active: 2 });
+    })
+
+    let _topicid
+
+    $("#topicsTable").on("click", "button.choose-question", function() {
+        _topicid = $(this).attr('id').slice(4)
+    })
+
+    $("#topicsTable").on("click", "button.fill-question", function() {
+        _topicid = $(this).attr('id').slice(4)
+    })
+
+
+    //create choose question
+    $("#createChoose").on("click", function() {
+        var question = $("#question").val()
+        var option = $("#choose1").val() + ',' + $("#choose2").val() + ',' + $("#choose3").val() + ',' + $("#choose4").val()
+        var answer = $("#answer").val()
+        console.log(_topicid + ' ' + question + ' ' + option + ' ' + answer)
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/admin/add-choose",
+            data: { "question": question, "option": option, "answer": answer, "topicid": _topicid },
+            success: function(data) {
+                console.log(data.msg)
+            }
+        })
+    })
+
+    //create fill question
+    $("#createFill").on("click", function() {
+        var question = $("#questionFill").val()
+        var answer = $("#answerFill").val()
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/admin/add-fill",
+            data: { "question": question, "answer": answer, "topicid": _topicid },
+            success: function(data) {
+                console.log(data.msg)
+            }
+        })
+
     })
 
 });
