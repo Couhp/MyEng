@@ -25,6 +25,7 @@ router.post('/getinfo', isAuthenticated, deserialize, userController.getInfo);
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.get('/logout', isUser, deserializeUser, userController.logout);
+router.get('/streak', isUser, deserializeUser, userController.getStreak);
 router.post('/update', isUser, deserializeUser, userController.update);
 router.post('/password', isUser, deserializeUser, userController.updatePassword);
 router.post('/exp', isUser, deserializeUser, userController.updateEXP);

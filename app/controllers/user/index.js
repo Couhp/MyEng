@@ -14,6 +14,7 @@ const myFeedback = require(global.__base + 'app/controllers/user/myFeedback.js')
 const updateLevel = require(global.__base + 'app/controllers/user/updateLevel.js');
 const updatePass = require(global.__base + 'app/controllers/user/updatePassword.js');
 const newTrain = require(global.__base + 'app/controllers/user/newTrain.js');
+const getStreak = require(global.__base + 'app/controllers/user/getStreak.js');
 
 const userController = {
     info: info,
@@ -29,7 +30,8 @@ const userController = {
     getFeedback: getFeedback,
     myFeedback: myFeedback,
     updatePassword: updatePass,
-    newTrain: newTrain
+    newTrain: newTrain,
+    getStreak: getStreak
 };
 
 module.exports = userController;
