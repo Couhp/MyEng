@@ -125,10 +125,10 @@
     
     h3#target {
         border: 5px solid lightgray;
-        border-radius: 10%;
+        border-radius: 100%;
         width: 130px;
         height: 130px;
-        padding-top: 10px;
+        padding-top: 40px;
         color: orange;
         margin-left: 87px;
         margin-top: 0px;
