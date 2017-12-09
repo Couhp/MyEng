@@ -533,8 +533,21 @@ $("document").ready(function() {
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);
-        $("#target").text(train + " exp");
-
+        // $("#target").text(train + " exp");
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/user/streak",
+            data: "",
+            success: function(data) {
+                code = data.errCode
+                if (code == 200) {
+                    $("#target").text("Bạn đã hoàn thành mục tiêu ngày")
+                }else {
+                    $("#target").text("Bạn chưa thành mục tiêu ngày")
+                }
+            }
+        })
 
         callback()
     }
