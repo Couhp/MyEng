@@ -15,10 +15,6 @@ $(document).ready(function() {
         });
     })
 
-    $("#replied").on('click', function() {
-        $("#none_replied").hide();
-    });
-
     //============= menu quan ly nguoi dung =================//
     //set data in datatable
     var table = $('#usersTable').DataTable({
@@ -78,14 +74,18 @@ $(document).ready(function() {
 
     //========= menu quan ly feedback ====================//
     //show inside tab
-    $("#r").click(function() {
-        $(this).addClass('active');
-        $("#none_replied").hide();
-    });
-    $("#nr").click(function() {
-        $(this).addClass('active');
-        $("#none_replied").show();
-    });
+    // $("#replied").on('click', function() {
+    //     $("#none_replied").hide();
+    // });
+
+    // $("#r").click(function() {
+    //     $(this).addClass('active');
+    //     $("#none_replied").hide();
+    // });
+    // $("#nr").click(function() {
+    //     $(this).addClass('active');
+    //     $("#none_replied").show();
+    // });
 
     //get fb
     var getFb = function() {
@@ -305,7 +305,7 @@ $(document).ready(function() {
 
     //================ end quan ly feedback =================//
 
-    //============== menu quan ly du lieu ==================//
+    //============== menu quan ly topic ==================//
     // create topic table
 
     var table = $('#topicsTable').DataTable({
@@ -346,9 +346,25 @@ $(document).ready(function() {
             }
         })
         location.reload(true)
-            // $("#admin_menu").tabs({ active: 2 });
     })
 
+    $('ul.nav-tabs a').click(function(e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    // store the currently selected tab in the hash value
+    $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+        var id = $(e.target).attr("href").substr(1);
+        window.location.hash = id;
+    });
+
+    // on load of the page: switch to the currently selected tab
+    var hash = window.location.hash;
+    $('ul.nav-tabs a[href="' + hash + '"]').tab('show');
+
+
+    // add question
     let _topicid
 
     $("#topicsTable").on("click", "button.choose-question", function() {
@@ -392,5 +408,78 @@ $(document).ready(function() {
         })
 
     })
+
+    //=============end quan ly topic ===================//
+
+
+    //============= show question ===================//
+    function getQuestion(id, callback) {
+        let mylist = []
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/choose/question",
+            data: { "topicid": id },
+            success: function(data) {
+
+                mylist = mylist.concat(data.data)
+                for (var i = 0; i < mylist.length; i++) {
+                    mylist[i].type = 1
+                }
+                $.ajax({
+                    type: "POST",
+                    method: "POST",
+                    url: "http://localhost:8080/api/fill/question",
+                    data: { "topicid": id },
+                    success: function(data) {
+                        sublist = data.data
+                        for (var i = 0; i < sublist.length; i++) {
+                            sublist[i].type = 2
+                        }
+                        mylist = mylist.concat(sublist)
+                        callback(mylist)
+                    }
+                })
+            }
+        });
+    }
+
+    function showQuestion(topicId) {
+        var table = $('#questionsTable').DataTable({
+            "ajax": {
+                "url": "http://localhost:8080/api/topic/all-question",
+                "type": "post",
+                "data": { "topicid": topicId }
+            },
+            "columns": [
+                { "data": "quesion" },
+                { "data": "answer" },
+                // { "data": "exp_topic" },
+                // { "data": null }
+            ],
+            // "columnDefs": [{
+            //     "targets": -1,
+            //     "data": "",
+            //     "render": function(data, type, row, meta) {
+            //         return '<button id= hihi' + data["_id"] + ' class="btn btn-info choose-question" data-toggle="modal" data-target="#modalChoose">Choose question </button>' +
+            //             '<button id= hehe' + data["_id"] + ' class="btn btn-success fill-question" data-toggle="modal" data-target="#modalFill">Fill question</button>';
+
+            //     }
+            // }]
+        });
+
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/topic/all-question",
+            data: { "topicid": topicId },
+            success: function(data) {
+                console.log("hihi this data :", data)
+            }
+        })
+
+    }
+    showQuestion("5a12248c7605d32d985a8155")
+
 
 });
