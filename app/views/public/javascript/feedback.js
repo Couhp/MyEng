@@ -219,6 +219,7 @@ $(document).ready(function() {
             data: "",
             success: function(data) {
                 setInfo(data.data)
+                console.log(data.data)
             }
         });
     }

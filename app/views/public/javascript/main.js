@@ -57,7 +57,7 @@ $("document").ready(function() {
     //=========================================================
 
     function random() {
-        return Math.floor((Math.random() * 3) + 1);
+        return Math.floor((Math.random() * 4) + 1);
     }
 
     function genTopicHTML(data, index) {
@@ -74,14 +74,14 @@ $("document").ready(function() {
         result = '   <div class="theme-div" data-toggle="modal" >  ' +
             '                                <div id= ' + id + ' class="theme-circle theme-circle' + theme + '">  ' +
             '                                    <img src="' + image + '" class="img-circle theme-img" alt="user img">   ' +
-            '                                    <span class="theme-text">' + name + '</span>  ' +
-            '                                    <div class="progress">  ' +
-            '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
-            '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">  ' +
-            '                                            50%  ' +
-            '                                        </div>  ' +
-            '                                    </div>  ' +
             '                                </div>  ' +
+            '                                <span class="theme-text">' + name + '</span>  ' +
+            '                                <div class="progress">  ' +
+            '                                    <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
+            '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">  ' +
+            '                                        50%  ' +
+            '                                    </div>  ' +
+            '                                 </div>  ' +
             '                       </div>  ';
 
         return result;
@@ -233,6 +233,8 @@ $("document").ready(function() {
     $("div.theme-box").on('click', 'div.theme-circle', function() {
         $("#main-interface").hide();
         $("#view-question").show();
+        $("#correct-response").hide()
+        $("#wrong-response").hide()
         var id = $(this).attr('id');
         $('#myModal').modal('show');
         $('#timeTrue').on('click', function() {
@@ -350,11 +352,13 @@ $("document").ready(function() {
                         _point += 1
                         _position += 1
                         $("div.group-button").css("background-color", "#bff199");
+                        $("#correct-response").show()
 
                     } else {
                         // Answer wrong
                         _position += 1
                         $("div.group-button").css("background-color", "#ffd3d1");
+                        $("#wrong-response").show()
                     }
                     $("input").prop('disabled', true);
                 } else {
@@ -366,6 +370,7 @@ $("document").ready(function() {
                         if (answer.trim().localeCompare(true_ans[i].trim()) === 0 && answer !== " " && answer !== "") {
                             // if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
                             $("div.group-button").css("background-color", "#bff199");
+                            $("#correct-response").show()
                             ok = true;
                             _point += 1;
                             break;
@@ -374,9 +379,10 @@ $("document").ready(function() {
                     // Answer wrong
                     if (!ok) {
                         $("div.group-button").css("background-color", "#ffd3d1");
+                        $("#wrong-response").show()
                     }
                     _position += 1
-                    $("textarea").prop('disabled', true);
+                    $("textarea").prop('disabled', true)
                 }
                 $("#check-btn").hide();
                 $("#next-btn").show();
@@ -426,6 +432,8 @@ $("document").ready(function() {
         $("div.group-button").css("background-color", "#f0f0f0");
         $("#next-btn").hide();
         $('#check-btn').show();
+        $("#correct-response").hide()
+        $("#wrong-response").hide()
         $("input").prop('disabled', false);
         $("textarea").prop('disabled', false);
         $("#ignore-btn").prop('disabled', false);
