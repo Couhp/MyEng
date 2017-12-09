@@ -39,7 +39,8 @@ $("document").ready(function() {
     let _passinglevel = 0
     let _numberQuestion = 0
     let _enterKey = true
-
+    let _topicExp = []
+    let _expNow = 0
 
     // ================= ROUTING ============================
 
@@ -64,7 +65,9 @@ $("document").ready(function() {
         //console.log(data)
         let name = data.name
         let id = data._id
+        let exp = data.exp_topic
         _topicId.push(clone(id))
+        _topicExp.push(clone(exp))
         var theme = random()
         if (index >= _level) {
             var theme = "-del"
@@ -74,12 +77,21 @@ $("document").ready(function() {
         result = '   <div class="theme-div" data-toggle="modal" >  ' +
             '                                <div id= ' + id + ' class="theme-circle theme-circle' + theme + '">  ' +
             '                                    <img src="' + image + '" class="img-circle theme-img" alt="user img">   ' +
+<<<<<<< HEAD
             '                                </div>  ' +
             '                                <span class="theme-text">' + name + '</span>  ' +
             '                                <div class="progress">  ' +
             '                                    <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
             '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">  ' +
             '                                        50%  ' +
+=======
+            '                                    <span class="theme-text">' + name + '</span>  ' +
+            '                                    <div class="progress">  ' +
+            '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
+            '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="200" style="width:' + exp*100/200 + '%">  ' +
+            '                                            Exp  ' +
+            '                                        </div>  ' +
+>>>>>>> 4a1c1b27a4994f790fc2652a7605a0b79e98eaed
             '                                    </div>  ' +
             '                                 </div>  ' +
             '                       </div>  ';
@@ -236,6 +248,7 @@ $("document").ready(function() {
         $("#correct-response").hide()
         $("#wrong-response").hide()
         var id = $(this).attr('id');
+
         $('#myModal').modal('show');
         $('#timeTrue').on('click', function() {
             my_timer();
@@ -260,6 +273,8 @@ $("document").ready(function() {
     var learn = function(id) {
         _numberQuestion = 10
         _id = id
+        _expNow = _topicExp[_topicId.indexOf(id)]
+        console.log(":::", _expNow)
         turnOnQuestion()
         getQuestion(id, function(data) {
             console.log(data)
@@ -367,7 +382,7 @@ $("document").ready(function() {
                     true_ans = _queue[_position].answer
                     var ok = false
                     for (var i = 0; i < true_ans.length; i++) {
-                        if (answer.trim().localeCompare(true_ans[i].trim()) === 0 && answer !== " " && answer !== "") {
+                        if (answer.trim().toLowerCase().localeCompare(true_ans[i].trim().toLowerCase()) === 0 && answer !== " " && answer !== "") {
                             // if (Compare(answer.trim(), true_ans[i].trim()) && answer !== " " && answer !== "") {
                             $("div.group-button").css("background-color", "#bff199");
                             $("#correct-response").show()
@@ -449,13 +464,14 @@ $("document").ready(function() {
     });
 
     var endLearn = function(id, point, type = 0) {
+        console.log(_level)
         $("#question").empty();
         $("#list-answer").empty();
         $("#view-question").hide();
         $("#show-result").show();
         $("#point").text(_point + " / " + _numberQuestion);
         if (type == 0) {
-            submitPoint(id, point)
+            submitPoint(id, point*_expNow/10)
             if (point >= 8) submitLevel(_level + 1)
         } else {
             if (point >= 10) {
@@ -504,13 +520,14 @@ $("document").ready(function() {
 
     function setInfo(data, train, callback) {
         _level = data.current_level
+        console.log(_level)
 
         function normalize(str) {
-            console.log(str.indexOf("/"))
+            
             if (str.indexOf("/") !== -1) {
                 let arr = str.split('/');
                 arr.splice(0, arr.length - 2)
-                console.log(arr)
+                
                 return '/' + arr.join('/');
             } else {
                 let arr = str.split('\\');

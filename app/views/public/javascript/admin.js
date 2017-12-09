@@ -469,6 +469,17 @@ $(document).ready(function() {
         });
 
     }
+
+    $.ajax({
+        type: "POST",
+        method: "POST",
+        url: "http://localhost:8080/api/topic/all-question",
+        data: { "topicid": "5a12248c7605d32d985a8155" },
+        success: function(data) {
+            console.log(data)
+        }
+    })
+
     showQuestion("5a12248c7605d32d985a8155")
 
 
