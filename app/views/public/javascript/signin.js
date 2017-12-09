@@ -24,6 +24,7 @@ $(document).ready(() => {
     }
 
     $('#submit').on('click', function() {
+        $("input").prop('required', true);
         submit()
     })
 

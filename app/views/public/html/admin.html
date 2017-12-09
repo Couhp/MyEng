@@ -29,7 +29,7 @@
                 <h2>Giao diện Admin</h2>
             </div>
             <div class="col-xs-2">
-                <button class="btn" style="margin-top: 25px;" id="logout">Đăng xuất</button>
+                <button class="btn btn-danger" style="margin-top: 25px;" id="logout">Đăng xuất</button>
             </div>
         </div>
         <input type="hidden" name="currentTab" value="0" />
@@ -52,7 +52,8 @@
                         </tr>
                     </thead>
                 </table>
-
+                <br/>
+                <br/>
             </div>
             <div id="menu2" class="tab-pane fade">
                 <div class="container">
@@ -82,6 +83,7 @@
                             <th>Mô tả</th>
                             <th>Exp</th>
                             <th>Thêm câu hỏi</th>
+                            <th>Xem câu hỏi</th>
                         </tr>
                     </thead>
                 </table>
@@ -89,15 +91,39 @@
                 <br/>
             </div>
             <div id="menu4" class="tab-pane fade">
-                <table id="questionsTable" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Câu hỏi</th>
-                            <th>Đáp án</th>
-                        </tr>
-                    </thead>
-                </table>
-
+                <div class="container">
+                    <ul class="nav nav-tabs" id="menu4_tabs">
+                        <li class="active"><a href="#chooseQuestion" data-toggle="tab">Câu hỏi chọn</a></li>
+                        <li><a href="#fillQuestion" data-toggle="tab">Câu hỏi điền</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="chooseQuestion" class="tab-pane fade active in">
+                            <table id="chooseTable" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Câu hỏi </th>
+                                        <th>Lựa chọn </th>
+                                        <th>Câu trả lời </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div id="fillQuestion" class="tab-pane fade">
+                            <table id="fillTable" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Câu hỏi </th>
+                                        <th>Câu trả lời </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -115,15 +141,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="topicname">Tên Topic:</label>
-                        <input type="text" class="form-control" id="topicname">
+                        <input type="text" class="form-control" id="topicname" required>
                     </div>
                     <div class="form-group">
                         <label for="description">Mô tả:</label>
-                        <input type="text" class="form-control" id="description">
+                        <input type="text" class="form-control" id="description" required>
                     </div>
                     <div class="form-group">
                         <label for="exp">Exp:</label>
-                        <input type="number" class="form-control" id="exp" placeholder="this is a number">
+                        <input type="number" class="form-control" id="exp" placeholder="this is a number" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -147,31 +173,31 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="question">Câu hỏi:</label>
-                        <input type="text" class="form-control" id="question">
+                        <input type="text" class="form-control" id="question" required>
                     </div>
                     <div class="form-group">
                         <label for="choose1">Lựa chọn 1:</label>
-                        <input type="text" class="form-control" id="choose1">
+                        <input type="text" class="form-control" id="choose1" required>
                     </div>
 
                     <div class="form-group">
                         <label for="choose2">Lựa chọn 2:</label>
-                        <input type="text" class="form-control" id="choose2">
+                        <input type="text" class="form-control" id="choose2" required>
                     </div>
 
                     <div class="form-group">
                         <label for="choose3">Lựa chọn 3:</label>
-                        <input type="text" class="form-control" id="choose3">
+                        <input type="text" class="form-control" id="choose3" required>
                     </div>
 
                     <div class="form-group">
                         <label for="choose4">Lựa chọn 4:</label>
-                        <input type="text" class="form-control" id="choose4">
+                        <input type="text" class="form-control" id="choose4" required>
                     </div>
 
                     <div class="form-group">
                         <label for="answer">Câu trả lời:</label>
-                        <input type="number" class="form-control" id="answer" min=0 max=3 placeholder="choose1-0; choose2-1; choose3-2; choose4-3">
+                        <input type="number" class="form-control" id="answer" min=0 max=3 placeholder="choose1-0; choose2-1; choose3-2; choose4-3" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -196,11 +222,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="questionFill">Câu hỏi :</label>
-                        <input type="text" class="form-control" id="questionFill">
+                        <input type="text" class="form-control" id="questionFill" required>
                     </div>
                     <div class="form-group">
                         <label for="answerFill">Trả lời:</label>
-                        <textarea class="form-control" rows="3" id="answerFill" style='resize:none' placeholder='Nếu có nhiều option thì giữa các đáp án phân tách bằng dấu phẩy ","'></textarea>
+                        <textarea class="form-control" rows="3" id="answerFill" style='resize:none' placeholder='Nếu có nhiều option thì giữa các đáp án phân tách bằng dấu phẩy ","' required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

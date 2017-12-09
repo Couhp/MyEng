@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     //============= menu quan ly nguoi dung =================//
     //set data in datatable
-    var table = $('#usersTable').DataTable({
+    var userstb = $('#usersTable').DataTable({
         "ajax": {
             "url": "http://localhost:8080/api/admin/all-user",
             "type": "get"
@@ -73,20 +73,6 @@ $(document).ready(function() {
 
 
     //========= menu quan ly feedback ====================//
-    //show inside tab
-    // $("#replied").on('click', function() {
-    //     $("#none_replied").hide();
-    // });
-
-    // $("#r").click(function() {
-    //     $(this).addClass('active');
-    //     $("#none_replied").hide();
-    // });
-    // $("#nr").click(function() {
-    //     $(this).addClass('active');
-    //     $("#none_replied").show();
-    // });
-
     //get fb
     var getFb = function() {
         $.ajax({
@@ -308,7 +294,7 @@ $(document).ready(function() {
     //============== menu quan ly topic ==================//
     // create topic table
 
-    var table = $('#topicsTable').DataTable({
+    var topictb = $('#topicsTable').DataTable({
         "ajax": {
             "url": "http://localhost:8080/api/topic/all",
             "type": "post",
@@ -318,17 +304,26 @@ $(document).ready(function() {
             { "data": "name" },
             { "data": "description" },
             { "data": "exp_topic" },
+            { "data": null },
             { "data": null }
         ],
-        "columnDefs": [{
-            "targets": -1,
-            "data": "",
-            "render": function(data, type, row, meta) {
-                return '<button id= hihi' + data["_id"] + ' class="btn btn-info choose-question" data-toggle="modal" data-target="#modalChoose">Choose question </button>' +
-                    '<button id= hehe' + data["_id"] + ' class="btn btn-success fill-question" data-toggle="modal" data-target="#modalFill">Fill question</button>';
+        "columnDefs": [{ //add qustion column
+                "targets": -2,
+                "data": "",
+                "render": function(data, type, row, meta) {
+                    return '<button id= hihi' + data["_id"] + ' class="btn btn-info choose-question" data-toggle="modal" data-target="#modalChoose">Choose question </button>' +
+                        '<button id= hehe' + data["_id"] + ' class="btn btn-success fill-question" data-toggle="modal" data-target="#modalFill">Fill question</button>';
 
+                }
+            },
+            { //show question column
+                "targets": -1,
+                "data": "",
+                "render": function(data, type, row, meta) {
+                    return '<button id= show' + data["_id"] + ' class="btn btn-warning show-question">Show question</button>'
+                }
             }
-        }]
+        ]
     });
 
     //create topic 
@@ -336,16 +331,24 @@ $(document).ready(function() {
         var topicname = $("#topicname").val()
         var description = $("#description").val()
         var exp = $("#exp").val()
-        $.ajax({
-            type: "POST",
-            method: "POST",
-            url: "http://localhost:8080/api/admin/add-topic",
-            data: { "name": topicname, "description": description, "exp": exp },
-            success: function(data) {
-                alert(data.msg)
-            }
-        })
-        location.reload(true)
+        if (topicname.length < 1) {
+            alert("Tên topic không hợp lệ!!!")
+        } else if (description.length < 1) {
+            alert("Mô tả không hợp lệ")
+        } else if (exp.length < 1) {
+            alert("Điểm kinh nghiệm không hợp lệ!!!")
+        } else {
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/api/admin/add-topic",
+                data: { "name": topicname, "description": description, "exp": exp },
+                success: function(data) {
+                    alert(data.msg)
+                }
+            })
+            location.reload(true)
+        }
     })
 
     $('ul.nav-tabs a').click(function(e) {
@@ -409,6 +412,18 @@ $(document).ready(function() {
 
     })
 
+
+    // event click show question button 
+    $("#topicsTable").on("click", "button.show-question", function() {
+        var topicid = $(this).attr("id").slice(4)
+        console.log("topicid:" + topicid)
+        filltb.destroy()
+        choosetb.destroy()
+        showChoose(topicid)
+        showFill(topicid)
+        $('.nav-tabs a[href="#menu4"]').tab('show');
+    })
+
     //=============end quan ly topic ===================//
 
 
@@ -444,53 +459,82 @@ $(document).ready(function() {
         });
     }
 
-    function showQuestion(topicId) {
-        var table = $('#questionsTable').DataTable({
+    var choosetb;
+    var filltb;
+    // show choose question table
+    function showChoose(topicId) {
+        choosetb = $('#chooseTable').DataTable({
             "ajax": {
                 "url": "http://localhost:8080/api/topic/all-question",
                 "type": "post",
-                "data": { "topicid": topicId }
+                "data": { "topicid": topicId },
+                "dataSrc": function(data) {
+                    return data.data.choose
+                },
+                // "beforeSend": function() {
+                //     choosetb.clear()
+                // }
             },
             "columns": [
                 { "data": "quesion" },
-                { "data": "answer" },
-                // { "data": "exp_topic" },
-                // { "data": null }
+                { "data": null },
+                { "data": null },
             ],
-            // "columnDefs": [{
-            //     "targets": -1,
-            //     "data": "",
-            //     "render": function(data, type, row, meta) {
-            //         return '<button id= hihi' + data["_id"] + ' class="btn btn-info choose-question" data-toggle="modal" data-target="#modalChoose">Choose question </button>' +
-            //             '<button id= hehe' + data["_id"] + ' class="btn btn-success fill-question" data-toggle="modal" data-target="#modalFill">Fill question</button>';
+            "columnDefs": [{ //option column
+                    "targets": 1,
+                    "render": function(data, type, row, meta) {
+                        return "1. " + data.option[0] + "<br/>" + "2. " + data.option[1] + "<br/>" + "3. " + data.option[2] + "<br/>" + "4. " + data.option[3]
+                    }
+                },
+                { //answer column
+                    "targets": 2,
+                    "render": function(data, type, row, meta) {
+                        return data.answer + 1
+                    }
+                }
 
-            //     }
-            // }]
+            ]
         });
 
+    }
+
+    //show fill question table
+    function showFill(topicId) {
+        filltb = $('#fillTable').DataTable({
+            "ajax": {
+                "url": "http://localhost:8080/api/topic/all-question",
+                "type": "post",
+                "data": { "topicid": topicId },
+                "dataSrc": function(data) {
+                    return data.data.fill
+                },
+                // "beforeSend": function() {
+                //     filltb.clear()
+                // }
+            },
+            "columns": [
+                { "data": "quesion" },
+                { "data": "answer" }
+            ]
+        });
+
+    }
+
+
+    function getChoose(topicId) {
         $.ajax({
             type: "POST",
             method: "POST",
             url: "http://localhost:8080/api/topic/all-question",
-            data: { "topicid": topicId },
+            data: { "topicid": "5a12248c7605d32d985a8155" },
             success: function(data) {
-                console.log("hihi this data :", data)
+                console.log("hihi this data :", data.data.choose)
+                return data.data.choose
             }
         })
-
     }
 
-    $.ajax({
-        type: "POST",
-        method: "POST",
-        url: "http://localhost:8080/api/topic/all-question",
-        data: { "topicid": "5a12248c7605d32d985a8155" },
-        success: function(data) {
-            console.log(data)
-        }
-    })
-
-    showQuestion("5a12248c7605d32d985a8155")
-
+    showChoose("5a12248c7605d32d985a8155")
+    showFill("5a12248c7605d32d985a8155")
 
 });
