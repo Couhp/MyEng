@@ -463,6 +463,7 @@ $("document").ready(function() {
         $("#point").text(_point + " / " + _numberQuestion);
         if (type == 0) {
             submitPoint(id, point*_expNow/10)
+            
             if (point >= 8) submitLevel(_level + 1)
         } else {
             if (point >= 10) {
