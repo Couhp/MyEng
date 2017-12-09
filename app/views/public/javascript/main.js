@@ -34,6 +34,7 @@ $("document").ready(function() {
     let _point = 0
     let _isLearning = 0
     let _waitingQueue = []
+    let _isNormal = 0
     let _isTiming = 0
     let _level = 1
     let _passinglevel = 0
@@ -41,8 +42,8 @@ $("document").ready(function() {
     let _enterKey = true
     let _topicExp = []
     let _expNow = 0
-
-    // ================= ROUTING ============================
+    let total_timeout
+        // ================= ROUTING ============================
 
     $("#feedback").on('click', function() {
         window.location = "http://localhost:8080/MyEng/FeedBack";
@@ -245,6 +246,7 @@ $("document").ready(function() {
         $('#timeTrue').on('click', function() {
             my_timer();
             _isTiming = true
+            _isNormal = true
             learn(id);
         });
         $('#timeFalse').on('click', function() {
@@ -300,6 +302,7 @@ $("document").ready(function() {
 
     var submitLevel = function(level) {
         // Send a ajax to submit level
+        console.log("level to sm :", level)
         $.ajax({
             type: "POST",
             method: "POST",
@@ -315,7 +318,7 @@ $("document").ready(function() {
             var time = 60
             $("#view-time").show()
             clock(time, time)
-            setTimeout(function(id) {
+            total_timeout = setTimeout(function(id) {
                 _isLearning = 0
                 endLearn(id, _point, true)
             }, time * 1000)
@@ -324,7 +327,7 @@ $("document").ready(function() {
             var time = 50
             $("#view-time").show()
             clock(time, time)
-            setTimeout(function(id) {
+            total_timeout = setTimeout(function(id) {
                 _isLearning = 0
                 endLearn(id, _point)
             }, time * 1000)
@@ -450,21 +453,26 @@ $("document").ready(function() {
         } else {
             console.log(":::", _isTiming)
             if (!_isTiming) endLearn(_id, _point)
-            else endLearn(_id, _point, true);
+            else
+            if (_isNormal) endLearn(_id, _point);
+            else endLearn(_id, _point, true)
         }
 
     });
 
     var endLearn = function(id, point, type = 0) {
-        console.log(_level)
+        clearTimeout(total_timeout)
+        console.log("in : ", _level, type)
         $("#question").empty();
         $("#list-answer").empty();
         $("#view-question").hide();
         $("#show-result").show();
-        $("#point").text(_point + " / " + _numberQuestion);
+        $("#point").text(point + " / " + _numberQuestion);
         if (type == 0) {
             submitPoint(id, point * _expNow / 10)
-            if (point >= 8) submitLevel(_level + 1)
+            index = _topicId.indexOf(id)
+            if (index > _level)
+                if (point >= 8) submitLevel(_level + 1)
         } else {
             if (point >= 10) {
                 submitLevel(Number(_passinglevel) + 1)
@@ -535,7 +543,25 @@ $("document").ready(function() {
         $("#exp").text(data.exp + " exp");
         $("#streak").text("Streak: " + data.streak);
         $("#target").text(train + " exp");
-
+        $.ajax({
+            type: "GET",
+            method: "GET",
+            url: "http://localhost:8080/api/user/streak",
+            data: "",
+            success: function(data) {
+                code = data.errCode
+                console.log(":code : ", code)
+                if (code == 200) {
+                    $("#target-info").text("Ban da hoan thanh muc tieu")
+                }
+                if (code == 400) {
+                    $("#target-info").text("Bạn chưa thành mục tiêu ngày")
+                }
+                if (code == 404) {
+                    $("#target-info").text("Bạn chưa dang ki huan luyen")
+                }
+            }
+        })
 
         callback()
     }
