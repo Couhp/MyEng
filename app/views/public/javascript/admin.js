@@ -447,7 +447,7 @@ $(document).ready(function() {
     function showQuestion(topicId) {
         var table = $('#questionsTable').DataTable({
             "ajax": {
-                "url": "http://localhost:8080/api/fill/question",
+                "url": "http://localhost:8080/api/topic/all-question",
                 "type": "post",
                 "data": { "topicid": topicId }
             },
@@ -467,6 +467,16 @@ $(document).ready(function() {
             //     }
             // }]
         });
+
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/api/topic/all-question",
+            data: { "topicid": topicId },
+            success: function(data) {
+                console.log("hihi this data :", data)
+            }
+        })
 
     }
 

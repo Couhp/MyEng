@@ -77,23 +77,15 @@ $("document").ready(function() {
         result = '   <div class="theme-div" data-toggle="modal" >  ' +
             '                                <div id= ' + id + ' class="theme-circle theme-circle' + theme + '">  ' +
             '                                    <img src="' + image + '" class="img-circle theme-img" alt="user img">   ' +
-<<<<<<< HEAD
-            '                                </div>  ' +
-            '                                <span class="theme-text">' + name + '</span>  ' +
-            '                                <div class="progress">  ' +
-            '                                    <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
-            '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">  ' +
-            '                                        50%  ' +
-=======
+
+            '                                 </div>  ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
             '                                    <div class="progress">  ' +
             '                                        <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar"  ' +
-            '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="200" style="width:' + exp*100/200 + '%">  ' +
+            '                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="200" style="width:' + exp * 100 / 200 + '%">  ' +
             '                                            Exp  ' +
             '                                        </div>  ' +
->>>>>>> 4a1c1b27a4994f790fc2652a7605a0b79e98eaed
             '                                    </div>  ' +
-            '                                 </div>  ' +
             '                       </div>  ';
 
         return result;
@@ -471,7 +463,7 @@ $("document").ready(function() {
         $("#show-result").show();
         $("#point").text(_point + " / " + _numberQuestion);
         if (type == 0) {
-            submitPoint(id, point*_expNow/10)
+            submitPoint(id, point * _expNow / 10)
             if (point >= 8) submitLevel(_level + 1)
         } else {
             if (point >= 10) {
@@ -523,11 +515,11 @@ $("document").ready(function() {
         console.log(_level)
 
         function normalize(str) {
-            
+
             if (str.indexOf("/") !== -1) {
                 let arr = str.split('/');
                 arr.splice(0, arr.length - 2)
-                
+
                 return '/' + arr.join('/');
             } else {
                 let arr = str.split('\\');
