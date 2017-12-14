@@ -181,7 +181,6 @@ $("document").ready(function() {
             my_list = my_list.concat(data)
             getChoose(_topicId[index - 1], function(data) {
                 my_list = my_list.concat(data)
-                console.log(my_list)
                 getChoose(_topicId[index - 2], function(data) {
                     my_list = my_list.concat(data)
                     for (var i = 0; i < my_list.length; i++) {
@@ -198,7 +197,7 @@ $("document").ready(function() {
     function showQuestion(index) {
         question = _queue[index]
         _position = index
-        console.log("question", question)
+            // console.log("question", question)
         $("#question").text(question["quesion"]);
         if (question["type"] == 1) {
             var list = question["option"];
@@ -258,6 +257,8 @@ $("document").ready(function() {
     $("div.theme-box").on('click', 'div.gold-btn', function() {
         $("#main-interface").hide();
         $("#view-question").show();
+        $("#correct-response").hide()
+        $("#wrong-response").hide()
         _isTiming = true
         var id = $(this).attr('id').replace("pass", '')
         my_timer(true)
@@ -405,9 +406,9 @@ $("document").ready(function() {
 
     $(document).keypress(function(e) {
         if (e.which == 13) {
-            console.log($("#check-btn").prop("disabled"))
-            console.log($("#next-btn").is(":visible"))
-            if (_enterKey && $("#check-btn").prop("disabled") == false) {
+            // console.log($("#check-btn").prop("disabled"))
+            // console.log($("#next-btn").is(":visible"))
+            if (_enterKey && $("#check-btn").prop("disabled") == false && $("#check-btn").is(":visible") == true) {
                 $("#check-btn").click()
                 _enterKey = false
             } else if ($("#next-btn").is(":visible")) {
@@ -435,6 +436,8 @@ $("document").ready(function() {
     $('#done-btn').on('click', function() {
         $("#show-result").hide();
         $("#main-interface").show();
+        $("#correct-response").hide()
+        $("#wrong-response").hide()
         location.reload();
     });
 
@@ -537,7 +540,6 @@ $("document").ready(function() {
 
         }
         $("#avatar").attr("src", normalize(data.avatar));
-        console.log(normalize(data.avatar))
         $("#displayname").append("<strong><a class='display' style='font-family:abc;' href='/MyEng/" + data._id + "'>" + data.displayName + "</a></strong>");
         $("#level").text("Level: " + data.current_level);
         $("#exp").text(data.exp + " exp");

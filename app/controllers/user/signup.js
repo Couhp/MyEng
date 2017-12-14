@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt-nodejs');
 let sigup = (req, res) => {
     console.log(req.body);
     // Check key not exists
-    let keys = ['username', 'email', 'password', 'displayName', 'birthday', 'livingIn'];
+    let keys = ['username', 'displayName', 'email', 'birthday', 'livingIn', 'password'];
     let notExists = utils.checkKeysNotExists(req.body, keys);
     if (notExists !== -1) {
         return res.json({
@@ -18,7 +18,7 @@ let sigup = (req, res) => {
         return res.json({ errCode: -1, msg: 'Invalid email format' });
     }
     // Check date
-    if (!moment(req.body.birthday).isValid()) {
+    if (!moment(req.body.birthday, 'YYYY-MM-DD').isValid()) {
         return res.json({ errCode: -1, msg: 'Invalid date format' });
     }
     //Check type avatar

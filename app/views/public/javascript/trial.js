@@ -49,7 +49,6 @@ $("document").ready(function() {
         var image = "../images/" + index + ".png"
 
         result = '   <div class="theme-div" data-toggle="modal" >  ' +
-            // '                            <a href="">  ' +
             '                                <div id= ' + id + ' class="theme-circle theme-circle' + theme + '">  ' +
             '                                    <img src="' + image + '" class="img-circle theme-img" alt="user img">   ' +
             '                                    <span class="theme-text">' + name + '</span>  ' +
@@ -60,7 +59,6 @@ $("document").ready(function() {
             '                                        </div>  ' +
             '                                    </div>  ' +
             '                                </div>  ' +
-            // '                            </a>  ' +
             '                       </div>  ';
 
         return result;

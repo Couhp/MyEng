@@ -335,7 +335,7 @@ $(document).ready(function() {
             alert("Tên topic không hợp lệ!!!")
         } else if (description.length < 1) {
             alert("Mô tả không hợp lệ")
-        } else if (exp.length < 1) {
+        } else if (exp.length < 1 || exp < 1) {
             alert("Điểm kinh nghiệm không hợp lệ!!!")
         } else {
             $.ajax({
@@ -383,32 +383,46 @@ $(document).ready(function() {
     $("#createChoose").on("click", function() {
         var question = $("#question").val()
         var option = $("#choose1").val() + ',' + $("#choose2").val() + ',' + $("#choose3").val() + ',' + $("#choose4").val()
-        var answer = $("#answer").val()
-        console.log(_topicid + ' ' + question + ' ' + option + ' ' + answer)
-        $.ajax({
-            type: "POST",
-            method: "POST",
-            url: "http://localhost:8080/api/admin/add-choose",
-            data: { "question": question, "option": option, "answer": answer, "topicid": _topicid },
-            success: function(data) {
-                console.log(data.msg)
-            }
-        })
+        var answer = $("#answer").val() - 1
+        if (question.length < 1) {
+            alert("Câu hỏi không hợp lệ ")
+        } else if ($("#choose1").val().length < 1 || $("#choose2").val().length < 1 || $("#choose3").val().length < 1 || $("#choose4").val().length < 1) {
+            alert("Tập lựa chọn không hợp lệ ")
+        } else if (answer.length < 1 || answer > 3 || answer < 0) {
+            alert("Đáp án là số từ 1 đến 4")
+        } else {
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/api/admin/add-choose",
+                data: { "question": question, "option": option, "answer": answer, "topicid": _topicid },
+                success: function(data) {
+                    console.log(data.msg)
+                }
+            })
+        }
+
     })
 
     //create fill question
     $("#createFill").on("click", function() {
         var question = $("#questionFill").val()
         var answer = $("#answerFill").val()
-        $.ajax({
-            type: "POST",
-            method: "POST",
-            url: "http://localhost:8080/api/admin/add-fill",
-            data: { "question": question, "answer": answer, "topicid": _topicid },
-            success: function(data) {
-                console.log(data.msg)
-            }
-        })
+        if (question.length < 1) {
+            alert("Câu hỏi không hợp lệ")
+        } else if (answer.length < 1) {
+            alert("Đáp án không hợp lệ")
+        } else {
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/api/admin/add-fill",
+                data: { "question": question, "answer": answer, "topicid": _topicid },
+                success: function(data) {
+                    console.log(data.msg)
+                }
+            })
+        }
 
     })
 
