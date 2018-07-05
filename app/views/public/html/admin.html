@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Learning English</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <Link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../vendor/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+    <!-- Javascript -->
+    <script type="text/javascript" src="../vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../javascript/admin.js"></script>
+    <script type="text/javascript" src="../vendor/jquery.dataTables.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                <h2>Giao diện Admin</h2>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn" style="margin-top: 25px;" id="logout">Đăng xuất</button>
+            </div>
+        </div>
+        <input type="hidden" name="currentTab" value="0" />
+        <ul class="nav nav-tabs" id="admin_menu">
+            <li class="active"><a data-toggle="tab" href="#menu1">Quản lý người dùng</a></li>
+            <li><a data-toggle="tab" href="#menu2">Quản lý góp ý</a></li>
+            <li><a data-toggle="tab" href="#menu3">Quản lý topic</a></li>
+            <li><a data-toggle="tab" href="#menu4">Xem câu hỏi</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="menu1" class="tab-pane fade in active">
+                <table id="usersTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>UserName</th>
+                            <th>Exp</th>
+                            <th>Cấp</th>
+                            <th>Chặn/Mở chặn</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <div class="container">
+                    <ul class="nav nav-tabs" id="menu2_tabs">
+                        <li class="active"><a href="#none_replied" data-toggle="tab" id="nr">Góp ý chưa trả lời</a></li>
+                        <li><a href="#replied" data-toggle="tab" id="r">Góp ý đã trả lời</a></li><br/>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="none_replied" class="tab-pane fade active in">
+                            <div id="news-content"></div>
+                        </div>
+                        <div id="replied" class="tab-pane fade">
+                            <div id="replied_content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <button id="create" class="btn btn-primary" data-toggle="modal" data-target="#modalTopic">
+                    <i class="fa fa-plus " aria-hidden="true"></i> 
+                    Tạo mới            
+                </button>
+                <table id="topicsTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Tên Topic</th>
+                            <th>Mô tả</th>
+                            <th>Exp</th>
+                            <th>Thêm câu hỏi</th>
+                        </tr>
+                    </thead>
+                </table>
+                <br/>
+                <br/>
+            </div>
+            <div id="menu4" class="tab-pane fade">
+                <table id="questionsTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Câu hỏi</th>
+                            <th>Đáp án</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- modal add topic -->
+    <div id="modalTopic" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Nhập chi tiết topic</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="topicname">Tên Topic:</label>
+                        <input type="text" class="form-control" id="topicname">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả:</label>
+                        <input type="text" class="form-control" id="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="exp">Exp:</label>
+                        <input type="number" class="form-control" id="exp" placeholder="this is a number">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="createTopic">Thêm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal topic -->
+
+    <!-- begin modal add choose question -->
+
+    <div id="modalChoose" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Thêm câu hỏi chọn </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="question">Câu hỏi:</label>
+                        <input type="text" class="form-control" id="question">
+                    </div>
+                    <div class="form-group">
+                        <label for="choose1">Lựa chọn 1:</label>
+                        <input type="text" class="form-control" id="choose1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="choose2">Lựa chọn 2:</label>
+                        <input type="text" class="form-control" id="choose2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="choose3">Lựa chọn 3:</label>
+                        <input type="text" class="form-control" id="choose3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="choose4">Lựa chọn 4:</label>
+                        <input type="text" class="form-control" id="choose4">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="answer">Câu trả lời:</label>
+                        <input type="number" class="form-control" id="answer" min=0 max=3 placeholder="choose1-0; choose2-1; choose3-2; choose4-3">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="createChoose">Thêm câu hỏi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end modal add choose question -->
+
+    <!-- begin modal add choose question -->
+
+    <div id="modalFill" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Thêm câu hỏi điền </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="questionFill">Câu hỏi :</label>
+                        <input type="text" class="form-control" id="questionFill">
+                    </div>
+                    <div class="form-group">
+                        <label for="answerFill">Trả lời:</label>
+                        <textarea class="form-control" rows="3" id="answerFill" style='resize:none' placeholder='Nếu có nhiều option thì giữa các đáp án phân tách bằng dấu phẩy ","'></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="createFill">Thêm câu hỏi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end modal add choose question -->
+</body>
+
+</html>
+<style>
+    .nothing {
+        border: 1px solid red;
+        background-color: pink;
+        height: 25px;
+        width: 100%;
+        border-radius: 6px;
+        opacity: 0.7;
+    }
+    
+    .nothing-text {
+        margin-left: 488px;
+        font-weight: bold;
+    }
+</style>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning English</title>
+    <Link rel="stylesheet" href="../vendor/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/trung.css">
+    <link rel="stylesheet" href="../css/gopy.css">
+    <!-- Vendor -->
+    <script type="text/javascript" src="../vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+
+    <script type="text/javascript" src="../javascript/feedback.js"></script>
+</head>
+
+<body class="bgc" style="background-image:url(/images/anh-nen-2.png)">
+    <!-- header page -->
+
+    <nav id="myScrollspy" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a id="logo" class="navbar-brand">My Eng</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a>
+                        <button class="button-header btn-info" id="main">Trang chủ</button>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <button class="button-header btn-info" id="feedback">Góp ý</button>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a id="profile">
+                        <img id="avatar" class="img-circle" alt="user img" width="30" height="30">
+                        <i id="displayname"></i>
+                    </a>
+                </li>
+                <li>
+                    <button class="button-header btn-info" style="margin-top: 12px;" id="logout">Đăng xuất</button>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container row">
+        <div class="col-md-1"></div>
+        <!-- main panel -->
+        <div class="col-md-7 main-panel">
+            <h1 class="topic-heading">Dòng thảo luận</h1>
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home">Mới</a></li>
+                <li><a href="#menu1">Của Tôi</a></li>
+
+
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <h3>Góp ý đã được trả lời:</h3><br/>
+                    <div id="news-content"></div>
+                </div>
+                <div id="menu1" class="tab-pane fade ">
+                    <div class="container">
+                        <div class="col-sm-6">
+                            <h3>Góp ý của tôi</h3>
+                        </div>
+                        <div class="col-sm-6"><button id="create" class="btn btn-primary" style="margin-left:-100px; margin-top:15px"><i class="fa fa-plus " aria-hidden="true"></i> Tạo mới</button><br/><br/></div>
+                    </div>
+
+                    <div class="panel panel-default" style="padding:30px 30px 30px 30px;" id="newFeed">
+                        <div class="form-group">
+                            <label>Tiêu đề :</label>
+                            <input type="text" class="form-control" id="fb-subject" placeholder="Tiêu đề" required /><br/>
+                            <label>Nội dung góp ý:</label>
+                            <input type="text" class="form-control" id="fb-content" placeholder="Nội dung" required /><br/>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3"> <button type="submit" class="btn btn-primary active" id="sendFeedback">Gửi &nbsp;</button>
+                            </div>
+                            <div class="col-xs-9"> <button class="btn btn-danger active" style="margin-left: -77px;" id="close">Đóng</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default" style="margin-bottom: 300px; padding:10px 20px 20px 20px; " id="my-content">
+                        <h2 id="old">Cũ hơn:</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+</body>
+
+</html>
+<style>
+    .nothing {
+        border: 1px solid red;
+        background-color: pink;
+        height: 25px;
+        width: 100%;
+        border-radius: 6px;
+        opacity: 0.7;
+    }
+    
+    .nothing-text {
+        margin-left: 262px;
+        font-weight: bold;
+    }
+</style>

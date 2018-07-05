@@ -1,0 +1,162 @@
+<!doctype html>
+<html class="fixed">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+    <!-- Web Fonts  -->
+    <link rel="stylesheet" href="../css/google-fonts.css" />
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.css" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../vendor/stylesheets/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="../vendor/stylesheets/skins/default.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+
+
+</head>
+
+<body style="background-image:url(/images/anh-nen-2.png)">
+    <!-- start: page -->
+    <section class="body-sign">
+        <div class="center-sign">
+            <a href="/MyEng/Welcome" class="logo pull-left">
+                <div class="panel-title-sign mt-xl">
+                    <h2 class="title text-uppercase text-bold m-none"> Trang chủ</h2>
+                </div>
+            </a>
+
+            <div class="panel panel-sign">
+                <div class="panel-title-sign mt-xl text-right">
+                    <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Đăng kí</h2>
+                </div>
+                <div class="panel-body">
+                    <script>
+                        function myFunction() {}
+                    </script>
+
+                    <form id="submitForm" onsubmit="myFunction(); return false;">
+                        <div class="form-group">
+                            <label>Tên đăng nhập</label>
+                            <input name="username" type="text" class="form-control mb-md" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tên hiển thị </label>
+                            <input name="displayName" type="text" class="form-control mb-md" required />
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input name="email" type="email" class="form-control mb-md" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input name="birthday" placeholder="YYYY-MM-DD" type="text" class="form-control mb-md" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Công việc</label>
+                            <input name="job" type="text" class="form-control mb-md" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nơi sống </label>
+                            <input name="livingIn" type="text" class="form-control mb-md" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Giới tính</label>
+                            <div>
+                                <select name="gender" class="form-control mb-md">
+									<option value="Nam">Nam</option>
+									<option value="Nu">Nữ</option>
+								</select>
+                            </div>
+
+                            <div class="form-group mb-none">
+                                <div class="row">
+                                    <div class="col-sm-6 mb-lg">
+                                        <label>Mật khẩu</label>
+                                        <input id="password" name="password" type="password" class="form-control mb-md" required />
+                                    </div>
+                                    <div class="col-sm-6 mb-lg">
+                                        <label>Xác nhận mật khẩu</label>
+                                        <input id="confirm_password" name="pwd_confirm" type="password" class="form-control mb-md" required/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary" id="submit">Đăng kí</button>
+
+                                </div>
+                            </div>
+
+                            <span class="mt-lg mb-lg line-thru text-center text-uppercase">
+								<span>Hoặc</span>
+                            </span>
+
+                            <p class="text-center">Bạn đã có một tài khoản <a href="/MyEng/SignIn">Đăng nhập!</a></p>
+
+                    </form>
+                    </div>
+                </div>
+
+                <p class="text-center text-muted mt-md mb-md">&copy; Copyright 2014. All Rights Reserved.</p>
+            </div>
+    </section>
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Có lỗi xảy ra</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="warning"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end: page -->
+
+    <!-- Vendor -->
+    <script type="text/javascript" src="../vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../javascript/signup.js"></script>
+
+
+    <script type="text/javascript">
+        var password = document.getElementById("password"),
+            confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Xác nhận lại mật khẩu");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
+
+</body>
+
+</html>

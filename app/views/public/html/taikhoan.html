@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<title> Learning English </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">  
+	<script type="text/javascript" src="../vendor/bootstrap.js"></script>
+	<script type="text/javascript" src="../javascript/datchedohuanluyen.js"></script>
+	<link rel="stylesheet" href="../vendor/bootstrap.css">
+ 	<link rel="stylesheet" href="../css/taikhoan.css">
+ 	<link rel="stylesheet" href="../vendor/animate.css">
+</head>
+<body >
+
+<div class="container-fluid">
+	 <nav id="myScrollspy" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a id="logo" class="navbar-brand">WebSiteName</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a>
+                        <button class="button-header btn-info" id="main">Trang chủ</button>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <button class="button-header btn-info" id="feedback">Gop Y</button>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="profile">
+                        <img id="avatar" class="img-circle" alt="user img" width="30" height="30">
+                        <i id="displayname"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+
+<div class="container-fluid all_block">	
+	<div class="col-sm-8 left">
+		<div class="container" id="taikhoan">
+			<div class="container-fluid block_1">
+				<div class="col-sm-8 text-left">
+					<div class="h2">Cài đặt tài khoản</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="btn btn-primary button_tiendo">Lưu thay đổi</div>
+				</div>
+			</div>
+
+			<div class="container-fluid block_2">
+				<div class="col-sm-2 text">
+					<h2 class="text"> Tên đăng nhập</h2>
+				</div>
+				<div class="col-sm-10 input_data">
+					<input type="text" value="Tinh855164" id="username">
+				</div>
+
+			</div>
+			<div class="container-fluid block_3">
+				<div class="col-sm-2 text">
+					<h2 class="text">Email</h2>
+				</div>
+				<div class="col-sm-10 input_data">
+					<input type="text" value="tinhchuquang@gmail.com" id="email">
+				</div>
+			</div>
+			<div class="container-fluid block_4">
+				<div class="col-sm-2">
+					<h2 class="text">Micrô</h2>
+				</div>
+				<div class="col-sm-3">
+					<input type="radio" data-test="enableMicrophone" value="true" name="microphone">
+					<span>Mở</span>
+				</div>
+				<div class="col-sm-7">
+					<input type="radio" data-test="enableMicrophone" value="false" name="microphone">
+					<span>Tắt</span>
+				</div>
+			</div>
+			<div class="container-fluid block_5">
+				<div class="col-sm-2">
+					<h2 class="text">Loa</h2>
+				</div>
+				<div class="col-sm-3">
+					<input type="radio" data-test="enableMicrophone" value="true" name="loa">
+					<span>Mở</span>
+				</div>
+				<div class="col-sm-7">
+					<input type="radio" data-test="enableMicrophone" value="false" name="loa">
+					<span>Tắt</span>
+				</div>
+			</div>
+			<div class="container-fluid block_6">
+				<div class="col-sm-2">
+					<h2 class="text">Hiệu ứng âm thanh</h2>
+				</div>
+				<div class="col-sm-3">
+					<input type="radio" data-test="enableMicrophone" value="true" name="sound">
+					<span>Mở</span>
+				</div>
+				<div class="col-sm-7">
+					<input type="radio" data-test="enableMicrophone" value="false" name="sound">
+					<span>Tắt</span>
+				</div>
+			</div>
+		<div class="container-fluid block_7">
+			<div class="col-sm-3">
+				<h2 class="text">Ảnh Hồ Sơ</h2>
+			</div>
+			<div class="col-sm-9">
+				
+				 <!-- Modal -->
+				 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Chose File</button>
+				  <div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">Chose image</h4>
+				        </div>
+				        <div class="modal-body">
+				        	<div class="col-sm-6"><input type="file" data-test="image-file" name="image" id="imgInp"></div>
+				        	<div class="col-sm-6"><img id="blah" src="#" alt="your image" /></div> 
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Upload</button>
+				        </div>
+				      </div>
+				      
+				    </div>
+				  </div>
+			</div>
+			
+		</div>
+	</div> 
+		
+		<div class="container-fluid block_4">
+			<div class="container-fluid row1">
+				<div class="col-sm-2">
+					<a href="">Giới thiệu</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Học đường</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">English Test</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Thiết bị di động</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Phụ Kiện</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Trợ giúp</a>
+				</div>
+			</div>
+			<div class="container-fluid row2">
+				<div class="col-sm-2">
+					<a href="">Nội quy</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Việc làm</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Điều khoản</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Quyền riêng tư</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">Twitter</a>
+				</div>
+				<div class="col-sm-2">
+					<a href="">facebook</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="col-sm-4 right">
+		<div class="container-fluid all_block_right">
+			<div class="col-sm-4">
+				<img src="../images/612520.png" alt="" width="100%" class="user_graphic">
+			</div>
+			<div class="col-sm-8">
+				<h2 class="user_name">Tỉnh Chu Quang</h2>
+				<h2 class="text">Hồ sơ của bạn</h2>
+			</div>
+		</div>
+		<div class="container-fluid all_block_right detail">
+			<a href="taikhoan.html">Tài Khoản</a>
+		</div>
+		<div class="container-fluid all_block_right detail">
+			<a href="hoso.html">Hồ Sơ</a>
+		</div>
+		<div class="container-fluid all_block_right detail">
+			<a href="matkhau.html">Mật Khẩu</a>
+		</div><div class="container-fluid all_block_right detail">
+			<a href="">Thông Báo</a>
+		</div>
+		<div class="container-fluid all_block_right detail">
+			<a href="datchedohuanluyen.html">Đặt chế độ huấn luyện</a>
+		</div>
+		<div class="container-fluid all_block_right detail">
+			<a href="chiasequatrinhhoc.html">Chia sẻ quá trinh học</a>
+		</div>
+	</div>
+
+</div>
+
+
+</body>
+</html>

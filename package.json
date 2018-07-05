@@ -1,0 +1,28 @@
+{
+  "name": "myEng",
+  "version": "1.0.0",
+  "description": "My English ",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "tungdd",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.16.1",
+    "connect-redis": "^3.2.0",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "line-reader": "^0.4.0",
+    "mediaserver": "^0.1.0",
+    "moment": "^2.19.1",
+    "mongoose": "^4.12.6",
+    "multer": "^1.3.0",
+    "readline": "^1.3.0",
+    "redis": "^2.8.0",
+    "redis-server": "^1.1.0"
+  }
+}
